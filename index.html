@@ -20,11 +20,6 @@
   </style>
 </head>
 <body>
-  <p>This is a simple demo of generating code from blocks and running
-  the code in a sandboxed JavaScript interpreter.</p>
-
-  <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/code-generators">Code Generators</a> and <a href="https://developers.google.com/blockly/guides/app-integration/running-javascript">Running JavaScript</a>.</p>
-
   <p>
     <button onclick="showCode()">Show JavaScript</button>
     <button onclick="runCode()">Run JavaScript</button>
@@ -62,56 +57,14 @@
       <block type="text_length"></block>
       <block type="text_print"></block>
     </category>
+    <category name="IP" colour="%{BKY_LOGIC_HUE}">
+      <block type="connection"></block>
+      <block type="email"></block>
+    </category>
   </xml>
 
-  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
-    <block type="controls_if" inline="false" x="20" y="20">
-      <mutation else="1"></mutation>
-      <value name="IF0">
-        <block type="logic_compare" inline="true">
-          <field name="OP">EQ</field>
-          <value name="A">
-            <block type="math_arithmetic" inline="true">
-              <field name="OP">MULTIPLY</field>
-              <value name="A">
-                <block type="math_number">
-                  <field name="NUM">6</field>
-                </block>
-              </value>
-              <value name="B">
-                <block type="math_number">
-                  <field name="NUM">7</field>
-                </block>
-              </value>
-            </block>
-          </value>
-          <value name="B">
-            <block type="math_number">
-              <field name="NUM">42</field>
-            </block>
-          </value>
-        </block>
-      </value>
-      <statement name="DO0">
-        <block type="text_print" inline="false">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">Don't panic</field>
-            </block>
-          </value>
-        </block>
-      </statement>
-      <statement name="ELSE">
-        <block type="text_print" inline="false">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">Panic</field>
-            </block>
-          </value>
-        </block>
-      </statement>
-    </block>
-  </xml>
+ <script src='scripts/BlockDef.js'></script>
+ <script src='scripts/BlockGenerator.js'></script>
 
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
