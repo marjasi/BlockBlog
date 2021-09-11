@@ -36,7 +36,7 @@ Blockly.Warning = function(block) {
   Blockly.Warning.superClass_.constructor.call(this, block);
   this.createIcon();
   // The text_ object can contain multiple warnings.
-  this.text_ = Object.create(null);
+  this.text_ = {};
 };
 Blockly.utils.object.inherits(Blockly.Warning, Blockly.Icon);
 

@@ -52,7 +52,7 @@ Blockly.Events.Abstract = function() {
 };
 
 /**
- * Whether or not the event is a UI event.
+ * Whether or not the event is a ui event.
  * @type {boolean}
  */
 Blockly.Events.Abstract.prototype.isUiEvent = false;

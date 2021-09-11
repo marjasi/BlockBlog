@@ -14,7 +14,6 @@ goog.provide('Blockly.BubbleDragger');
 
 /** @suppress {extraRequire} */
 goog.require('Blockly.Bubble');
-goog.require('Blockly.ComponentManager');
 /** @suppress {extraRequire} */
 goog.require('Blockly.constants');
 goog.require('Blockly.Events');
@@ -52,11 +51,13 @@ Blockly.BubbleDragger = function(bubble, workspace) {
   this.workspace_ = workspace;
 
   /**
-   * Which drag target the mouse pointer is over, if any.
-   * @type {?Blockly.IDragTarget}
+   * Which delete area the mouse pointer is over, if any.
+   * One of {@link Blockly.DELETE_AREA_TRASH},
+   * {@link Blockly.DELETE_AREA_TOOLBOX}, or {@link Blockly.DELETE_AREA_NONE}.
+   * @type {?number}
    * @private
    */
-  this.dragTarget_ = null;
+  this.deleteArea_ = null;
 
   /**
    * Whether the bubble would be deleted if dropped immediately.
@@ -112,6 +113,13 @@ Blockly.BubbleDragger.prototype.startBubbleDrag = function() {
   }
 
   this.draggingBubble_.setDragging && this.draggingBubble_.setDragging(true);
+
+  var toolbox = this.workspace_.getToolbox();
+  if (toolbox && typeof toolbox.addStyle == 'function') {
+    var style = this.draggingBubble_.isDeletable() ? 'blocklyToolboxDelete' :
+                                                     'blocklyToolboxGrab';
+    toolbox.addStyle(style);
+  }
 };
 
 /**
@@ -125,45 +133,36 @@ Blockly.BubbleDragger.prototype.startBubbleDrag = function() {
 Blockly.BubbleDragger.prototype.dragBubble = function(e, currentDragDeltaXY) {
   var delta = this.pixelsToWorkspaceUnits_(currentDragDeltaXY);
   var newLoc = Blockly.utils.Coordinate.sum(this.startXY_, delta);
+
   this.draggingBubble_.moveDuringDrag(this.dragSurface_, newLoc);
 
-  var oldDragTarget = this.dragTarget_;
-  this.dragTarget_ = this.workspace_.getDragTarget(e);
-
-  var oldWouldDeleteBubble = this.wouldDeleteBubble_;
-  this.wouldDeleteBubble_ = this.shouldDelete_(this.dragTarget_);
-  if (oldWouldDeleteBubble != this.wouldDeleteBubble_) {
-    // Prevent unnecessary add/remove class calls.
+  if (this.draggingBubble_.isDeletable()) {
+    this.deleteArea_ = this.workspace_.isDeleteArea(e);
     this.updateCursorDuringBubbleDrag_();
   }
-
-  // Call drag enter/exit/over after wouldDeleteBlock is called in shouldDelete_
-  if (this.dragTarget_ !== oldDragTarget) {
-    oldDragTarget && oldDragTarget.onDragExit(this.draggingBubble_);
-    this.dragTarget_ && this.dragTarget_.onDragEnter(this.draggingBubble_);
-  }
-  this.dragTarget_ && this.dragTarget_.onDragOver(this.draggingBubble_);
 };
 
 /**
- * Whether ending the drag would delete the bubble.
- * @param {?Blockly.IDragTarget} dragTarget The drag target that the bubblee is
- *     currently over.
- * @return {boolean} Whether dropping the bubble immediately would delete the
- *    block.
+ * Shut the trash can and, if necessary, delete the dragging bubble.
+ * Should be called at the end of a bubble drag.
+ * @return {boolean} Whether the bubble was deleted.
  * @private
  */
-Blockly.BubbleDragger.prototype.shouldDelete_ = function(dragTarget) {
-  if (dragTarget) {
-    var componentManager = this.workspace_.getComponentManager();
-    var isDeleteArea = componentManager.hasCapability(dragTarget.id,
-        Blockly.ComponentManager.Capability.DELETE_AREA);
-    if (isDeleteArea) {
-      return (/** @type {!Blockly.IDeleteArea} */ (dragTarget))
-          .wouldDelete(this.draggingBubble_, false);
+Blockly.BubbleDragger.prototype.maybeDeleteBubble_ = function() {
+  var trashcan = this.workspace_.trashcan;
+
+  if (this.wouldDeleteBubble_) {
+    if (trashcan) {
+      setTimeout(trashcan.closeLid.bind(trashcan), 100);
     }
+    // Fire a move event, so we know where to go back to for an undo.
+    this.fireMoveEvent_();
+    this.draggingBubble_.dispose(false, true);
+  } else if (trashcan) {
+    // Make sure the trash can lid is closed.
+    trashcan.closeLid();
   }
-  return false;
+  return this.wouldDeleteBubble_;
 };
 
 /**
@@ -172,7 +171,19 @@ Blockly.BubbleDragger.prototype.shouldDelete_ = function(dragTarget) {
  * @private
  */
 Blockly.BubbleDragger.prototype.updateCursorDuringBubbleDrag_ = function() {
-  this.draggingBubble_.setDeleteStyle(this.wouldDeleteBubble_);
+  this.wouldDeleteBubble_ = this.deleteArea_ != Blockly.DELETE_AREA_NONE;
+  var trashcan = this.workspace_.trashcan;
+  if (this.wouldDeleteBubble_) {
+    this.draggingBubble_.setDeleteStyle(true);
+    if (this.deleteArea_ == Blockly.DELETE_AREA_TRASH && trashcan) {
+      trashcan.setLidOpen(true);
+    }
+  } else {
+    this.draggingBubble_.setDeleteStyle(false);
+    if (trashcan) {
+      trashcan.setLidOpen(false);
+    }
+  }
 };
 
 /**
@@ -187,37 +198,30 @@ Blockly.BubbleDragger.prototype.endBubbleDrag = function(
   // Make sure internal state is fresh.
   this.dragBubble(e, currentDragDeltaXY);
 
-  var preventMove = this.dragTarget_ &&
-      this.dragTarget_.shouldPreventMove(this.draggingBubble_);
-  if (preventMove) {
-    var newLoc = this.startXY_;
-  } else {
-    var delta = this.pixelsToWorkspaceUnits_(currentDragDeltaXY);
-    var newLoc = Blockly.utils.Coordinate.sum(this.startXY_, delta);
-  }
+  var delta = this.pixelsToWorkspaceUnits_(currentDragDeltaXY);
+  var newLoc = Blockly.utils.Coordinate.sum(this.startXY_, delta);
+
   // Move the bubble to its final location.
   this.draggingBubble_.moveTo(newLoc.x, newLoc.y);
+  var deleted = this.maybeDeleteBubble_();
 
-  if (this.dragTarget_) {
-    this.dragTarget_.onDrop(this.draggingBubble_);
-  }
-
-  if (this.wouldDeleteBubble_) {
-    // Fire a move event, so we know where to go back to for an undo.
-    this.fireMoveEvent_();
-    this.draggingBubble_.dispose(false, true);
-  } else {
+  if (!deleted) {
     // Put everything back onto the bubble canvas.
     if (this.dragSurface_) {
       this.dragSurface_.clearAndHide(this.workspace_.getBubbleCanvas());
     }
-    if (this.draggingBubble_.setDragging) {
-      this.draggingBubble_.setDragging(false);
-    }
+
+    this.draggingBubble_.setDragging && this.draggingBubble_.setDragging(false);
     this.fireMoveEvent_();
   }
   this.workspace_.setResizesEnabled(true);
 
+  var toolbox = this.workspace_.getToolbox();
+  if (toolbox && typeof toolbox.removeStyle == 'function') {
+    var style = this.draggingBubble_.isDeletable() ? 'blocklyToolboxDelete' :
+                                                     'blocklyToolboxGrab';
+    toolbox.removeStyle(style);
+  }
   Blockly.Events.setGroup(false);
 };
 

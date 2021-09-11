@@ -15,8 +15,6 @@
 goog.provide('Blockly.FieldMultilineInput');
 
 goog.require('Blockly.Css');
-goog.require('Blockly.Field');
-goog.require('Blockly.fieldRegistry');
 goog.require('Blockly.FieldTextInput');
 goog.require('Blockly.utils');
 goog.require('Blockly.utils.aria');
@@ -25,7 +23,6 @@ goog.require('Blockly.utils.KeyCodes');
 goog.require('Blockly.utils.object');
 goog.require('Blockly.utils.Svg');
 goog.require('Blockly.utils.userAgent');
-goog.require('Blockly.WidgetDiv');
 
 
 /**
@@ -62,7 +59,7 @@ Blockly.FieldMultilineInput = function(opt_value, opt_validator, opt_config) {
   this.maxLines_ = Infinity;
 
   /**
-   * Whether Y overflow is currently occurring.
+   * Whether Y overflow is currently occuring.
    * @type {boolean}
    * @protected
    */
@@ -100,8 +97,8 @@ Blockly.FieldMultilineInput.fromJson = function(options) {
  * @package
  */
 Blockly.FieldMultilineInput.prototype.toXml = function(fieldElement) {
-  // Replace '\n' characters with HTML-escaped equivalent '&#10'. This is
-  // needed so the plain-text representation of the XML produced by
+  // Replace '\n' characters with html-escaped equivalent '&#10'. This is
+  // needed so the plain-text representation of the xml produced by
   // `Blockly.Xml.domToText` will appear on a single line (this is a limitation
   // of the plain-text format).
   fieldElement.textContent = this.getValue().replace(/\n/g, '&#10;');
@@ -135,8 +132,7 @@ Blockly.FieldMultilineInput.prototype.initView = function() {
  * Get the text from this field as displayed on screen.  May differ from getText
  * due to ellipsis, and other formatting.
  * @return {string} Currently displayed text.
- * @protected
- * @override
+ * @private
  */
 Blockly.FieldMultilineInput.prototype.getDisplayText_ = function() {
   var textLines = this.getText();

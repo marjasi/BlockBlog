@@ -17,7 +17,6 @@ goog.requireType('Blockly.blockRendering.Renderer');
 goog.requireType('Blockly.Cursor');
 goog.requireType('Blockly.Events.Abstract');
 goog.requireType('Blockly.Field');
-goog.requireType('Blockly.IBlockDragger');
 goog.requireType('Blockly.IConnectionChecker');
 goog.requireType('Blockly.IFlyout');
 goog.requireType('Blockly.IMetricsManager');
@@ -34,7 +33,7 @@ goog.requireType('Blockly.ToolboxItem');
  *
  * @type {Object<string, Object<string, function(new:?)>>}
  */
-Blockly.registry.typeMap_ = Object.create(null);
+Blockly.registry.typeMap_ = {};
 
 /**
  * The string used to register the default class for a type of plugin.
@@ -102,10 +101,6 @@ Blockly.registry.Type.FLYOUTS_HORIZONTAL_TOOLBOX =
 Blockly.registry.Type.METRICS_MANAGER =
     new Blockly.registry.Type('metricsManager');
 
-/** @type {!Blockly.registry.Type<Blockly.IBlockDragger>} */
-Blockly.registry.Type.BLOCK_DRAGGER =
-    new Blockly.registry.Type('blockDragger');
-
 /**
  * Registers a class based on a type and name.
  * @param {string|!Blockly.registry.Type<T>} type The type of the plugin.
@@ -142,7 +137,7 @@ Blockly.registry.register = function(
   var typeRegistry = Blockly.registry.typeMap_[type];
   // If the type registry has not been created, create it.
   if (!typeRegistry) {
-    typeRegistry = Blockly.registry.typeMap_[type] = Object.create(null);
+    typeRegistry = Blockly.registry.typeMap_[type] = {};
   }
 
   // Validate that the given class has all the required properties.
@@ -265,7 +260,7 @@ Blockly.registry.getClass = function(type, name, opt_throwIfMissing) {
  * @param {string} name The plugin's name. (Ex. logic_category)
  * @param {boolean=} opt_throwIfMissing Whether or not to throw an error if we
  *     are unable to find the object.
- * @return {?T} The object with the given name and type or null if none exists.
+ * @returns {T} The object with the given name and type or null if none exists.
  * @template T
  */
 Blockly.registry.getObject = function(type, name, opt_throwIfMissing) {

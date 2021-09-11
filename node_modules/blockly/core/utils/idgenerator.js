@@ -12,10 +12,6 @@
  */
 'use strict';
 
-/**
- * @name Blockly.utils.IdGenerator
- * @namespace
- */
 goog.provide('Blockly.utils.IdGenerator');
 
 

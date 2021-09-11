@@ -14,7 +14,6 @@
 goog.provide('Blockly.Gesture');
 
 goog.require('Blockly.blockAnimations');
-/** @suppress {extraRequire} */
 goog.require('Blockly.BlockDragger');
 goog.require('Blockly.browserEvents');
 goog.require('Blockly.BubbleDragger');
@@ -27,12 +26,10 @@ goog.require('Blockly.Tooltip');
 goog.require('Blockly.Touch');
 goog.require('Blockly.utils');
 goog.require('Blockly.utils.Coordinate');
-goog.require('Blockly.Workspace');
 goog.require('Blockly.WorkspaceDragger');
 
 goog.requireType('Blockly.BlockSvg');
 goog.requireType('Blockly.Field');
-goog.requireType('Blockly.IBlockDragger');
 goog.requireType('Blockly.IBubble');
 goog.requireType('Blockly.IFlyout');
 goog.requireType('Blockly.WorkspaceSvg');
@@ -183,7 +180,7 @@ Blockly.Gesture = function(e, creatorWorkspace) {
 
   /**
    * The object tracking a block drag, or null if none is in progress.
-   * @type {?Blockly.IBlockDragger}
+   * @type {Blockly.BlockDragger}
    * @private
    */
   this.blockDragger_ = null;
@@ -439,14 +436,11 @@ Blockly.Gesture.prototype.updateIsDragging_ = function() {
  * @private
  */
 Blockly.Gesture.prototype.startDraggingBlock_ = function() {
-  var BlockDraggerClass = Blockly.registry.getClassFromOptions(
-      Blockly.registry.Type.BLOCK_DRAGGER, this.creatorWorkspace_.options, true);
-
-  this.blockDragger_ = new BlockDraggerClass(
+  this.blockDragger_ = new Blockly.BlockDragger(
       /** @type {!Blockly.BlockSvg} */ (this.targetBlock_),
       /** @type {!Blockly.WorkspaceSvg} */ (this.startWorkspace_));
-  this.blockDragger_.startDrag(this.currentDragDeltaXY_, this.healStack_);
-  this.blockDragger_.drag(this.mostRecentEvent_, this.currentDragDeltaXY_);
+  this.blockDragger_.startBlockDrag(this.currentDragDeltaXY_, this.healStack_);
+  this.blockDragger_.dragBlock(this.mostRecentEvent_, this.currentDragDeltaXY_);
 };
 
 /**
@@ -538,7 +532,7 @@ Blockly.Gesture.prototype.handleMove = function(e) {
   if (this.isDraggingWorkspace_) {
     this.workspaceDragger_.drag(this.currentDragDeltaXY_);
   } else if (this.isDraggingBlock_) {
-    this.blockDragger_.drag(
+    this.blockDragger_.dragBlock(
         this.mostRecentEvent_, this.currentDragDeltaXY_);
   } else if (this.isDraggingBubble_) {
     this.bubbleDragger_.dragBubble(
@@ -570,7 +564,7 @@ Blockly.Gesture.prototype.handleUp = function(e) {
   if (this.isDraggingBubble_) {
     this.bubbleDragger_.endBubbleDrag(e, this.currentDragDeltaXY_);
   } else if (this.isDraggingBlock_) {
-    this.blockDragger_.endDrag(e, this.currentDragDeltaXY_);
+    this.blockDragger_.endBlockDrag(e, this.currentDragDeltaXY_);
   } else if (this.isDraggingWorkspace_) {
     this.workspaceDragger_.endDrag(this.currentDragDeltaXY_);
   } else if (this.isBubbleClick_()) {
@@ -606,7 +600,7 @@ Blockly.Gesture.prototype.cancel = function() {
     this.bubbleDragger_.endBubbleDrag(
         this.mostRecentEvent_, this.currentDragDeltaXY_);
   } else if (this.isDraggingBlock_) {
-    this.blockDragger_.endDrag(
+    this.blockDragger_.endBlockDrag(
         this.mostRecentEvent_, this.currentDragDeltaXY_);
   } else if (this.isDraggingWorkspace_) {
     this.workspaceDragger_.endDrag(this.currentDragDeltaXY_);
@@ -958,7 +952,7 @@ Blockly.Gesture.prototype.hasStarted = function() {
 /**
  * Get a list of the insertion markers that currently exist.  Block drags have
  * 0, 1, or 2 insertion markers.
- * @return {!Array<!Blockly.BlockSvg>} A possibly empty list of insertion
+ * @return {!Array.<!Blockly.BlockSvg>} A possibly empty list of insertion
  *     marker blocks.
  * @package
  */
@@ -967,23 +961,6 @@ Blockly.Gesture.prototype.getInsertionMarkers = function() {
     return this.blockDragger_.getInsertionMarkers();
   }
   return [];
-};
-
-/**
- * Gets the current dragger if an item is being dragged. Null if nothing is
- * being dragged.
- * @return {!Blockly.WorkspaceDragger|!Blockly.BubbleDragger|!Blockly.IBlockDragger|null}
- *    The dragger that is currently in use or null if no drag is in progress.
- */
-Blockly.Gesture.prototype.getCurrentDragger = function() {
-  if (this.isDraggingBlock_) {
-    return this.blockDragger_;
-  } else if (this.isDraggingWorkspace_) {
-    return this.workspaceDragger_;
-  } else if (this.isDraggingBubble_) {
-    return this.bubbleDragger_;
-  }
-  return null;
 };
 
 /**

@@ -10,10 +10,6 @@
  */
 'use strict';
 
-/**
- * @name Blockly.utils.toolbox
- * @namespace
- */
 goog.provide('Blockly.utils.toolbox');
 
 /** @suppress {extraRequire} */
@@ -213,7 +209,7 @@ Blockly.utils.toolbox.convertToolboxDefToJson = function(toolboxDef) {
 
 /**
  * Validates the toolbox JSON fields have been set correctly.
- * @param {!Blockly.utils.toolbox.ToolboxInfo} toolboxJson Object holding
+ * @param {Blockly.utils.toolbox.ToolboxInfo} toolboxJson Object holding
  *     information for creating a toolbox.
  * @throws {Error} if the toolbox is not the correct format.
  * @private
@@ -345,7 +341,7 @@ Blockly.utils.toolbox.xmlToJsonArray_ = function(toolboxDef) {
     var tagName = child.tagName.toUpperCase();
     obj['kind'] = tagName;
 
-    // Store the XML for a block.
+    // Store the xml for a block
     if (tagName == 'BLOCK') {
       obj['blockxml'] = child;
     } else if (child.childNodes && child.childNodes.length > 0) {
@@ -353,7 +349,7 @@ Blockly.utils.toolbox.xmlToJsonArray_ = function(toolboxDef) {
       obj['contents'] = Blockly.utils.toolbox.xmlToJsonArray_(child);
     }
 
-    // Add XML attributes to object
+    // Add xml attributes to object
     Blockly.utils.toolbox.addAttributes_(child, obj);
     arr.push(obj);
   }

@@ -99,10 +99,7 @@ Blockly.ShortcutItems.registerCopy = function() {
         Blockly.selected.isDeletable() &&
         Blockly.selected.isMovable();
     },
-    callback: function(workspace, e) {
-      // Prevent the default copy behavior, which may beep or otherwise indicate
-      // an error due to the lack of a selection.
-      e.preventDefault();
+    callback: function() {
       Blockly.hideChaff();
       Blockly.copy(/** @type {!Blockly.ICopyable} */ (Blockly.selected));
       return true;

@@ -25,15 +25,12 @@ goog.require('Blockly.Tooltip');
 goog.require('Blockly.utils');
 goog.require('Blockly.utils.aria');
 goog.require('Blockly.utils.dom');
-goog.require('Blockly.utils.math');
 goog.require('Blockly.utils.Svg');
 goog.require('Blockly.utils.userAgent');
-goog.require('Blockly.Workspace');
 goog.require('Blockly.WorkspaceDragSurfaceSvg');
 goog.require('Blockly.WorkspaceSvg');
-goog.require('Blockly.WidgetDiv');
 
-goog.requireType('Blockly.BlockSvg');
+goog.requireType('Blockly.Workspace');
 
 
 /**
@@ -68,7 +65,6 @@ Blockly.inject = function(container, opt_options) {
   // Create surfaces for dragging things. These are optimizations
   // so that the browser does not repaint during the drag.
   var blockDragSurface = new Blockly.BlockDragSurfaceSvg(subContainer);
-
   var workspaceDragSurface = new Blockly.WorkspaceDragSurfaceSvg(subContainer);
 
   var workspace = Blockly.createMainWorkspace_(svg, options, blockDragSurface,
@@ -167,7 +163,7 @@ Blockly.createMainWorkspace_ = function(svg, options, blockDragSurface,
       mainWorkspace.getTheme().getClassName());
 
   if (!wsOptions.hasCategories && wsOptions.languageTree) {
-    // Add flyout as an <svg> that is a sibling of the workspace SVG.
+    // Add flyout as an <svg> that is a sibling of the workspace svg.
     var flyout = mainWorkspace.addFlyout(Blockly.utils.Svg.SVG);
     Blockly.utils.dom.insertAfter(flyout, svg);
   }
@@ -235,7 +231,8 @@ Blockly.bumpTopObjectsIntoBounds_ = function(workspace) {
   var scrollMetricsInWsCoords = metricsManager.getScrollMetrics(true);
   var topBlocks = workspace.getTopBoundedElements();
   for (var i = 0, block; (block = topBlocks[i]); i++) {
-    Blockly.bumpObjectIntoBounds_(workspace, scrollMetricsInWsCoords, block);
+    Blockly.bumpObjectIntoBounds_(
+        workspace, scrollMetricsInWsCoords, block);
   }
 };
 
@@ -248,7 +245,7 @@ Blockly.bumpTopObjectsIntoBounds_ = function(workspace) {
 Blockly.bumpIntoBoundsHandler_ = function(workspace) {
   return function(e) {
     var metricsManager = workspace.getMetricsManager();
-    if (!metricsManager.hasFixedEdges() || workspace.isDragging()) {
+    if (!metricsManager.hasFixedEdges || workspace.isDragging()) {
       return;
     }
 
@@ -291,7 +288,7 @@ Blockly.bumpIntoBoundsHandler_ = function(workspace) {
  *    in workspace coordinates.
  * @param {!Blockly.IBoundedElement} object The object to bump.
  * @return {boolean} True if block was bumped.
- * @package
+ * @private
  */
 Blockly.bumpObjectIntoBounds_ = function(workspace, scrollMetrics, object) {
   // Compute new top/left position for object.
@@ -378,11 +375,12 @@ Blockly.init_ = function(mainWorkspace) {
     }
   }
 
+  var verticalSpacing = Blockly.Scrollbar.scrollbarThickness;
   if (options.hasTrashcan) {
-    mainWorkspace.trashcan.init();
+    verticalSpacing = mainWorkspace.trashcan.init(verticalSpacing);
   }
   if (options.zoomOptions && options.zoomOptions.controls) {
-    mainWorkspace.zoomControls_.init();
+    mainWorkspace.zoomControls_.init(verticalSpacing);
   }
 
   if (options.moveOptions && options.moveOptions.scrollbars) {

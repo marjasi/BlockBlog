@@ -20,7 +20,6 @@ goog.provide('Blockly.utils.userAgent');
 
 goog.require('Blockly.utils.global');
 
-
 /** @const {boolean} */
 Blockly.utils.userAgent.IE;
 
@@ -93,13 +92,9 @@ Blockly.utils.userAgent.MOBILE;
       !Blockly.utils.userAgent.EDGE;
 
   // Platforms.  Logic from:
-  // https://github.com/google/closure-library/blob/master/closure/goog/labs/useragent/platform.js and
-  // https://github.com/google/closure-library/blob/master/closure/goog/labs/useragent/extra.js
+  // https://github.com/google/closure-library/blob/master/closure/goog/labs/useragent/platform.js
   Blockly.utils.userAgent.ANDROID = has('Android');
-  var maxTouchPoints = Blockly.utils.global['navigator'] &&
-      Blockly.utils.global['navigator']['maxTouchPoints'];
-  Blockly.utils.userAgent.IPAD = has('iPad') ||
-      has('Macintosh') && maxTouchPoints > 0;
+  Blockly.utils.userAgent.IPAD = has('iPad');
   Blockly.utils.userAgent.IPOD = has('iPod');
   Blockly.utils.userAgent.IPHONE = has('iPhone') &&
       !Blockly.utils.userAgent.IPAD && !Blockly.utils.userAgent.IPOD;
