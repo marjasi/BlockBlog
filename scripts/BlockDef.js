@@ -21,7 +21,7 @@ Blockly.Blocks['email'] = {
   init: function() {
     this.appendValueInput("NAME")
         .setCheck("String")
-        .appendField(new Blockly.FieldTextInput("Email Text File"), "EMAIL_FILE");
+        .appendField(new Blockly.FieldTextInput("Rest Root"), "EMAIL_FILE");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
