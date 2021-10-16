@@ -9,6 +9,12 @@
         <statement name="FIELDS">
           <block type="field_static" id="A!vJ=U]tMaN;;g8fp+IP">
             <field name="TEXT">URI Root</field>
+            <next>
+              <block type="field_input" id="v=^R{LF*6O=PX|VTfNNB">
+                <field name="TEXT">URI Path</field>
+                <field name="FIELDNAME">URI_ROOT</field>
+              </block>
+            </next>
           </block>
         </statement>
         <next>
@@ -62,28 +68,51 @@
         <statement name="FIELDS">
           <block type="field_static" id="E`[CL(.=VOQCrNpSR|[g">
             <field name="TEXT">Static URI</field>
+            <next>
+              <block type="field_input" id="{fYP%$W+]+#|HEqUDJrt">
+                <field name="TEXT">URI Path</field>
+                <field name="FIELDNAME">URI_STATIC</field>
+              </block>
+            </next>
           </block>
         </statement>
         <next>
-          <block type="input_statement" id="XyGqA;.;PUexdpe-MHI1">
-            <field name="INPUTNAME">URI</field>
+          <block type="input_value" id="?`1cTb~nR6H@aq,n}p@$">
+            <field name="INPUTNAME">RESOURCE_LINKER</field>
             <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="AA+sNPJL8m_DvC:mdgs*">
+                <field name="TEXT">Resource Linker</field>
+              </block>
+            </statement>
             <value name="TYPE">
-              <shadow type="type_null" id="f@YD|.]WM)rdf;?8`Z!:"></shadow>
-              <block type="type_group" id="*iI2D7`eFl|Bq?=:L^${">
-                <mutation types="2"></mutation>
-                <value name="TYPE0">
-                  <block type="type_other" id="YxSi%/T:r1@k}*(aq_BQ">
-                    <field name="TYPE">uri_static</field>
-                  </block>
-                </value>
-                <value name="TYPE1">
-                  <block type="type_other" id="^Y0{2bbMgLPB*Lsn17ds">
-                    <field name="TYPE">uri_dynamic</field>
+              <shadow type="type_null" id="$@dC[Wk2A9PcZ6v8B?WE"></shadow>
+              <block type="type_other" id="QWqXYdrx@G48u,.z/jYx">
+                <field name="TYPE">resource_linker</field>
+              </block>
+            </value>
+            <next>
+              <block type="input_statement" id="XyGqA;.;PUexdpe-MHI1">
+                <field name="INPUTNAME">URI</field>
+                <field name="ALIGN">LEFT</field>
+                <value name="TYPE">
+                  <shadow type="type_null" id="f@YD|.]WM)rdf;?8`Z!:"></shadow>
+                  <block type="type_group" id="*iI2D7`eFl|Bq?=:L^${">
+                    <mutation types="2"></mutation>
+                    <value name="TYPE0">
+                      <block type="type_other" id="YxSi%/T:r1@k}*(aq_BQ">
+                        <field name="TYPE">uri_static</field>
+                      </block>
+                    </value>
+                    <value name="TYPE1">
+                      <block type="type_other" id="^Y0{2bbMgLPB*Lsn17ds">
+                        <field name="TYPE">uri_dynamic</field>
+                      </block>
+                    </value>
                   </block>
                 </value>
               </block>
-            </value>
+            </next>
           </block>
         </next>
       </block>
@@ -137,8 +166,207 @@
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="DCTZ1O9b;g4NTqa`iOVZ">
-        <mutation colour="#a5805b"></mutation>
-        <field name="HUE">30</field>
+        <mutation colour="#a55b80"></mutation>
+        <field name="HUE">330</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="[S[)M;fV[]b*57#uD.];" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">resource_linker</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="UQOWe+!^;chB+AouQ^{K">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_variable" id="p+Q.vU9:x1XaHaWbE|r`">
+            <field name="TEXT">Linker ID</field>
+            <field name="FIELDNAME">LINKER_VARIABLE</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="V}4(#yi;w9O%dCbW-x+i" deletable="false" movable="false">
+        <field name="TEXT">A linker value that points to a resource definition.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="P0lyfy6mBz19~M5hGv0}" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="kbm+p6ScQLB1AeQmk)fo"></shadow>
+      <block type="type_other" id="fvYl,6)q(kt_KhV]pE1I">
+        <field name="TYPE">resource_linker</field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="yT_[NIgvsd)FW(=_YP/;">
+        <mutation colour="#5ba580"></mutation>
+        <field name="HUE">150</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="7{P{1W@r6vBcOw4p{K7J" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">uri_dynamic</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="ul}ngri|DC5FZtE@Udf5">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="bOIT|OZSR|w@P@VPmel.">
+            <field name="TEXT">Dynamic URI</field>
+            <next>
+              <block type="field_input" id="pG)=X8LVvull8iXjL=B1">
+                <field name="TEXT">URI Path</field>
+                <field name="FIELDNAME">URI_DYNAMIC</field>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_value" id="Xmk@LHMyMcKjl2q99d3{">
+            <field name="INPUTNAME">RESOURCE_LINKER</field>
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id=".b}MJeyV_ni)nDh;nS^]">
+                <field name="TEXT">Resource Linker</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow type="type_null" id="n?Uy;*beO5:EWK7R:R(+"></shadow>
+              <block type="type_other" id="4^)I-F8,:%!iu0-8iU!j">
+                <field name="TYPE">resource_linker</field>
+              </block>
+            </value>
+            <next>
+              <block type="input_statement" id="Xh*Z(H!?+C1QjgnSFv1(">
+                <field name="INPUTNAME">URI</field>
+                <field name="ALIGN">LEFT</field>
+                <value name="TYPE">
+                  <shadow type="type_null" id="PUkmC=V.lIoH*046E)g-"></shadow>
+                  <block type="type_group" id="csP,h{~A}`,MxOsmj@50">
+                    <mutation types="2"></mutation>
+                    <value name="TYPE0">
+                      <block type="type_other" id="GxjSQ|!5pAu$sbHwx]`-">
+                        <field name="TYPE">uri_static</field>
+                      </block>
+                    </value>
+                    <value name="TYPE1">
+                      <block type="type_other" id="}=bz@5[~ImN{Ynu(t39b">
+                        <field name="TYPE">uri_dynamic</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id=".JC/c3[XJ`x{qef%1d!`" deletable="false" movable="false">
+        <field name="TEXT">A block that defines a dynamic part of the URI scheme.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="+SfrW(0Ek5eQBJF;WSth" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="o4tEPGH%s3y23+6523bf"></shadow>
+      <block type="type_group" id="=O{6!]eZC;V(VB*P_:91">
+        <mutation types="3"></mutation>
+        <value name="TYPE0">
+          <block type="type_other" id="/3bJokO5(%?QzGsqzxH=">
+            <field name="TYPE">uri_static</field>
+          </block>
+        </value>
+        <value name="TYPE1">
+          <block type="type_other" id="(lEHV`OJs#16wN-3r-9b">
+            <field name="TYPE">uri_dynamic</field>
+          </block>
+        </value>
+        <value name="TYPE2">
+          <block type="type_other" id="m9U%qNn$xXKCFy-fN!j;">
+            <field name="TYPE">uri_root</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="*11KT0Vf/yd=LDrdru*o"></shadow>
+      <block type="type_group" id="%Frlx@bOi@.$j1_!-GG7">
+        <mutation types="2"></mutation>
+        <value name="TYPE0">
+          <block type="type_other" id="?v`n=gT;??Q@Udg[190;">
+            <field name="TYPE">uri_static</field>
+          </block>
+        </value>
+        <value name="TYPE1">
+          <block type="type_other" id="GQdVcYBG~M.1=$}[HSpF">
+            <field name="TYPE">uri_dynamic</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="jBsp:Y8R-;_VIWX{MhhA">
+        <mutation colour="#5b6da5"></mutation>
+        <field name="HUE">225</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="`JwC~:e=)Lwc/Nbk{7}T" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="NONE"></mutation>
+    <field name="NAME">resource_definition</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">NONE</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="hq8|2/RQd||/%VMo;Q@V">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="3PlngUhHndlPGSjJ8@Qt">
+            <field name="TEXT">Resource Definition</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_value" id="~toxw)(72nZu4#JxBS?5">
+            <field name="INPUTNAME">RESOURCE_ID</field>
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="p/vxIo!,HA3Mlb5;-Xey">
+                <field name="TEXT">Resource Linker</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow type="type_null" id="0Ut-YQ%:N7c5jNM7n@Vo"></shadow>
+              <block type="type_other" id="Cl3}o@1Cd@/`}G5!dXbX">
+                <field name="TYPE">resource_linker</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="0XHe$0]@##.^1O,J*DN7" deletable="false" movable="false">
+        <field name="TEXT">A definition of a resource.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="y*_1ueR|*u!RBh-uZ}B." deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="l}DSR*Y.j1ig5|#boC%[">
+        <mutation colour="#5ba5a5"></mutation>
+        <field name="HUE">180</field>
       </block>
     </value>
   </block></xml>
