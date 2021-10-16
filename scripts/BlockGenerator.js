@@ -10,9 +10,15 @@ Blockly.JavaScript['connection'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['email'] = function(block) {
-  var text_email_file = block.getFieldValue('EMAIL_FILE');
-  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+Blockly.JavaScript['uri_root'] = function(block) {
+  var statements_uri = Blockly.JavaScript.statementToCode(block, 'URI');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+Blockly.JavaScript['uri_static'] = function(block) {
+  var statements_uri = Blockly.JavaScript.statementToCode(block, 'URI');
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
   return code;

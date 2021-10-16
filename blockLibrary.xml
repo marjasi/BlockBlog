@@ -1,0 +1,144 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><block type="factory_base" id="jF`C_NvCw0nbCTPx4Tk(" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="NONE"></mutation>
+    <field name="NAME">uri_root</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">NONE</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id=",EX^WHk](]*Bg2El}5DR">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="A!vJ=U]tMaN;;g8fp+IP">
+            <field name="TEXT">URI Root</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_statement" id="KzY,E$!DU5c}k,$RH;hD">
+            <field name="INPUTNAME">URI</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="Q?|2Apz~OLuV~G-{*v{l"></shadow>
+              <block type="type_group" id="Mc,OBTq|NT]6D;5V0ATt">
+                <mutation types="2"></mutation>
+                <value name="TYPE0">
+                  <block type="type_other" id="K@dw)@GUtA0--i;AP$8x">
+                    <field name="TYPE">uri_static</field>
+                  </block>
+                </value>
+                <value name="TYPE1">
+                  <block type="type_other" id="Hi(=b,A8vit+Pp%E)SjJ">
+                    <field name="TYPE">uri_dynamic</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="eGvU^_:ykriD8w|z:!1%" deletable="false" movable="false">
+        <field name="TEXT">This block defines the URI scheme's root address.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="){1wrW!jA`iGv^]NK:7*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="6`=ZmwC^1Y-^osn(ThO;">
+        <mutation colour="#a55b5b"></mutation>
+        <field name="HUE">0</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="fLk/ff,?;[WQw)Y4f3Mf" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">uri_static</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="ZRZaz47E2wiv~KXyN:@q">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="E`[CL(.=VOQCrNpSR|[g">
+            <field name="TEXT">Static URI</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_statement" id="XyGqA;.;PUexdpe-MHI1">
+            <field name="INPUTNAME">URI</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="f@YD|.]WM)rdf;?8`Z!:"></shadow>
+              <block type="type_group" id="*iI2D7`eFl|Bq?=:L^${">
+                <mutation types="2"></mutation>
+                <value name="TYPE0">
+                  <block type="type_other" id="YxSi%/T:r1@k}*(aq_BQ">
+                    <field name="TYPE">uri_static</field>
+                  </block>
+                </value>
+                <value name="TYPE1">
+                  <block type="type_other" id="^Y0{2bbMgLPB*Lsn17ds">
+                    <field name="TYPE">uri_dynamic</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="!ku/Xl0RdGIf[n-MukkL" deletable="false" movable="false">
+        <field name="TEXT">A block that defines a static part of the URI scheme.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=",l^ZDe!(`t,J^m8Wab!F" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id=".|,I.ACg@Hr0/Al?+Mt,"></shadow>
+      <block type="type_group" id="AHijr|ct(@A[Xdkj)X4!">
+        <mutation types="3"></mutation>
+        <value name="TYPE0">
+          <block type="type_other" id="[Le6zJj)}xa)^kXmcpc6">
+            <field name="TYPE">uri_static</field>
+          </block>
+        </value>
+        <value name="TYPE1">
+          <block type="type_other" id="1mF!*-52c+fi}*l]RL[/">
+            <field name="TYPE">uri_dynamic</field>
+          </block>
+        </value>
+        <value name="TYPE2">
+          <block type="type_other" id=",s5!TQJdDo%0(O5kY+z{">
+            <field name="TYPE">uri_root</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="oT5Q[8_Ns12@Cmz7ADKW"></shadow>
+      <block type="type_group" id="(Fb/XFN:?r^zM6{T[:W/">
+        <mutation types="2"></mutation>
+        <value name="TYPE0">
+          <block type="type_other" id="5|E!Dq3xWF^X2]C8`}cR">
+            <field name="TYPE">uri_static</field>
+          </block>
+        </value>
+        <value name="TYPE1">
+          <block type="type_other" id="DOZxJ`9!?=8KdH*WcvbW">
+            <field name="TYPE">uri_dynamic</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="DCTZ1O9b;g4NTqa`iOVZ">
+        <mutation colour="#a5805b"></mutation>
+        <field name="HUE">30</field>
+      </block>
+    </value>
+  </block></xml>
