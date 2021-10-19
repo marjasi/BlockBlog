@@ -26,7 +26,7 @@ Blockly.JavaScript['uri_static'] = function(block) {
   var value_resource_linker = Blockly.JavaScript.valueToCode(block, 'RESOURCE_LINKER', Blockly.JavaScript.ORDER_ATOMIC);
   var statements_uri = Blockly.JavaScript.statementToCode(block, 'URI');
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = '...;';
   return code;
 };
 
