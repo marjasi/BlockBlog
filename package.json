@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "blocklyDemoConfig": {
-    "title": "Generate JavaScript",
+    "title": "Generate JSON",
     "description": "Turn blocks into code and execute it.",
     "files": [
       "index.html",
