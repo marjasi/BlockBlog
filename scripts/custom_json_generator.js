@@ -2,12 +2,11 @@ const customJSONGenerator = new Blockly.Generator("JSON");
 customJSONGenerator.PRECEDENCE = 0;
 
 customJSONGenerator['resource_linker'] = function(block) {
-  // Get the name of the variable
+  // Get the name of the linker variable.
   var linkerID = block.getField("LINKER_VARIABLE");
-  // TODO: Assemble JavaScript into code variable.
-  var code = '"' + "resource_link" + '"' + " : " + '"' + linkerID.getText() + '"';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, customJSONGenerator.PRECEDENCE];
+  var json = '"' + linkerID.getText() + '"';
+  
+  return [json, customJSONGenerator.PRECEDENCE];
 };
 
 customJSONGenerator['resource_definition'] = function(block) {
