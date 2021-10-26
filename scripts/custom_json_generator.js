@@ -10,10 +10,9 @@ customJSONGenerator['resource_linker'] = function(block) {
 };
 
 customJSONGenerator['resource_definition'] = function(block) {
-  var value_resource_id = Blockly.JavaScript.valueToCode(block, 'RESOURCE_ID', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
+  var resourceLinker = customJSONGenerator.valueToCode(block, 'RESOURCE_ID', customJSONGenerator.PRECEDENCE);
+  var json = '"resource" : {\n"resource_linker" : ' + resourceLinker + '\n}';
+  return json;
 };
 
 customJSONGenerator['uri_root'] = function(block) {
