@@ -1,6 +1,17 @@
 const customJSONGenerator = new Blockly.Generator("JSON");
 customJSONGenerator.PRECEDENCE = 0;
 
+// scrub_ is called from every block on blockToCode.
+customJSONGenerator.scrub_ = function(block, code, opt_thisOnly) {
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  let nextCode = '';
+  if (nextBlock) {
+    // Separate same object memebers with a comma and a newline.
+    nextCode = opt_thisOnly ? '' : ',\n' + customJSONGenerator.blockToCode(nextBlock);
+  }
+  return code +  nextCode;
+};
+
 customJSONGenerator['resource_linker'] = function(block) {
   // Get the name of the linker variable.
   var linkerID = block.getField("LINKER_VARIABLE");
@@ -11,14 +22,13 @@ customJSONGenerator['resource_linker'] = function(block) {
 
 customJSONGenerator['resource_definition'] = function(block) {
   var resourceLinker = customJSONGenerator.valueToCode(block, 'RESOURCE_ID', customJSONGenerator.PRECEDENCE);
-  var json = '"resource" : {\n"resource_linker" : ' + resourceLinker + '\n}';
+  var json = '{\n"resource_linker" : ' + resourceLinker + '\n}';
   return json;
 };
 
 customJSONGenerator['resource_definitions'] = function(block) {
-  var statements_resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
-  // TODO: Assemble JavaScript into code variable.
-  var json = '...;\n';
+  var resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
+  var json = '"resources" : [\n' + resources + '\n]';
   return json;
 };
 
