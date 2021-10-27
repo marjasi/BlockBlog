@@ -322,10 +322,10 @@
       </block>
     </value>
   </block><block type="factory_base" id="`JwC~:e=)Lwc/Nbk{7}T" deletable="false" movable="false" x="10" y="10">
-    <mutation connections="NONE"></mutation>
+    <mutation connections="BOTH"></mutation>
     <field name="NAME">resource_definition</field>
     <field name="INLINE">EXT</field>
-    <field name="CONNECTIONS">NONE</field>
+    <field name="CONNECTIONS">BOTH</field>
     <statement name="INPUTS">
       <block type="input_dummy" id="hq8|2/RQd||/%VMo;Q@V">
         <field name="ALIGN">LEFT</field>
@@ -363,10 +363,59 @@
         <field name="TEXT"></field>
       </block>
     </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="KRyLKlY?-ng$k8=?;9lt"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="6B;HIb6s.qYf^-Hk7bd8"></shadow>
+    </value>
     <value name="COLOUR">
       <block type="colour_hue" id="l}DSR*Y.j1ig5|#boC%[">
         <mutation colour="#5ba5a5"></mutation>
         <field name="HUE">180</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="{{5tL,tkIDp]}!~3dL|R" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="NONE"></mutation>
+    <field name="NAME">resource_definitions</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">NONE</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="^p,GJBVvue%z#]*PD2q(">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="fHr(v{:N;!C5xju,)%De">
+            <field name="TEXT">Resource Definitions</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_statement" id="$3ptPB$=F/rO;3L8x(XW">
+            <field name="INPUTNAME">RESOURCES</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="j%2,6$M@eb6*8%jLbxP@"></shadow>
+              <block type="type_other" id="P3#Fy;KGSwHo8M3NTo4;">
+                <field name="TYPE">resource_definition</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="Kf}4WLf2%%a+%9/9y[$p" deletable="false" movable="false">
+        <field name="TEXT">This block defines the resource definitions used by the REST API.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";d#;]_7F@wcM@8m5FP|." deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="=QsBt!5VLcyySlXsX/X{">
+        <mutation colour="#5ba593"></mutation>
+        <field name="HUE">165</field>
       </block>
     </value>
   </block></xml>

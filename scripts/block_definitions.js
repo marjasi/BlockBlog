@@ -35,6 +35,8 @@ var resourceDefinitionJson = {
     }
   ],
   "inputsInline": false,
+  "previousStatement": null,
+  "nextStatement": null,
   "colour": 180,
   "tooltip": "A definition of a resource.",
   "helpUrl": ""
@@ -43,6 +45,31 @@ var resourceDefinitionJson = {
 Blockly.Blocks['resource_definition'] = {
   init: function() {
     this.jsonInit(resourceDefinitionJson);
+  }
+}
+
+var resourceDefinitionsJson = {
+  "type": "resource_definitions",
+  "message0": "Resource Definitions %1 %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "RESOURCES",
+      "check": "resource_definition"
+    }
+  ],
+  "inputsInline": false,
+  "colour": 165,
+  "tooltip": "This block defines the resource definitions used by the REST API.",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['resource_definitions'] = {
+  init: function() {
+    this.jsonInit(resourceDefinitionsJson);
   }
 }
 

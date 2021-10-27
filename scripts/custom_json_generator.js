@@ -15,6 +15,13 @@ customJSONGenerator['resource_definition'] = function(block) {
   return json;
 };
 
+customJSONGenerator['resource_definitions'] = function(block) {
+  var statements_resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
+  // TODO: Assemble JavaScript into code variable.
+  var json = '...;\n';
+  return json;
+};
+
 customJSONGenerator['uri_root'] = function(block) {
   var text_uri_root = block.getFieldValue('URI_ROOT');
   var statements_uri = Blockly.JavaScript.statementToCode(block, 'URI');
