@@ -1,27 +1,23 @@
 // Initialize the Blockly workspace.
-var demoWorkspace = Blockly.inject('blocklyDiv',
+var blockWorkspace = Blockly.inject('blocklyDiv',
     {media: 'https://unpkg.com/blockly/media/',
      toolbox: document.getElementById('toolbox')});
-Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-                           demoWorkspace);
+Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), blockWorkspace);
 
-function showCode() {
-  // Generate JavaScript code and display it.
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-  alert(code);
+function DownloadFile(fileName, fileContent) {
 }
 
-function runCode() {
-  // Generate JavaScript code and run it.
+function showJSON() {
+  // Generate JSON code and display it.
+  customJSONGenerator.INFINITE_LOOP_TRAP = null;
+  var json = customJSONGenerator.workspaceToCode(blockWorkspace);
+  alert(json);
+}
+
+function saveJSON() {
+  // Generate JSON code and save it to a file for the user to download.
   window.LoopTrap = 1000;
-  Blockly.JavaScript.INFINITE_LOOP_TRAP =
-      'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-  var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  try {
-    eval(code);
-  } catch (e) {
-    alert(e);
-  }
+  customJSONGenerator.INFINITE_LOOP_TRAP = null;
+  var json = customJSONGenerator.workspaceToCode(blockWorkspace);
+  if (DownloadFile("JSONResult.json", json));
 }

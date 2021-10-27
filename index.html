@@ -21,8 +21,8 @@
 </head>
 <body>
   <p>
-    <button onclick="showCode()">Show JavaScript</button>
-    <button onclick="runCode()">Run JavaScript</button>
+    <button onclick="showJSON()">Show JSON</button>
+    <button onclick="saveJSON()">Save JSON</button>
   </p>
 
   <div id="blocklyDiv" style="height: 800px; width: 1600px;"></div>
@@ -35,13 +35,14 @@
       <block type="resource_linker"></block>
     </category>
     <category name="Resource" colour="%{BKY_LOOPS_HUE}">
+      <block type="resource_definitions"></block>
       <block type="resource_definition"></block>
       <block type="resource_linker"></block>
     </category>
   </xml>
 
-  <script src='scripts/BlockDef.js'></script>
-  <script src='scripts/BlockGenerator.js'></script>
+  <script src='scripts/block_definitions.js'></script>
+  <script src='scripts/custom_json_generator.js'></script>
   <script src="index.js"></script>
 
 </body>
