@@ -28,7 +28,7 @@ customJSONGenerator['resource_definition'] = function(block) {
 
 customJSONGenerator['resource_definitions'] = function(block) {
   var resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
-  var json = '"resources" : [\n' + resources + '\n]';
+  var json = '{\n"resources" : [\n' + resources + '\n]\n}';
   return json;
 };
 
