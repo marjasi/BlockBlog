@@ -16,7 +16,6 @@ customJSONGenerator['resource_linker'] = function(block) {
   // Get the name of the linker variable.
   var linkerID = block.getField("LINKER_VARIABLE");
   var json = '"' + linkerID.getText() + '"';
-  
   return [json, customJSONGenerator.PRECEDENCE];
 };
 
@@ -33,27 +32,24 @@ customJSONGenerator['resource_definitions'] = function(block) {
 };
 
 customJSONGenerator['uri_root'] = function(block) {
-  var text_uri_root = block.getFieldValue('URI_ROOT');
-  var statements_uri = Blockly.JavaScript.statementToCode(block, 'URI');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
+  var uriRootPath = block.getFieldValue('URI_ROOT');
+  var uriPaths = Blockly.JavaScript.statementToCode(block, 'URI');
+  var json = '...;\n';
+  return json;
 };
 
 customJSONGenerator['uri_static'] = function(block) {
-  var text_uri_static = block.getFieldValue('URI_STATIC');
-  var value_resource_linker = Blockly.JavaScript.valueToCode(block, 'RESOURCE_LINKER', Blockly.JavaScript.ORDER_ATOMIC);
-  var statements_uri = Blockly.JavaScript.statementToCode(block, 'URI');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;';
-  return code;
+  var staticUriPath = block.getFieldValue('URI_STATIC');
+  var linkerID = Blockly.JavaScript.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
+  var uriPaths = Blockly.JavaScript.statementToCode(block, 'URI');
+  var json = '...;';
+  return json;
 };
 
 customJSONGenerator['uri_dynamic'] = function(block) {
-  var text_uri_dynamic = block.getFieldValue('URI_DYNAMIC');
-  var value_resource_linker = Blockly.JavaScript.valueToCode(block, 'RESOURCE_LINKER', Blockly.JavaScript.ORDER_ATOMIC);
-  var statements_uri = Blockly.JavaScript.statementToCode(block, 'URI');
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
-  return code;
+  var dynamicUriPath = block.getFieldValue('URI_DYNAMIC');
+  var linkerID = Blockly.JavaScript.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
+  var uriPaths = Blockly.JavaScript.statementToCode(block, 'URI');
+  var json = '...;\n';
+  return json;
 };
