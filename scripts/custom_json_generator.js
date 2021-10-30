@@ -33,23 +33,35 @@ customJSONGenerator['resource_definitions'] = function(block) {
 
 customJSONGenerator['uri_root'] = function(block) {
   var uriRootPath = block.getFieldValue('URI_ROOT');
-  var uriPaths = Blockly.JavaScript.statementToCode(block, 'URI');
-  var json = '...;\n';
+  var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
+  var json = '{\n "uri_root" : {\n "root_path" : "' + uriRootPath + '",\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
   return json;
 };
 
 customJSONGenerator['uri_static'] = function(block) {
   var staticUriPath = block.getFieldValue('URI_STATIC');
-  var linkerID = Blockly.JavaScript.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
-  var uriPaths = Blockly.JavaScript.statementToCode(block, 'URI');
-  var json = '...;';
+  var linkerID = customJSONGenerator.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
+  var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
+  var json;
+  if (uriPaths) {
+    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
+  }
+  else {
+    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + '\n}\n}';
+  }
   return json;
 };
 
 customJSONGenerator['uri_dynamic'] = function(block) {
   var dynamicUriPath = block.getFieldValue('URI_DYNAMIC');
-  var linkerID = Blockly.JavaScript.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
-  var uriPaths = Blockly.JavaScript.statementToCode(block, 'URI');
-  var json = '...;\n';
+  var linkerID = customJSONGenerator.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
+  var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
+  var json;
+  if (uriPaths) {
+    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n"uri_paths" : [' + uriPaths + ']\n}\n}';
+  }
+    else {
+    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + '\n}\n}';
+  }
   return json;
 };
