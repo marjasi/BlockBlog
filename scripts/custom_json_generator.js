@@ -44,10 +44,10 @@ customJSONGenerator['uri_static'] = function(block) {
   var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
   var json;
   if (uriPaths) {
-    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
+    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n'  + '"dynamic" : false,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
   }
   else {
-    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + '\n}\n}';
+    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n"dynamic" : false' + '\n}\n}';
   }
   return json;
 };
@@ -58,10 +58,10 @@ customJSONGenerator['uri_dynamic'] = function(block) {
   var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
   var json;
   if (uriPaths) {
-    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n"uri_paths" : [' + uriPaths + ']\n}\n}';
+    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n' + '"dynamic" : true,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
   }
     else {
-    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + '\n}\n}';
+    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n"dynamic" : true' + '\n}\n}';
   }
   return json;
 };
