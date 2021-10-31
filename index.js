@@ -19,6 +19,7 @@ function showJSON() {
   // Generate JSON code and display it.
   customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = customJSONGenerator.workspaceToCode(blockWorkspace);
+  json = '[\n' + json + '\n]';
   alert(json);
 }
 

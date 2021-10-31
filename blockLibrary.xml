@@ -1,8 +1,8 @@
 <xml xmlns="https://developers.google.com/blockly/xml"><block type="factory_base" id="jF`C_NvCw0nbCTPx4Tk(" deletable="false" movable="false" x="10" y="10">
-    <mutation connections="NONE"></mutation>
+    <mutation connections="TOP"></mutation>
     <field name="NAME">uri_root</field>
     <field name="INLINE">EXT</field>
-    <field name="CONNECTIONS">NONE</field>
+    <field name="CONNECTIONS">TOP</field>
     <statement name="INPUTS">
       <block type="input_dummy" id=",EX^WHk](]*Bg2El}5DR">
         <field name="ALIGN">LEFT</field>
@@ -50,6 +50,9 @@
       <block type="text" id="){1wrW!jA`iGv^]NK:7*" deletable="false" movable="false">
         <field name="TEXT"></field>
       </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="38=0QOS[E1)0O?s.K.l6"></shadow>
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="6`=ZmwC^1Y-^osn(ThO;">
@@ -376,10 +379,10 @@
       </block>
     </value>
   </block><block type="factory_base" id="{{5tL,tkIDp]}!~3dL|R" deletable="false" movable="false" x="10" y="10">
-    <mutation connections="NONE"></mutation>
+    <mutation connections="TOP"></mutation>
     <field name="NAME">resource_definitions</field>
     <field name="INLINE">EXT</field>
-    <field name="CONNECTIONS">NONE</field>
+    <field name="CONNECTIONS">TOP</field>
     <statement name="INPUTS">
       <block type="input_dummy" id="^p,GJBVvue%z#]*PD2q(">
         <field name="ALIGN">LEFT</field>
@@ -412,10 +415,78 @@
         <field name="TEXT"></field>
       </block>
     </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="eY!Jm7B2W*x@{+b(dz]-"></shadow>
+    </value>
     <value name="COLOUR">
       <block type="colour_hue" id="=QsBt!5VLcyySlXsX/X{">
         <mutation colour="#5ba593"></mutation>
         <field name="HUE">165</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="QDZ`xX=I5@/[A{^Wm7,A" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="NONE"></mutation>
+    <field name="NAME">rest_api</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">NONE</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="Db!6MmHbFa]ktiuDbSdR">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="*r$OO4I{u/IZcTgMs7H_">
+            <field name="TEXT">REST API</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_statement" id="UJ(3I)0}Aw-jPx7s(L,X">
+            <field name="INPUTNAME">RESOURCES</field>
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="mijjxg/1Pn*u/JPO_]mj">
+                <field name="TEXT">Resources:</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow type="type_null" id="51BmPCNur18XnmInA8H."></shadow>
+              <block type="type_other" id="/+]*(2Cab9U/:kS/gfgz">
+                <field name="TYPE">resource_definitions</field>
+              </block>
+            </value>
+            <next>
+              <block type="input_statement" id="ypRZY:d1uBb9OkI5WDf,">
+                <field name="INPUTNAME">URI_ROOT</field>
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="7o]8(u,%{%8v5!$_h+h2">
+                    <field name="TEXT">URI Root:</field>
+                  </block>
+                </statement>
+                <value name="TYPE">
+                  <shadow type="type_null" id="Iy0RxY^YuV:l#8rsuM7?"></shadow>
+                  <block type="type_other" id="5@q1963_5a1i.PsC~K|T">
+                    <field name="TYPE">uri_root</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="m64~So5~Q~d?Q!91)4by" deletable="false" movable="false">
+        <field name="TEXT">A block that declares the REST API components.</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="6w{IULdLXSh**.AA2w%]" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="%MnveaJUE7LR_VY-[]o^">
+        <mutation colour="#935ba5"></mutation>
+        <field name="HUE">285</field>
       </block>
     </value>
   </block></xml>
