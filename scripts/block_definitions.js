@@ -62,6 +62,7 @@ var resourceDefinitionsJson = {
     }
   ],
   "inputsInline": false,
+  "previousStatement": null,
   "colour": 165,
   "tooltip": "This block defines the resource definitions used by the REST API.",
   "helpUrl": ""
@@ -95,6 +96,7 @@ var uriRootJson = {
     }
   ],
   "inputsInline": false,
+  "previousStatement": null,
   "colour": 0,
   "tooltip": "This block defines the URI scheme's root address.",
   "helpUrl": ""
@@ -197,5 +199,35 @@ var uriDynamicJson = {
 Blockly.Blocks['uri_dynamic'] = {
   init: function() {
     this.jsonInit(uriDynamicJson);
+  }
+}
+
+var restApiJson = {
+  "type": "rest_api",
+  "message0": "REST API %1 Resources: %2 URI Root: %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "RESOURCES",
+      "check": "resource_definitions"
+    },
+    {
+      "type": "input_statement",
+      "name": "URI_ROOT",
+      "check": "uri_root"
+    }
+  ],
+  "inputsInline": false,
+  "colour": 285,
+  "tooltip": "A block that declares the REST API components.",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['rest_api'] = {
+  init: function() {
+    this.jsonInit(restApiJson);
   }
 }
