@@ -30,7 +30,6 @@ function downloadJSON() {
   window.LoopTrap = 1000;
   customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = customJSONGenerator.workspaceToCode(blockWorkspace);
-  json = '[\n' + json + '\n]';
   try {
     createDownloadFile(jsonFileName, json, jsonFileType);
   } catch(error) {
