@@ -13,6 +13,7 @@
     ]
   },
   "dependencies": {
-    "blockly": "^5.20210325.0"
+    "blockly": "^5.20210325.0",
+    "express": "^4.17.1"
   }
 }
