@@ -1,6 +1,5 @@
 {
-"resource_definitions" :
-  {
+"resource_definitions" :   {
   "resources" : [
     {
     "resource_linker" : "ID54"
@@ -12,9 +11,8 @@
     "resource_linker" : "ID1"
     }
   ]
-  }
-,"uri" :
-  {
+  },
+"uri" :   {
    "uri_root" : {
    "root_path" : "restapi",
   "uri_paths" : [  {
