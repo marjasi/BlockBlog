@@ -1,0 +1,47 @@
+{
+"resource_definitions" :
+  {
+  "resources" : [
+    {
+    "resource_linker" : "ID54"
+    },
+    {
+    "resource_linker" : "ID23"
+    },
+    {
+    "resource_linker" : "ID1"
+    }
+  ]
+  }
+,"uri" :
+  {
+   "uri_root" : {
+   "root_path" : "restapi",
+  "uri_paths" : [  {
+    "stores" : {
+    "resource_linker" : "ID23",
+    "dynamic" : true
+    }
+    },
+    {
+    "products" : {
+    "resource_linker" : "ID1",
+    "dynamic" : true
+    }
+    },
+    {
+    "products" : {
+    "resource_linker" : "ID1",
+    "dynamic" : false,
+    "uri_paths" : [  {
+      "customers" : {
+      "resource_linker" : "ID54",
+      "dynamic" : false
+      }
+      }]
+    }
+    }]
+  }
+  }
+
+}

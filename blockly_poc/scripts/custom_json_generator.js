@@ -69,6 +69,6 @@ customJSONGenerator['uri_dynamic'] = function(block) {
 customJSONGenerator['rest_api'] = function(block) {
   var resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
   var uri = customJSONGenerator.statementToCode(block, 'URI_ROOT');
-  var code = '{\n' + '"resource_definitions" : \n' + resources + '\n,' + '"uri" : \n' + uri + '\n'  + '\n}';
+  var code = '{\n' + '"resource_definitions" : \n' + resources + ',\n' + '"uri" : \n' + uri + '\n'  + '\n}';
   return code;
 };
