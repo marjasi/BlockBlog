@@ -1,0 +1,19 @@
+{
+  "name": "blockly-poc",
+  "version": "0.0.0",
+  "private": true,
+  "blocklyDemoConfig": {
+    "title": "Generate JSON",
+    "description": "Turn blocks into code and execute it.",
+    "files": [
+      "index.html",
+      "./node_modules/blockly/*_compressed.js",
+      "./node_modules/blockly/*_compressed.js.map",
+      "./node_modules/blockly/msg/en.js"
+    ]
+  },
+  "dependencies": {
+    "blockly": "^5.20210325.0",
+    "express": "^4.17.1"
+  }
+}
