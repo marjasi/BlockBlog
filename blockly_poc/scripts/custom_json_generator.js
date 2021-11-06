@@ -45,10 +45,11 @@ customJSONGenerator['uri_static'] = function(block) {
   var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
   var json;
   if (uriPaths) {
-    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n'  + '"dynamic" : false,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
+    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n'
+      + '"dynamic" : false,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
   }
   else {
-    json = '{\n"' + staticUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n"dynamic" : false' + '\n}\n}';
+    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n"dynamic" : false' + '\n}\n}';
   }
   return json;
 };
@@ -59,10 +60,11 @@ customJSONGenerator['uri_dynamic'] = function(block) {
   var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
   var json;
   if (uriPaths) {
-    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n' + '"dynamic" : true,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
+    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n'
+      + '"dynamic" : true,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
   }
     else {
-    json = '{\n"' + dynamicUriPath + '" : {\n"resource_linker" : ' + linkerID + ',\n"dynamic" : true' + '\n}\n}';
+    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n"dynamic" : true' + '\n}\n}';
   }
   return json;
 };
@@ -70,6 +72,6 @@ customJSONGenerator['uri_dynamic'] = function(block) {
 customJSONGenerator['rest_api'] = function(block) {
   var resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
   var uri = customJSONGenerator.statementToCode(block, 'URI_ROOT');
-  var code = '{\n' + '"resource_definitions" : ' + resources + ',\n' + '"uri" : ' + uri + '\n'  + '\n}';
+  var code = '{\n' + '"resource_definitions" : ' + resources + ',\n' + '"uri" : ' + uri + '\n}';
   return code;
 };
