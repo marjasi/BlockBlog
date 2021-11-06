@@ -2,12 +2,15 @@
 "resource_definitions" :   {
   "resources" : [
     {
+    "resource_name" : "Customer",
     "resource_linker" : "ID54"
     },
     {
+    "resource_name" : "Store",
     "resource_linker" : "ID23"
     },
     {
+    "resource_name" : "Product",
     "resource_linker" : "ID1"
     }
   ]
@@ -16,19 +19,19 @@
    "uri_root" : {
    "root_path" : "restapi",
   "uri_paths" : [  {
-    "stores" : {
+    "path" : {
     "resource_linker" : "ID23",
     "dynamic" : true
     }
     },
     {
-    "products" : {
+    "path" : {
     "resource_linker" : "ID1",
     "dynamic" : true
     }
     },
     {
-    "products" : {
+    "path" : {
     "resource_linker" : "ID1",
     "dynamic" : false,
     "uri_paths" : [  {

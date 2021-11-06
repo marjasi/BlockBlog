@@ -18,7 +18,10 @@ fs.readFile('blocklyREST.json', 'utf8', (err, fileContents) => {
   }
   try {
     const blocklyJsondata = JSON.parse(fileContents)
-    console.log(data);
+    console.log(blocklyJsondata.resource_definitions.resources[0].resource_linker);
+    console.log(blocklyJsondata.resource_definitions.resources[0].resource_name);
+    console.log(blocklyJsondata.uri.uri_root.root_path);
+    console.log(blocklyJsondata.uri.uri_root.uri_paths[2])
   } catch(err) {
     console.error(err);
   }
