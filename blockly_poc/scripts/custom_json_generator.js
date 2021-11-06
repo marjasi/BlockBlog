@@ -22,7 +22,7 @@ customJSONGenerator['resource_linker'] = function(block) {
 customJSONGenerator['resource_definition'] = function(block) {
   var resourceName = block.getFieldValue('RESOURCE_NAME');
   var resourceLinker = customJSONGenerator.valueToCode(block, 'RESOURCE_ID', customJSONGenerator.PRECEDENCE);
-  var json = '{\n"resource_name" : ' + resourceName + ',\n' + '"resource_linker" : ' + resourceLinker + '\n}';
+  var json = '{\n"resource_name" : "' + resourceName + '",\n' + '"resource_linker" : ' + resourceLinker + '\n}';
   return json;
 };
 
