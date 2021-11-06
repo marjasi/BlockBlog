@@ -63,7 +63,5 @@ fs.readFile('blocklyREST.json', 'utf8', (err, fileContents) => {
   }
 })
 
-
-
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
