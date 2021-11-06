@@ -20,22 +20,26 @@
    "root_path" : "restapi",
   "uri_paths" : [  {
     "path" : {
+    "uri_path": "stores",
     "resource_linker" : "ID23",
     "dynamic" : true
     }
     },
     {
     "path" : {
+    "uri_path": "products",
     "resource_linker" : "ID1",
     "dynamic" : true
     }
     },
     {
     "path" : {
+    "uri_path": "products",
     "resource_linker" : "ID1",
     "dynamic" : false,
     "uri_paths" : [  {
-      "customers" : {
+      "path" : {
+      "uri_path": "customers",
       "resource_linker" : "ID54",
       "dynamic" : false
       }
@@ -44,5 +48,4 @@
     }]
   }
   }
-
 }
