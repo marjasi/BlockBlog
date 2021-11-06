@@ -23,8 +23,13 @@ Blockly.Blocks['resource_linker'] = {
 
 var resourceDefinitionJson = {
   "type": "resource_definition",
-  "message0": "Resource Definition %1 Resource Linker %2",
+  "message0": "Resource Name %1 %2 Resource Linker %3",
   "args0": [
+    {
+      "type": "field_input",
+      "name": "RESOURCE_NAME",
+      "text": "Resource"
+    },
     {
       "type": "input_dummy"
     },

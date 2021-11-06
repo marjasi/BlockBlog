@@ -333,8 +333,14 @@
       <block type="input_dummy" id="hq8|2/RQd||/%VMo;Q@V">
         <field name="ALIGN">LEFT</field>
         <statement name="FIELDS">
-          <block type="field_static" id="3PlngUhHndlPGSjJ8@Qt">
-            <field name="TEXT">Resource Definition</field>
+          <block type="field_static" id="=7eOk41cdz63qzD}(M7?">
+            <field name="TEXT">Resource Name</field>
+            <next>
+              <block type="field_input" id="tuEppHzN)f*W^S37}8nf">
+                <field name="TEXT">Resource</field>
+                <field name="FIELDNAME">RESOURCE_NAME</field>
+              </block>
+            </next>
           </block>
         </statement>
         <next>
