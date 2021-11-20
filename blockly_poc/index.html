@@ -60,6 +60,64 @@
         <block type="resource_definitions">
           <statement name="RESOURCES">
             <block type="resource_definition">
+              <field name="RESOURCE_NAME">Page</field>
+              <value name="RESOURCE_ID">
+                <block type="resource_linker">
+                  <field name="LINKER_VARIABLE">ID1</field>
+                </block>
+              </value>
+            </block>
+          </statement>
+        </block>
+      </statement>
+      <statement name="URI_ROOT">
+        <block type="uri_root">
+          <field name="URI_ROOT">home</field>
+          <statement name="URI">
+            <block type="uri_static">
+              <field name="URI_STATIC">welcome</field>
+              <value name="RESOURCE_LINKER">
+                <block type="resource_linker">
+                  <field name="LINKER_VARIABLE">ID1</field>
+                </block>
+              </value>
+              <statement name="URI">
+                <block type="content_type_reference">
+                  <field name="CONTENT_TYPE">Homepage</field>
+                </block>
+              </statement>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <block type="content_type" x="500" y="20">
+      <field name="CONTENT_TYPE">Homepage</field>
+      <statement name="PROPERTIES">
+        <block type="header">
+          <field name="HEADER_NAME">main_header</field>
+          <field name="TEXT">How to read quickly</field>
+          <statement name="CHILDREN">
+            <block type="paragraph">
+              <field name="PARAGRAPH_NAME">main_first_paragraph</field>
+              <field name="TEXT">Be selective and tune into your intention. Before you pull a book from a shelf or open a journal article, ask yourself: why am I reading this? Why do I need this information? This pause for thought will hopefully help you cull all of the unnecessary material you would have otherwise flicked through absentmindedly.</field>
+            </block>
+          </statement>
+          <statement name="CHILDREN">
+            <block type="image_property">
+              <field name="IMAGE_NAME">first_image</field>
+              <value name="IMAGE">
+                <block type="image"></block>
+              </value>
+            </block>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <!-- <block type="rest_api" x="60" y="20">
+      <statement name="RESOURCES">
+        <block type="resource_definitions">
+          <statement name="RESOURCES">
+            <block type="resource_definition">
               <field name="RESOURCE_NAME">Product</field>
               <value name="RESOURCE_ID">
                 <block type="resource_linker">
@@ -145,7 +203,7 @@
           </statement>
         </block>
       </statement>
-    </block>
+    </block> -->
   </xml>
 
   <script src='scripts/block_definitions.js'></script>
