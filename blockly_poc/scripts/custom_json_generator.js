@@ -12,6 +12,58 @@ customJSONGenerator.scrub_ = function(block, code, opt_thisOnly) {
   return code +  nextCode;
 };
 
+customJSONGenerator['header'] = function(block) {
+  var text_header_name = block.getFieldValue('HEADER_NAME');
+  var text_text = block.getFieldValue('TEXT');
+  var code = '';
+  return code;
+};
+
+customJSONGenerator['paragraph'] = function(block) {
+  var text_paragraph_name = block.getFieldValue('PARAGRAPH_NAME');
+  var text_text = block.getFieldValue('TEXT');
+  var code = '';
+  return code;
+};
+
+customJSONGenerator['image_property'] = function(block) {
+  var text_image_name = block.getFieldValue('IMAGE_NAME');
+  var value_image = customJSONGenerator.valueToCode(block, 'IMAGE', customJSONGenerator.PRECEDENCE);
+  var code = '';
+  return code;
+};
+
+customJSONGenerator['image'] = function(block) {
+  var code = '';
+  return [code, customJSONGenerator.PRECEDENCE];
+};
+
+customJSONGenerator['link'] = function(block) {
+  var text_link_name = block.getFieldValue('LINK_NAME');
+  var value_name = customJSONGenerator.valueToCode(block, 'NAME', customJSONGenerator.PRECEDENCE);
+  var code = '';
+  return code;
+};
+
+customJSONGenerator['content_type_link'] = function(block) {
+  var text_content_type = block.getFieldValue('CONTENT_TYPE');
+  var code = '';
+  return [code, customJSONGenerator.PRECEDENCE];
+};
+
+customJSONGenerator['content_type_reference'] = function(block) {
+  var text_content_type = block.getFieldValue('CONTENT_TYPE');
+  var code = '';
+  return code;
+};
+
+customJSONGenerator['content_type'] = function(block) {
+  var text_content_type = block.getFieldValue('CONTENT_TYPE');
+  var statements_properties = customJSONGenerator.statementToCode(block, 'PROPERTIES');
+  var code = '';
+  return code;
+};
+
 customJSONGenerator['resource_linker'] = function(block) {
   // Get the name of the linker variable.
   var linkerID = block.getField("LINKER_VARIABLE");
