@@ -1,6 +1,6 @@
 var headerJson = {
   "type": "header",
-  "message0": "Header %1 %2 Text %3",
+  "message0": "Header %1 %2 Text %3 %4 %5",
   "args0": [
     {
       "type": "field_input",
@@ -14,6 +14,13 @@ var headerJson = {
       "type": "field_input",
       "name": "TEXT",
       "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "CHILDREN"
     }
   ],
   "previousStatement": null,
@@ -62,7 +69,7 @@ Blockly.Blocks['paragraph'] = {
 
 var imagePropertyJson = {
   "type": "image_property",
-  "message0": "Image %1 %2",
+  "message0": "Image %1 %2 %3",
   "args0": [
     {
       "type": "field_input",
@@ -73,6 +80,10 @@ var imagePropertyJson = {
       "type": "input_value",
       "name": "IMAGE",
       "check": "image"
+    },
+    {
+      "type": "input_statement",
+      "name": "CHILDREN"
     }
   ],
   "previousStatement": null,

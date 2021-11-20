@@ -15,6 +15,7 @@ customJSONGenerator.scrub_ = function(block, code, opt_thisOnly) {
 customJSONGenerator['header'] = function(block) {
   var text_header_name = block.getFieldValue('HEADER_NAME');
   var text_text = block.getFieldValue('TEXT');
+  var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   var code = '';
   return code;
 };
@@ -29,6 +30,7 @@ customJSONGenerator['paragraph'] = function(block) {
 customJSONGenerator['image_property'] = function(block) {
   var text_image_name = block.getFieldValue('IMAGE_NAME');
   var value_image = customJSONGenerator.valueToCode(block, 'IMAGE', customJSONGenerator.PRECEDENCE);
+  var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   var code = '';
   return code;
 };
