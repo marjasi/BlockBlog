@@ -71,7 +71,7 @@ customJSONGenerator['content_type'] = function(block) {
   var statements_properties = customJSONGenerator.statementToCode(block, 'PROPERTIES');
   var htmlData = '<!DOCTYPE html><html><head><title>' + text_content_type + '</title></head><body>'
       + statements_properties + '</body></html>';
-  var json = '{\n"content_type" : "' + text_content_type + '",\n "html_data" : "' + htmlData + '"\n}';
+  var json = '{\n"content_type" : "' + text_content_type + '",\n "html_data" : "' + htmlData + '"\n}END';
   return json;
 };
 
@@ -135,6 +135,6 @@ customJSONGenerator['uri_dynamic'] = function(block) {
 customJSONGenerator['rest_api'] = function(block) {
   var resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
   var uri = customJSONGenerator.statementToCode(block, 'URI_ROOT');
-  var code = '{\n' + '"resource_definitions" : ' + resources + ',\n' + '"uri" : ' + uri + '\n}';
+  var code = '{\n' + '"resource_definitions" : ' + resources + ',\n' + '"uri" : ' + uri + '\n}END';
   return code;
 };
