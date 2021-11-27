@@ -12,10 +12,24 @@ function updateHtmlFileDictionary(jsonData) {
   }
 }
 
+function getContentTypeName(uriPaths) {
+  if (uriPaths) {
+    for (var uriPath of uriPaths) {
+      if (uriPath.content_type_reference) {
+        return uriPath.content_type_reference;
+      }
+    }
+  }
+
+  return null;
+}
+
 function checkUriPaths(uriPaths) {
-  for (var uriPath of uriPaths) {
-    if (uriPath.path) {
-      return true;
+  if (uriPaths) {
+    for (var uriPath of uriPaths) {
+      if (uriPath.path) {
+        return true;
+      }
     }
   }
 
@@ -37,11 +51,16 @@ function registerUriPath(parentUriPath, uriPathData, jsonData) {
   var uriPathValue = parentUriPath + '/' + uriPathData.uri_path;
   var resourceId = uriPathData.resource_linker;
   var resourceName = getResourceNameById(jsonData, resourceId);
-  createMockupEndpoint(uriPathValue, resourceName);
-
   var uriPaths = uriPathData.uri_paths;
+  if (getContentTypeName(uriPaths)) {
+    createMockupEndpointWithHtml(uriPathValue, resourceName, getContentTypeName(uriPaths));
+  }
+  else {
+    createMockupEndpoint(uriPathValue, resourceName);
+  }
+
   if (checkUriPaths(uriPaths)) {
-    for (var uriPath of uriPaths){
+    for (var uriPath of uriPaths) {
       uriPath = uriPath.path;
       registerUriPath(uriPathValue, uriPath, jsonData);
     }
@@ -66,6 +85,17 @@ function createMockupEndpoints(jsonData) {
       registerUriPath(uriRoot, uriPath, jsonData);
     }
   }
+}
+
+function createMockupEndpointWithHtml(endpoint, resourceName, contentTypeName) {
+  app.get(endpoint, (req, res) => {
+      filename = contentTypeName + '.html';
+      res.set({
+        "Content-Disposition": 'attachment; filename="'+ filename +'"',
+        "Content-Type": "	text/html",
+      });
+      res.send(htmlFileDictionary[contentTypeName]);
+  });
 }
   
 function createMockupEndpoint(endpoint, resourceName) {
