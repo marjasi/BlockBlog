@@ -5,7 +5,7 @@ function removeNewLinesFromString(string){
 
 function formatHtmlData(htmlData) {
   htmlData = removeNewLinesFromString(htmlData);
-  htmlData = htmlData.replace(/>,/, '>');
+  htmlData = htmlData.replace(/>,/gm, '>');
   return htmlData;
 }
 
