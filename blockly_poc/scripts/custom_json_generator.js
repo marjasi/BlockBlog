@@ -62,8 +62,8 @@ customJSONGenerator['content_type_link'] = function(block) {
 
 customJSONGenerator['content_type_reference'] = function(block) {
   var text_content_type = block.getFieldValue('CONTENT_TYPE');
-  var code = '';
-  return code;
+  var json = '{\n "content_type_reference" : "' + text_content_type + '"\n}';
+  return json;
 };
 
 customJSONGenerator['content_type'] = function(block) {
@@ -78,14 +78,14 @@ customJSONGenerator['content_type'] = function(block) {
 customJSONGenerator['resource_linker'] = function(block) {
   // Get the name of the linker variable.
   var linkerID = block.getField("LINKER_VARIABLE");
-  var json = '"' + linkerID.getText() + '"';
+  var json = linkerID.getText();
   return [json, customJSONGenerator.PRECEDENCE];
 };
 
 customJSONGenerator['resource_definition'] = function(block) {
   var resourceName = block.getFieldValue('RESOURCE_NAME');
   var resourceLinker = customJSONGenerator.valueToCode(block, 'RESOURCE_ID', customJSONGenerator.PRECEDENCE);
-  var json = '{\n"resource_name" : "' + resourceName + '",\n' + '"resource_linker" : ' + resourceLinker + '\n}';
+  var json = '{\n"resource_name" : "' + resourceName + '",\n' + '"resource_linker" : "' + resourceLinker + '"\n}';
   return json;
 };
 
@@ -108,11 +108,11 @@ customJSONGenerator['uri_static'] = function(block) {
   var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
   var json;
   if (uriPaths) {
-    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n'
+    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n'
       + '"dynamic" : false,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
   }
   else {
-    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n"dynamic" : false' + '\n}\n}';
+    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n"dynamic" : false' + '\n}\n}';
   }
   return json;
 };
@@ -123,11 +123,11 @@ customJSONGenerator['uri_dynamic'] = function(block) {
   var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
   var json;
   if (uriPaths) {
-    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n'
+    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n'
       + '"dynamic" : true,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
   }
     else {
-    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : ' + linkerID + ',\n"dynamic" : true' + '\n}\n}';
+    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n"dynamic" : true' + '\n}\n}';
   }
   return json;
 };
