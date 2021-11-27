@@ -13,6 +13,16 @@
    "root_path" : "home",
   "uri_paths" : [  {
     "path" : {
+    "uri_path": "about",
+    "resource_linker" : "ID1",
+    "dynamic" : false,
+    "uri_paths" : [  {
+       "content_type_reference" : "About"
+      }]
+    }
+    },
+    {
+    "path" : {
     "uri_path": "welcome",
     "resource_linker" : "ID1",
     "dynamic" : false,
@@ -26,6 +36,10 @@
 },
 {
 "content_type" : "Homepage",
- "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <h1 id=\"main_header\">How to read quickly</h1>  <p id=\"main_first_paragraph\">Be selective and tune into your intention.Before you pull a book from a shelf or open ajournal article, ask yourself: why am Ireading this? Why do I need this information?This pause for thought will hopefully help youcull all of theunnecessary material you wouldhave otherwise flicked through absentmindedly.</p></body></html>"
+ "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <h1 id=\"main_header\">How to read quickly</h1>  <a href=\"About.html\">About</a>    <p id=\"main_first_paragraph\">Be selective and tune into your intention. Before you pull a book from a shelf or open ajournal article, ask yourself: why am Ireading this? Why do I need this information? This pause for thought will hopefully help youcull all of theunnecessary material you wouldhave otherwise flicked through absentmindedly.</p></body></html>"
+},
+{
+"content_type" : "About",
+ "html_data" : "<!DOCTYPE html><html><head><title>About</title></head><body>  <h1 id=\"main_header\">About</h1>  <a href=\"Homepage.html\">Home</a>    <p id=\"main_first_paragraph\">This blog is about reading. There is a lot of good information here.</p></body></html>"
 }
 ]

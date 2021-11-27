@@ -3,6 +3,12 @@ function removeNewLinesFromString(string){
   return string;
 }
 
+function formatHtmlData(htmlData) {
+  htmlData = removeNewLinesFromString(htmlData);
+  htmlData = htmlData.replace(/>,/, '>');
+  return htmlData;
+}
+
 const customJSONGenerator = new Blockly.Generator("JSON");
 customJSONGenerator.PRECEDENCE = 0;
 
@@ -50,14 +56,14 @@ customJSONGenerator['image'] = function(block) {
 customJSONGenerator['link'] = function(block) {
   var text_link_name = block.getFieldValue('LINK_NAME');
   var value_name = customJSONGenerator.valueToCode(block, 'NAME', customJSONGenerator.PRECEDENCE);
-  var code = '';
-  return code;
+  var htmlData = '<a href=\\"' + value_name + '\\">' + text_link_name + '</a>';
+  return htmlData;
 };
 
 customJSONGenerator['content_type_link'] = function(block) {
   var text_content_type = block.getFieldValue('CONTENT_TYPE');
-  var code = '';
-  return [code, customJSONGenerator.PRECEDENCE];
+  var htmlData = text_content_type + '.html';
+  return [htmlData, customJSONGenerator.PRECEDENCE];
 };
 
 customJSONGenerator['content_type_reference'] = function(block) {
@@ -71,6 +77,7 @@ customJSONGenerator['content_type'] = function(block) {
   var statements_properties = customJSONGenerator.statementToCode(block, 'PROPERTIES');
   var htmlData = '<!DOCTYPE html><html><head><title>' + text_content_type + '</title></head><body>'
       + statements_properties + '</body></html>';
+  htmlData = formatHtmlData(htmlData);
   var json = '{\n"content_type" : "' + text_content_type + '",\n "html_data" : "' + htmlData + '"\n}END';
   return json;
 };

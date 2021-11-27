@@ -87,6 +87,20 @@
                 </block>
               </statement>
           </statement>
+          <statement name="URI">
+            <block type="uri_static">
+              <field name="URI_STATIC">about</field>
+              <value name="RESOURCE_LINKER">
+                <block type="resource_linker">
+                  <field name="LINKER_VARIABLE">ID1</field>
+                </block>
+              </value>
+              <statement name="URI">
+                <block type="content_type_reference">
+                  <field name="CONTENT_TYPE">About</field>
+                </block>
+              </statement>
+          </statement>
         </block>
       </statement>
     </block>
@@ -100,6 +114,49 @@
             <block type="paragraph">
               <field name="PARAGRAPH_NAME">main_first_paragraph</field>
               <field name="TEXT">Be selective and tune into your intention.&#13;&#10; Before you pull a book from a shelf or open a&#13;&#10;journal article, ask yourself: why am I&#13;&#10;reading this? Why do I need this information?&#13;&#10; This pause for thought will hopefully help you&#13;&#10;cull all of theunnecessary material you would&#13;&#10;have otherwise flicked through absentmindedly.</field>
+            </block>
+          </statement>
+          <statement name="CHILDREN">
+            <block type="link">
+              <field name="LINK_NAME">About</field>
+              <value name="NAME">
+                <block type="content_type_link">
+                  <field name="CONTENT_TYPE">About</field>
+                </block>
+              </value>
+            </block>
+          </statement>
+          <!-- <statement name="CHILDREN">
+            <block type="image_property">
+              <field name="IMAGE_NAME">first_image</field>
+              <value name="IMAGE">
+                <block type="image"></block>
+              </value>
+            </block>
+          </statement> -->
+        </block>
+      </statement>
+    </block>
+    <block type="content_type" x="940" y="20">
+      <field name="CONTENT_TYPE">About</field>
+      <statement name="PROPERTIES">
+        <block type="header">
+          <field name="HEADER_NAME">main_header</field>
+          <field name="TEXT">About</field>
+          <statement name="CHILDREN">
+            <block type="paragraph">
+              <field name="PARAGRAPH_NAME">main_first_paragraph</field>
+              <field name="TEXT">This blog is about reading.&#13;&#10; There is a lot of good information here.</field>
+            </block>
+          </statement>
+          <statement name="CHILDREN">
+            <block type="link">
+              <field name="LINK_NAME">Home</field>
+              <value name="NAME">
+                <block type="content_type_link">
+                  <field name="CONTENT_TYPE">Homepage</field>
+                </block>
+              </value>
             </block>
           </statement>
           <!-- <statement name="CHILDREN">
