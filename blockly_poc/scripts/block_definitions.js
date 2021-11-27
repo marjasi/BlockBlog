@@ -11,7 +11,7 @@ var headerJson = {
       "type": "input_dummy"
     },
     {
-      "type": "field_input",
+      "type": "field_multilinetext",
       "name": "TEXT",
       "text": ""
     },
@@ -49,7 +49,7 @@ var paragraphJson = {
       "type": "input_dummy"
     },
     {
-      "type": "field_input",
+      "type": "field_multilinetext",
       "name": "TEXT",
       "text": ""
     }

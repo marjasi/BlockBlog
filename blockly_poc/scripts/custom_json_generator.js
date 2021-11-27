@@ -1,3 +1,8 @@
+function removeNewLinesFromString(string){
+  string = string.replace(/(\r\n|\n|\r)/gm, "");
+  return string;
+}
+
 const customJSONGenerator = new Blockly.Generator("JSON");
 customJSONGenerator.PRECEDENCE = 0;
 
@@ -16,14 +21,16 @@ customJSONGenerator['header'] = function(block) {
   var text_header_name = block.getFieldValue('HEADER_NAME');
   var text_text = block.getFieldValue('TEXT');
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
-  var code = '';
-  return code;
+  text_text = removeNewLinesFromString(text_text);
+  var htmlData = '<h1 id=\\"' + text_header_name + '\\">' + text_text + '</h1>' + statements_children;
+  return htmlData;
 };
 
 customJSONGenerator['paragraph'] = function(block) {
   var text_paragraph_name = block.getFieldValue('PARAGRAPH_NAME');
   var text_text = block.getFieldValue('TEXT');
-  var code = '';
+  text_text = removeNewLinesFromString(text_text);
+  var code = '<p id=\\"' + text_paragraph_name + '\\">' + text_text + '</p>';
   return code;
 };
 
@@ -62,8 +69,10 @@ customJSONGenerator['content_type_reference'] = function(block) {
 customJSONGenerator['content_type'] = function(block) {
   var text_content_type = block.getFieldValue('CONTENT_TYPE');
   var statements_properties = customJSONGenerator.statementToCode(block, 'PROPERTIES');
-  var code = '';
-  return code;
+  var htmlData = '<!DOCTYPE html><html><head><title>' + text_content_type + '</title></head><body>'
+      + statements_properties + '</body></html>';
+  var json = '{\n"content_type" : "' + text_content_type + '",\n "html_data" : "' + htmlData + '"\n}';
+  return json;
 };
 
 customJSONGenerator['resource_linker'] = function(block) {
