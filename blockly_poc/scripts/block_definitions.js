@@ -156,7 +156,7 @@ Blockly.Blocks['image'] = {
 
 var linkJson = {
   "type": "link",
-  "message0": "Link %1 %2",
+  "message0": "Link %1 Ref Text %2 %3",
   "args0": [
     {
       "type": "field_input",
@@ -164,8 +164,13 @@ var linkJson = {
       "text": ""
     },
     {
+      "type": "field_input",
+      "name": "TEXT",
+      "text": ""
+    },
+    {
       "type": "input_value",
-      "name": "NAME"
+      "name": "CONTENT_TYPE"
     }
   ],
   "previousStatement": null,
@@ -214,7 +219,6 @@ var contentTypeReferenceJson = {
     }
   ],
   "previousStatement": null,
-  "nextStatement": null,
   "colour": 75,
   "tooltip": "The content type.",
   "helpUrl": ""

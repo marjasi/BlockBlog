@@ -56,8 +56,9 @@ customJSONGenerator['image'] = function(block) {
 
 customJSONGenerator['link'] = function(block) {
   var text_link_name = block.getFieldValue('LINK_NAME');
-  var value_name = customJSONGenerator.valueToCode(block, 'NAME', customJSONGenerator.PRECEDENCE);
-  var htmlData = '<a href=\\"' + value_name + '\\">' + text_link_name + '</a>';
+  var text_text = block.getFieldValue('TEXT');
+  var value_content_type = customJSONGenerator.valueToCode(block, 'CONTENT_TYPE', customJSONGenerator.PRECEDENCE);
+  var htmlData = '<a id=\\"' + text_link_name + '\\" href=\\"' + value_content_type + '\\">' + text_text + '</a>';
   return htmlData;
 };
 
