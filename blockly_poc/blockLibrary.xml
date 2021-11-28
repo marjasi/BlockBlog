@@ -553,10 +553,10 @@
       </block>
     </value>
   </block><block type="factory_base" id="l5X(Jl9@PV;sgK%(%,={" deletable="false" movable="false" x="10" y="10">
-    <mutation connections="BOTH"></mutation>
+    <mutation connections="TOP"></mutation>
     <field name="NAME">content_type_reference</field>
     <field name="INLINE">AUTO</field>
-    <field name="CONNECTIONS">BOTH</field>
+    <field name="CONNECTIONS">TOP</field>
     <statement name="INPUTS">
       <block type="input_dummy" id="@N}nhKw8GuNAgBxAcIWT">
         <field name="ALIGN">LEFT</field>
@@ -584,10 +584,7 @@
       </block>
     </value>
     <value name="TOPTYPE">
-      <shadow type="type_null" id="sdzbBS;Z5-Zm$;={Yq3E"></shadow>
-    </value>
-    <value name="BOTTOMTYPE">
-      <shadow type="type_null" id="}pr18g%3l{Ig2#=Z9-.%"></shadow>
+      <shadow type="type_null" id="N+ZC/XJ[MoqTkN)_de6#"></shadow>
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="oQot[muFq7pGd)n8tL`[">
@@ -849,7 +846,7 @@
     <field name="CONNECTIONS">BOTH</field>
     <statement name="INPUTS">
       <block type="input_value" id="%6Hf$Q^u3j9oV*^4uzG(">
-        <field name="INPUTNAME">NAME</field>
+        <field name="INPUTNAME">CONTENT_TYPE</field>
         <field name="ALIGN">LEFT</field>
         <statement name="FIELDS">
           <block type="field_static" id="xD*+lNxU/XL-h)H..R3T">
@@ -858,6 +855,17 @@
               <block type="field_input" id="Rg,D$)hgr~[slq7Hl_/`">
                 <field name="TEXT"></field>
                 <field name="FIELDNAME">LINK_NAME</field>
+                <next>
+                  <block type="field_static" id="/K4Lk]_nNy!c:Z_M:QRF">
+                    <field name="TEXT">Ref Text</field>
+                    <next>
+                      <block type="field_input" id="GLa~ahiI}g(%20a6C34=">
+                        <field name="TEXT"></field>
+                        <field name="FIELDNAME">TEXT</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
               </block>
             </next>
           </block>
