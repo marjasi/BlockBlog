@@ -1,6 +1,6 @@
 var headerJson = {
   "type": "header",
-  "message0": "Header %1 %2 Text %3 %4 %5",
+  "message0": "Header %1 Level %2 %3 Text %4 %5 %6",
   "args0": [
     {
       "type": "field_input",
@@ -8,10 +8,40 @@ var headerJson = {
       "text": ""
     },
     {
+      "type": "field_dropdown",
+      "name": "LEVEL",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ],
+        [
+          "6",
+          "6"
+        ]
+      ]
+    },
+    {
       "type": "input_dummy"
     },
     {
-      "type": "field_multilinetext",
+      "type": "field_input",
       "name": "TEXT",
       "text": ""
     },

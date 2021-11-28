@@ -17,7 +17,7 @@ customJSONGenerator.scrub_ = function(block, code, opt_thisOnly) {
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   let nextCode = '';
   if (nextBlock) {
-    // Separate same object memebers with a comma and a newline.
+    // Separate same object members with a comma and a newline.
     nextCode = opt_thisOnly ? '' : ',\n' + customJSONGenerator.blockToCode(nextBlock);
   }
   return code +  nextCode;
@@ -25,10 +25,11 @@ customJSONGenerator.scrub_ = function(block, code, opt_thisOnly) {
 
 customJSONGenerator['header'] = function(block) {
   var text_header_name = block.getFieldValue('HEADER_NAME');
+  var dropdown_level = block.getFieldValue('LEVEL');
   var text_text = block.getFieldValue('TEXT');
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   text_text = removeNewLinesFromString(text_text);
-  var htmlData = '<h1 id=\\"' + text_header_name + '\\">' + text_text + '</h1>' + statements_children;
+  var htmlData = '<h' + dropdown_level + ' id=\\"' + text_header_name + '\\">' + text_text + '</h1>' + statements_children;
   return htmlData;
 };
 
