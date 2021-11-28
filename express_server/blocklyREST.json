@@ -13,6 +13,16 @@
    "root_path" : "home",
   "uri_paths" : [  {
     "path" : {
+    "uri_path": "welcome",
+    "resource_linker" : "ID1",
+    "dynamic" : false,
+    "uri_paths" : [  {
+       "content_type_reference" : "Homepage"
+      }]
+    }
+    },
+    {
+    "path" : {
     "uri_path": "about",
     "resource_linker" : "ID1",
     "dynamic" : false,
@@ -23,11 +33,21 @@
     },
     {
     "path" : {
-    "uri_path": "welcome",
+    "uri_path": "books",
     "resource_linker" : "ID1",
     "dynamic" : false,
     "uri_paths" : [  {
-       "content_type_reference" : "Homepage"
+       "content_type_reference" : "Books"
+      }]
+    }
+    },
+    {
+    "path" : {
+    "uri_path": "divine_comedy",
+    "resource_linker" : "ID1",
+    "dynamic" : false,
+    "uri_paths" : [  {
+       "content_type_reference" : "DivineComedy"
       }]
     }
     }]
@@ -36,10 +56,18 @@
 },
 {
 "content_type" : "Homepage",
- "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <h1 id=\"main_header\">How to read quickly</h1>  <a id=\"home_about\" href=\"About.html\">About</a>    <p id=\"main_first_paragraph\">Be selective and tune into your intention. Before you pull a book from a shelf or open ajournal article, ask yourself: why am Ireading this? Why do I need this information? This pause for thought will hopefully help youcull all of theunnecessary material you wouldhave otherwise flicked through absentmindedly.</p></body></html>"
+ "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <h1 id=\"main_header\">How to read quickly</h1>  <p id=\"main_first_paragraph\">Be selective and tune into your intention. Before you pull a book from a shelf or open ajournal article, ask yourself: why am Ireading this? Why do I need this information? This pause for thought will hopefully help youcull all of theunnecessary material you wouldhave otherwise flicked through absentmindedly.</p>    <a id=\"home_about\" href=\"About.html\">About</a>    <a id=\"home_books\" href=\"Books.html\">What to read?</a></body></html>"
 },
 {
 "content_type" : "About",
- "html_data" : "<!DOCTYPE html><html><head><title>About</title></head><body>  <h5 id=\"main_header\">About</h1>  <a id=\"about_home\" href=\"Homepage.html\">Home</a>    <p id=\"main_first_paragraph\">This blog is about reading. There is a lot of good information here.</p></body></html>"
+ "html_data" : "<!DOCTYPE html><html><head><title>About</title></head><body>  <h5 id=\"main_header\">About</h1>  <p id=\"main_first_paragraph\">This blog is about reading. There is a lot of good information here.</p>    <a id=\"about_home\" href=\"Homepage.html\">Home</a></body></html>"
+},
+{
+"content_type" : "Books",
+ "html_data" : "<!DOCTYPE html><html><head><title>Books</title></head><body>  <h1 id=\"main_header\">What to read?</h1>  <p id=\"main_first_paragraph\">You can check various websites that have lists of the best books of all time. Although, the lists you will find on most of them will be rather subjective. I would recommend visiting thegreatestbooks.org. It generates a list of the best books based on lists on other best book websites. Each website is examined and the number of times a book appears on any list is tracked. Based on that number the books are put on the generated list.</p>    <p id=\"main_second_paragraph\">What a wonderful idea! Instead of reading a bunch of list, how about we evaluate books based on all of the website info available and make one definitive list.</p>    <a id=\"books_home\" href=\"Homepage.html\">Home</a>    <a id=\"books_divine_comedy\" href=\"DivineComedy.html\">Divine Comedy</a></body></html>"
+},
+{
+"content_type" : "DivineComedy",
+ "html_data" : "<!DOCTYPE html><html><head><title>DivineComedy</title></head><body>  <h1 id=\"main_header\">Divine Comedy</h1>  <p id=\"main_first_paragraph\">It is not only a classic, but also a very valuable poem that gives insight about a human being's inner development. Dante travels through Hell, Purgatory and Heaven guided by Virgill. This journey encompasses Dante's spiritual growth. The poem was being written for 13 years from 1308 to 1321. Not only the content of the poem, but also its creation involves change. Like life itself - there is nothing set in stone. Not even after the final moments, change never ends.</p>    <a id=\"divine_comedy_books\" href=\"Books.html\">What to read?</a></body></html>"
 }
 ]
