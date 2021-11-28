@@ -621,6 +621,15 @@
             <field name="TYPE">image</field>
           </block>
         </value>
+        <next>
+          <block type="input_statement" id="kZ%P1mmHT?=|Q0GO?X]A">
+            <field name="INPUTNAME">CHILDREN</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="x9_Z|HeO-Co6PEZHZi%h"></shadow>
+            </value>
+          </block>
+        </next>
       </block>
     </statement>
     <value name="TOOLTIP">
@@ -757,6 +766,29 @@
               <block type="field_input" id="?|SbW2JZ)A].$0XX~j[@">
                 <field name="TEXT"></field>
                 <field name="FIELDNAME">HEADER_NAME</field>
+                <next>
+                  <block type="field_static" id="(;J|6@jY,*{3z`y).}Ae">
+                    <field name="TEXT">Level</field>
+                    <next>
+                      <block type="field_dropdown" id="[`2p}--weU!2r,Q=l-Ek">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">LEVEL</field>
+                        <field name="USER0">1</field>
+                        <field name="CPU0">1</field>
+                        <field name="USER1">2</field>
+                        <field name="CPU1">2</field>
+                        <field name="USER2">3</field>
+                        <field name="CPU2">3</field>
+                        <field name="USER3">4</field>
+                        <field name="CPU3">4</field>
+                        <field name="USER4">5</field>
+                        <field name="CPU4">5</field>
+                        <field name="USER5">6</field>
+                        <field name="CPU5">6</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
               </block>
             </next>
           </block>
@@ -775,6 +807,15 @@
                 </next>
               </block>
             </statement>
+            <next>
+              <block type="input_statement" id="Fh:uLCfnS,DV[#fEEK:%">
+                <field name="INPUTNAME">CHILDREN</field>
+                <field name="ALIGN">LEFT</field>
+                <value name="TYPE">
+                  <shadow type="type_null" id="Vyh,-#J6s*#4(?^2uJu;"></shadow>
+                </value>
+              </block>
+            </next>
           </block>
         </next>
       </block>
