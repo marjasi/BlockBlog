@@ -54,29 +54,20 @@
           <field name="URL_ROOT">home</field>
           <statement name="URL">
             <block type="url">
-              <field name="URL_PATH">divine_comedy</field>
-              <statement name="URL">
-                <block type="page_reference">
-                  <field name="PAGE_NAME">DivineComedy</field>
-                </block>
-              </statement>
-          </statement>
-          <statement name="URL">
-            <block type="url">
               <field name="URL_PATH">books</field>
               <statement name="URL">
                 <block type="page_reference">
                   <field name="PAGE_NAME">Books</field>
                 </block>
               </statement>
-          </statement>
-          <statement name="URL">
-            <block type="url">
-              <field name="URL_PATH">about</field>
               <statement name="URL">
-                <block type="page_reference">
-                  <field name="PAGE_NAME">About</field>
-                </block>
+                <block type="url">
+                  <field name="URL_PATH">divine_comedy</field>
+                  <statement name="URL">
+                    <block type="page_reference">
+                      <field name="PAGE_NAME">DivineComedy</field>
+                    </block>
+                  </statement>
               </statement>
           </statement>
           <statement name="URL">
@@ -86,6 +77,15 @@
                 <block type="page_reference">
                   <field name="PAGE_NAME">Homepage</field>
                 </block>
+              </statement>
+              <statement name="URL">
+                <block type="url">
+                  <field name="URL_PATH">about</field>
+                  <statement name="URL">
+                    <block type="page_reference">
+                      <field name="PAGE_NAME">About</field>
+                    </block>
+                  </statement>
               </statement>
           </statement>
         </block>
