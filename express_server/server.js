@@ -1,22 +1,22 @@
 const { Console } = require('console');
 const express = require('express');
-const app = express();
 const fs = require('fs');
+const app = express();
 htmlFileDictionary = {}
 
 function updateHtmlFileDictionary(jsonData) {
   for (var jsonElement of jsonData) {
-    if (jsonElement.content_type) {
-      htmlFileDictionary[jsonElement.content_type] = jsonElement.html_data;
+    if (jsonElement.page_name) {
+      htmlFileDictionary[jsonElement.page_name] = jsonElement.html_data;
     }
   }
 }
 
-function getContentTypeName(uriPaths) {
-  if (uriPaths) {
-    for (var uriPath of uriPaths) {
-      if (uriPath.content_type_reference) {
-        return uriPath.content_type_reference;
+function getPageName(urlPaths) {
+  if (urlPaths) {
+    for (var urlPath of urlPaths) {
+      if (urlPath.page_reference) {
+        return urlPath.page_reference;
       }
     }
   }
@@ -24,10 +24,10 @@ function getContentTypeName(uriPaths) {
   return null;
 }
 
-function checkUriPaths(uriPaths) {
-  if (uriPaths) {
-    for (var uriPath of uriPaths) {
-      if (uriPath.path) {
+function checkUrlPaths(urlPaths) {
+  if (urlPaths) {
+    for (var urlPath of urlPaths) {
+      if (urlPath.path) {
         return true;
       }
     }
@@ -36,71 +36,61 @@ function checkUriPaths(uriPaths) {
   return false
 }
 
-function getResourceNameById(jsonData, resourceId) {
-  var resources = jsonData.resource_definitions.resources;
-  for (var resource of resources) {
-    if (resource.resource_linker === resourceId) {
-      return resource.resource_name;
-    }
-  }
-
-  return null;
-}
-
-function registerUriPath(parentUriPath, uriPathData, jsonData) {
-  var uriPathValue = parentUriPath + '/' + uriPathData.uri_path;
-  var resourceId = uriPathData.resource_linker;
-  var resourceName = getResourceNameById(jsonData, resourceId);
-  var uriPaths = uriPathData.uri_paths;
-  if (getContentTypeName(uriPaths)) {
-    createMockupEndpointWithHtml(uriPathValue, resourceName, getContentTypeName(uriPaths));
+function registerUrlPath(parentUrlPath, urlPathData, jsonData) {
+  var urlPathValue = parentUrlPath + '/' + urlPathData.url_path;
+  var urlPaths = urlPathData.url_paths;
+  if (getPageName(urlPaths)) {
+    createMockupEndpointWithHtml(urlPathValue, getPageName(urlPaths));
   }
   else {
-    createMockupEndpoint(uriPathValue, resourceName);
+    createMockupEndpoint(urlPathValue);
   }
 
-  if (checkUriPaths(uriPaths)) {
-    for (var uriPath of uriPaths) {
-      uriPath = uriPath.path;
-      registerUriPath(uriPathValue, uriPath, jsonData);
+  if (checkUrlPaths(urlPaths)) {
+    for (var urlPath of urlPaths) {
+      // Check if the child element is a url.
+      if (urlPath.path) {
+      urlPath = urlPath.path;
+        registerUrlPath(urlPathValue, urlPath, jsonData);
+      }
     }
   }
 }
 
 function createMockupEndpoints(jsonData) {
   for (var jsonElement of jsonData) {
-    if (jsonElement.uri) {
+    if (jsonElement.url_schema) {
       jsonData = jsonElement;
     }
   }
-  // Get uri root path and register it as an endpoint.
-  var uriRoot = '/' + jsonData.uri.uri_root.root_path;
-  createMockupEndpoint(uriRoot, 'URI ROOT');
+  // Get url root path and register it as an endpoint.
+  var urlRoot = '/' + jsonData.url_schema.url_root.root_path;
+  createMockupEndpoint(urlRoot);
 
   // Get and register other endpoints.
-  var uriPaths = jsonData.uri.uri_root.uri_paths;
-  if (checkUriPaths(uriPaths)) {
-    for (var uriPath of uriPaths) {
-      uriPath = uriPath.path;
-      registerUriPath(uriRoot, uriPath, jsonData);
+  var urlPaths = jsonData.url_schema.url_root.url_paths;
+  if (checkUrlPaths(urlPaths)) {
+    for (var urlPath of urlPaths) {
+      urlPath = urlPath.path;
+      registerUrlPath(urlRoot, urlPath, jsonData);
     }
   }
 }
 
-function createMockupEndpointWithHtml(endpoint, resourceName, contentTypeName) {
+function createMockupEndpointWithHtml(endpoint, pageName) {
   app.get(endpoint, (req, res) => {
-      filename = contentTypeName + '.html';
+      filename = pageName + '.html';
       res.set({
         "Content-Disposition": 'attachment; filename="'+ filename +'"',
         "Content-Type": "	text/html",
       });
-      res.send(htmlFileDictionary[contentTypeName]);
+      res.send(htmlFileDictionary[pageName]);
   });
 }
   
-function createMockupEndpoint(endpoint, resourceName) {
+function createMockupEndpoint(endpoint) {
     app.get(endpoint, (req, res) => {
-        res.send('Endpoint created for resource ' + resourceName);
+        res.send('Endpoint ' + endpoint + ' created.');
     });
 }
 
