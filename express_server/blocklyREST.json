@@ -7,15 +7,15 @@
     "path" : {
     "url_path": "welcome",
     "url_paths" : [  {
+      "path" : {
+      "url_path": "about",
+      "url_paths" : [  {
+         "page_reference" : "About"
+        }]
+      }
+      },
+      {
        "page_reference" : "Homepage"
-      }]
-    }
-    },
-    {
-    "path" : {
-    "url_path": "about",
-    "url_paths" : [  {
-       "page_reference" : "About"
       }]
     }
     },
@@ -23,15 +23,15 @@
     "path" : {
     "url_path": "books",
     "url_paths" : [  {
+      "path" : {
+      "url_path": "divine_comedy",
+      "url_paths" : [  {
+         "page_reference" : "DivineComedy"
+        }]
+      }
+      },
+      {
        "page_reference" : "Books"
-      }]
-    }
-    },
-    {
-    "path" : {
-    "url_path": "divine_comedy",
-    "url_paths" : [  {
-       "page_reference" : "DivineComedy"
       }]
     }
     }]

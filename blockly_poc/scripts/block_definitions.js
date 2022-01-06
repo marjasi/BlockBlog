@@ -55,7 +55,7 @@ var headerJson = {
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -86,7 +86,7 @@ var paragraphJson = {
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -118,7 +118,7 @@ var imagePropertyJson = {
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -143,7 +143,7 @@ var imageJson = {
     }
   ],
   "output": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -175,7 +175,7 @@ var linkJson = {
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -206,7 +206,7 @@ var pageJson = {
       "name": "PROPERTIES"
     }
   ],
-  "colour": 75,
+  "colour": 230,
   "tooltip": "The page content type definition.",
   "helpUrl": ""
 }
@@ -228,7 +228,7 @@ var pageLinkJson = {
     }
   ],
   "output": null,
-  "colour": 75,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -250,7 +250,7 @@ var pageReferenceJson = {
     }
   ],
   "previousStatement": null,
-  "colour": 75,
+  "colour": 230,
   "tooltip": "Reference to a page.",
   "helpUrl": ""
 }
@@ -285,7 +285,7 @@ var urlJson = {
     "url_root"
   ],
   "nextStatement": "url",
-  "colour": 330,
+  "colour": 310,
   "tooltip": "A block that defines a part of the URL schema.",
   "helpUrl": ""
 }
@@ -316,7 +316,7 @@ var urlRootJson = {
   ],
   "inputsInline": false,
   "previousStatement": null,
-  "colour": 0,
+  "colour": 330,
   "tooltip": "This block defines the URL scheme's root address.",
   "helpUrl": ""
 }
@@ -329,7 +329,7 @@ Blockly.Blocks['url_root'] = {
 
 var restApiJson = {
   "type": "rest_api",
-  "message0": "REST API %1 URL Root: %2",
+  "message0": "REST API %1 URL Hierarchy: %2",
   "args0": [
     {
       "type": "input_dummy"
@@ -341,7 +341,7 @@ var restApiJson = {
     }
   ],
   "inputsInline": false,
-  "colour": 285,
+  "colour": 0,
   "tooltip": "A block that declares the REST API components.",
   "helpUrl": ""
 }
