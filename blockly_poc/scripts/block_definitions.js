@@ -55,7 +55,7 @@ var headerJson = {
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -86,7 +86,7 @@ var paragraphJson = {
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -118,7 +118,7 @@ var imagePropertyJson = {
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -143,7 +143,7 @@ var imageJson = {
     }
   ],
   "output": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -170,12 +170,12 @@ var linkJson = {
     },
     {
       "type": "input_value",
-      "name": "CONTENT_TYPE"
+      "name": "PAGE_LINK"
     }
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 230,
+  "colour": 215,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -186,57 +186,13 @@ Blockly.Blocks['link'] = {
   }
 }
 
-var contentTypeLinkJson = {
-  "type": "content_type_link",
-  "message0": "Content Type %1",
+var pageJson = {
+  "type": "page",
+  "message0": "Page %1 %2 Blocks: %3 %4",
   "args0": [
     {
       "type": "field_input",
-      "name": "CONTENT_TYPE",
-      "text": ""
-    }
-  ],
-  "output": null,
-  "colour": 75,
-  "tooltip": "",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['content_type_link'] = {
-  init: function() {
-    this.jsonInit(contentTypeLinkJson);
-  }
-}
-
-var contentTypeReferenceJson = {
-  "type": "content_type_reference",
-  "message0": "Content Type %1",
-  "args0": [
-    {
-      "type": "field_input",
-      "name": "CONTENT_TYPE",
-      "text": ""
-    }
-  ],
-  "previousStatement": null,
-  "colour": 75,
-  "tooltip": "The content type.",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['content_type_reference'] = {
-  init: function() {
-    this.jsonInit(contentTypeReferenceJson);
-  }
-}
-
-var contentTypeJson = {
-  "type": "content_type",
-  "message0": "Content Type %1 %2 Properties: %3 %4",
-  "args0": [
-    {
-      "type": "field_input",
-      "name": "CONTENT_TYPE",
+      "name": "PAGE_NAME",
       "text": ""
     },
     {
@@ -250,246 +206,142 @@ var contentTypeJson = {
       "name": "PROPERTIES"
     }
   ],
-  "colour": 75,
-  "tooltip": "The content type definition.",
+  "colour": 230,
+  "tooltip": "The page content type definition.",
   "helpUrl": ""
 }
 
-Blockly.Blocks['content_type'] = {
+Blockly.Blocks['page'] = {
   init: function() {
-    this.jsonInit(contentTypeJson);
+    this.jsonInit(pageJson);
   }
 }
 
-var resourceLinkerJson = {
-  "type": "resource_linker",
-  "message0": "%1",
-  "args0": [
-    {
-      "type": "field_variable",
-      "name": "LINKER_VARIABLE",
-      "variable": "Linker ID"
-    }
-  ],
-  "inputsInline": false,
-  "output": "resource_linker",
-  "colour": 150,
-  "tooltip": "A linker value that points to a resource definition.",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['resource_linker'] = {
-  init: function() {
-    this.jsonInit(resourceLinkerJson);
-  }
-}
-
-var resourceDefinitionJson = {
-  "type": "resource_definition",
-  "message0": "Resource Name %1 %2 Resource Linker %3",
+var pageLinkJson = {
+  "type": "page_link",
+  "message0": "Page %1",
   "args0": [
     {
       "type": "field_input",
-      "name": "RESOURCE_NAME",
-      "text": "Resource"
-    },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_value",
-      "name": "RESOURCE_ID",
-      "check": "resource_linker"
+      "name": "PAGE_NAME",
+      "text": ""
     }
   ],
-  "inputsInline": false,
-  "previousStatement": null,
-  "nextStatement": null,
-  "colour": 180,
-  "tooltip": "A definition of a resource.",
+  "output": null,
+  "colour": 230,
+  "tooltip": "",
   "helpUrl": ""
 }
 
-Blockly.Blocks['resource_definition'] = {
+Blockly.Blocks['page_link'] = {
   init: function() {
-    this.jsonInit(resourceDefinitionJson);
+    this.jsonInit(pageLinkJson);
   }
 }
 
-var resourceDefinitionsJson = {
-  "type": "resource_definitions",
-  "message0": "Resource Definitions %1 %2",
-  "args0": [
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_statement",
-      "name": "RESOURCES",
-      "check": "resource_definition"
-    }
-  ],
-  "inputsInline": false,
-  "previousStatement": null,
-  "colour": 165,
-  "tooltip": "This block defines the resource definitions used by the REST API.",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['resource_definitions'] = {
-  init: function() {
-    this.jsonInit(resourceDefinitionsJson);
-  }
-}
-
-var uriRootJson = {
-  "type": "uri_root",
-  "message0": "URI Root %1 %2 %3",
+var pageReferenceJson = {
+  "type": "page_reference",
+  "message0": "Page %1",
   "args0": [
     {
       "type": "field_input",
-      "name": "URI_ROOT",
-      "text": "URI Path"
+      "name": "PAGE_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "colour": 230,
+  "tooltip": "Reference to a page.",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['page_reference'] = {
+  init: function() {
+    this.jsonInit(pageReferenceJson);
+  }
+}
+
+var urlJson = {
+  "type": "url",
+  "message0": "URL %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "URL_PATH",
+      "text": "URL Path"
     },
     {
       "type": "input_dummy"
     },
     {
       "type": "input_statement",
-      "name": "URI",
-      "check": [
-        "uri_static",
-        "uri_dynamic"
-      ]
-    }
-  ],
-  "inputsInline": false,
-  "previousStatement": null,
-  "colour": 0,
-  "tooltip": "This block defines the URI scheme's root address.",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['uri_root'] = {
-  init: function() {
-    this.jsonInit(uriRootJson);
-  }
-}
-
-var uriStaticJson = {
-  "type": "uri_static",
-  "message0": "Static URI %1 %2 Resource Linker %3 %4",
-  "args0": [
-    {
-      "type": "field_input",
-      "name": "URI_STATIC",
-      "text": "URI Path"
-    },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_value",
-      "name": "RESOURCE_LINKER",
-      "check": "resource_linker"
-    },
-    {
-      "type": "input_statement",
-      "name": "URI",
-      "check": [
-        "uri_static",
-        "uri_dynamic"
-      ]
+      "name": "URL",
+      "check": "url"
     }
   ],
   "inputsInline": false,
   "previousStatement": [
-    "uri_static",
-    "uri_dynamic",
-    "uri_root"
+    "url",
+    "url_root"
   ],
-  "nextStatement": [
-    "uri_static",
-    "uri_dynamic"
+  "nextStatement": "url",
+  "colour": 310,
+  "tooltip": "A block that defines a part of the URL schema.",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['url'] = {
+  init: function() {
+    this.jsonInit(urlJson);
+  }
+}
+
+var urlRootJson = {
+  "type": "url_root",
+  "message0": "URL Root %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "URL_ROOT",
+      "text": "URL Path"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "URL",
+      "check": "url"
+    }
   ],
+  "inputsInline": false,
+  "previousStatement": null,
   "colour": 330,
-  "tooltip": "A block that defines a static part of the URI scheme.",
+  "tooltip": "This block defines the URL scheme's root address.",
   "helpUrl": ""
 }
 
-Blockly.Blocks['uri_static'] = {
+Blockly.Blocks['url_root'] = {
   init: function() {
-    this.jsonInit(uriStaticJson);
-  }
-}
-
-var uriDynamicJson = {
-  "type": "uri_dynamic",
-  "message0": "Dynamic URI %1 %2 Resource Linker %3 %4",
-  "args0": [
-    {
-      "type": "field_input",
-      "name": "URI_DYNAMIC",
-      "text": "URI Path"
-    },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_value",
-      "name": "RESOURCE_LINKER",
-      "check": "resource_linker"
-    },
-    {
-      "type": "input_statement",
-      "name": "URI",
-      "check": [
-        "uri_static",
-        "uri_dynamic"
-      ]
-    }
-  ],
-  "inputsInline": false,
-  "previousStatement": [
-    "uri_static",
-    "uri_dynamic",
-    "uri_root"
-  ],
-  "nextStatement": [
-    "uri_static",
-    "uri_dynamic"
-  ],
-  "colour": 225,
-  "tooltip": "A block that defines a dynamic part of the URI scheme.",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['uri_dynamic'] = {
-  init: function() {
-    this.jsonInit(uriDynamicJson);
+    this.jsonInit(urlRootJson);
   }
 }
 
 var restApiJson = {
   "type": "rest_api",
-  "message0": "REST API %1 Resources: %2 URI Root: %3",
+  "message0": "REST API %1 URL Hierarchy: %2",
   "args0": [
     {
       "type": "input_dummy"
     },
     {
       "type": "input_statement",
-      "name": "RESOURCES",
-      "check": "resource_definitions"
-    },
-    {
-      "type": "input_statement",
-      "name": "URI_ROOT",
-      "check": "uri_root"
+      "name": "URL_ROOT",
+      "check": "url_root"
     }
   ],
   "inputsInline": false,
-  "colour": 285,
+  "colour": 0,
   "tooltip": "A block that declares the REST API components.",
   "helpUrl": ""
 }

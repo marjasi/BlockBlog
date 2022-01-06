@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Blockly REST API Designer</title>
+  <title>Blockly Headless CMS</title>
   <script src="./node_modules/blockly/blockly_compressed.js"></script>
   <script src="./node_modules/blockly/blocks_compressed.js"></script>
   <script src="./node_modules/blockly/javascript_compressed.js"></script>
@@ -32,20 +32,13 @@
       <block type="rest_api"></block>
     </category>
     <category name="URI" colour="%{BKY_LOGIC_HUE}">
-      <block type="uri_root"></block>
-      <block type="uri_static"></block>
-      <block type="uri_dynamic"></block>
-      <block type="resource_linker"></block>
-    </category>
-    <category name="Resource" colour="%{BKY_LOOPS_HUE}">
-      <block type="resource_definitions"></block>
-      <block type="resource_definition"></block>
-      <block type="resource_linker"></block>
+      <block type="url_root"></block>
+      <block type="url"></block>
     </category>
     <category name="Content" colour="%{BKY_MATH_HUE}">
-      <block type="content_type"></block>
-      <block type="content_type_reference"></block>
-      <block type="content_type_link"></block>
+      <block type="page"></block>
+      <block type="page_reference"></block>
+      <block type="page_link"></block>
       <block type="header"></block>
       <block type="paragraph"></block>
       <block type="image_property"></block>
@@ -56,84 +49,50 @@
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
     <block type="rest_api" x="60" y="20">
-      <statement name="RESOURCES">
-        <block type="resource_definitions">
-          <statement name="RESOURCES">
-            <block type="resource_definition">
-              <field name="RESOURCE_NAME">Page</field>
-              <value name="RESOURCE_ID">
-                <block type="resource_linker">
-                  <field name="LINKER_VARIABLE">ID1</field>
-                </block>
-              </value>
-            </block>
-          </statement>
-        </block>
-      </statement>
-      <statement name="URI_ROOT">
-        <block type="uri_root">
-          <field name="URI_ROOT">home</field>
-          <statement name="URI">
-            <block type="uri_static">
-              <field name="URI_STATIC">divine_comedy</field>
-              <value name="RESOURCE_LINKER">
-                <block type="resource_linker">
-                  <field name="LINKER_VARIABLE">ID1</field>
-                </block>
-              </value>
-              <statement name="URI">
-                <block type="content_type_reference">
-                  <field name="CONTENT_TYPE">DivineComedy</field>
+      <statement name="URL_ROOT">
+        <block type="url_root">
+          <field name="URL_ROOT">home</field>
+          <statement name="URL">
+            <block type="url">
+              <field name="URL_PATH">books</field>
+              <statement name="URL">
+                <block type="page_reference">
+                  <field name="PAGE_NAME">Books</field>
                 </block>
               </statement>
-          </statement>
-          <statement name="URI">
-            <block type="uri_static">
-              <field name="URI_STATIC">books</field>
-              <value name="RESOURCE_LINKER">
-                <block type="resource_linker">
-                  <field name="LINKER_VARIABLE">ID1</field>
-                </block>
-              </value>
-              <statement name="URI">
-                <block type="content_type_reference">
-                  <field name="CONTENT_TYPE">Books</field>
-                </block>
+              <statement name="URL">
+                <block type="url">
+                  <field name="URL_PATH">divine_comedy</field>
+                  <statement name="URL">
+                    <block type="page_reference">
+                      <field name="PAGE_NAME">DivineComedy</field>
+                    </block>
+                  </statement>
               </statement>
           </statement>
-          <statement name="URI">
-            <block type="uri_static">
-              <field name="URI_STATIC">about</field>
-              <value name="RESOURCE_LINKER">
-                <block type="resource_linker">
-                  <field name="LINKER_VARIABLE">ID1</field>
-                </block>
-              </value>
-              <statement name="URI">
-                <block type="content_type_reference">
-                  <field name="CONTENT_TYPE">About</field>
+          <statement name="URL">
+            <block type="url">
+              <field name="URL_PATH">welcome</field>
+              <statement name="URL">
+                <block type="page_reference">
+                  <field name="PAGE_NAME">Homepage</field>
                 </block>
               </statement>
-          </statement>
-          <statement name="URI">
-            <block type="uri_static">
-              <field name="URI_STATIC">welcome</field>
-              <value name="RESOURCE_LINKER">
-                <block type="resource_linker">
-                  <field name="LINKER_VARIABLE">ID1</field>
-                </block>
-              </value>
-              <statement name="URI">
-                <block type="content_type_reference">
-                  <field name="CONTENT_TYPE">Homepage</field>
-                </block>
+              <statement name="URL">
+                <block type="url">
+                  <field name="URL_PATH">about</field>
+                  <statement name="URL">
+                    <block type="page_reference">
+                      <field name="PAGE_NAME">About</field>
+                    </block>
+                  </statement>
               </statement>
           </statement>
         </block>
       </statement>
     </block>
-    <block type="content_type" x="500" y="20">
-      <field name="CONTENT_TYPE">Homepage</field>
+    <block type="page" x="500" y="20">
+      <field name="PAGE_NAME">Homepage</field>
       <statement name="PROPERTIES">
         <block type="header">
           <field name="HEADER_NAME">main_header</field>
@@ -143,9 +102,9 @@
             <block type="link">
               <field name="LINK_NAME">home_books</field>
               <field name="TEXT">What to read?</field>
-              <value name="CONTENT_TYPE">
-                <block type="content_type_link">
-                  <field name="CONTENT_TYPE">Books</field>
+              <value name="PAGE_LINK">
+                <block type="page_link">
+                  <field name="PAGE_NAME">Books</field>
                 </block>
               </value>
             </block>
@@ -154,9 +113,9 @@
             <block type="link">
               <field name="LINK_NAME">home_about</field>
               <field name="TEXT">About</field>
-              <value name="CONTENT_TYPE">
-                <block type="content_type_link">
-                  <field name="CONTENT_TYPE">About</field>
+              <value name="PAGE_LINK">
+                <block type="page_link">
+                  <field name="PAGE_NAME">About</field>
                 </block>
               </value>
             </block>
@@ -164,7 +123,7 @@
           <statement name="CHILDREN">
             <block type="paragraph">
               <field name="PARAGRAPH_NAME">main_first_paragraph</field>
-              <field name="TEXT">Be selective and tune into your intention.&#13;&#10; Before you pull a book from a shelf or open a&#13;&#10;journal article, ask yourself: why am I&#13;&#10;reading this? Why do I need this information?&#13;&#10; This pause for thought will hopefully help you&#13;&#10;cull all of theunnecessary material you would&#13;&#10;have otherwise flicked through absentmindedly.</field>
+              <field name="TEXT">Be selective and tune into your intention.&#13;&#10; Before you pull a book from a shelf or open a&#13;&#10; journal article, ask yourself: why am I&#13;&#10; reading this? Why do I need this information?&#13;&#10; This pause for thought will hopefully help you&#13;&#10; cull all of theunnecessary material you would&#13;&#10; have otherwise flicked through absentmindedly.</field>
             </block>
           </statement>
           <!-- <statement name="CHILDREN">
@@ -178,8 +137,8 @@
         </block>
       </statement>
     </block>
-    <block type="content_type" x="1050" y="20">
-      <field name="CONTENT_TYPE">About</field>
+    <block type="page" x="1050" y="20">
+      <field name="PAGE_NAME">About</field>
       <statement name="PROPERTIES">
         <block type="header">
           <field name="HEADER_NAME">main_header</field>
@@ -189,9 +148,9 @@
             <block type="link">
               <field name="LINK_NAME">about_home</field>
               <field name="TEXT">Home</field>
-              <value name="CONTENT_TYPE">
-                <block type="content_type_link">
-                  <field name="CONTENT_TYPE">Homepage</field>
+              <value name="PAGE_LINK">
+                <block type="page_link">
+                  <field name="PAGE_NAME">Homepage</field>
                 </block>
               </value>
             </block>
@@ -213,8 +172,8 @@
         </block>
       </statement>
     </block>
-    <block type="content_type" x="500" y="400">
-      <field name="CONTENT_TYPE">Books</field>
+    <block type="page" x="500" y="400">
+      <field name="PAGE_NAME">Books</field>
       <statement name="PROPERTIES">
         <block type="header">
           <field name="HEADER_NAME">main_header</field>
@@ -224,9 +183,9 @@
             <block type="link">
               <field name="LINK_NAME">books_divine_comedy</field>
               <field name="TEXT">Divine Comedy</field>
-              <value name="CONTENT_TYPE">
-                <block type="content_type_link">
-                  <field name="CONTENT_TYPE">DivineComedy</field>
+              <value name="PAGE_LINK">
+                <block type="page_link">
+                  <field name="PAGE_NAME">DivineComedy</field>
                 </block>
               </value>
             </block>
@@ -235,9 +194,9 @@
             <block type="link">
               <field name="LINK_NAME">books_home</field>
               <field name="TEXT">Home</field>
-              <value name="CONTENT_TYPE">
-                <block type="content_type_link">
-                  <field name="CONTENT_TYPE">Homepage</field>
+              <value name="PAGE_LINK">
+                <block type="page_link">
+                  <field name="PAGE_NAME">Homepage</field>
                 </block>
               </value>
             </block>
@@ -257,8 +216,8 @@
         </block>
       </statement>
     </block>
-    <block type="content_type" x="1050" y="400">
-      <field name="CONTENT_TYPE">DivineComedy</field>
+    <block type="page" x="1050" y="400">
+      <field name="PAGE_NAME">DivineComedy</field>
       <statement name="PROPERTIES">
         <block type="header">
           <field name="HEADER_NAME">main_header</field>
@@ -268,9 +227,9 @@
             <block type="link">
               <field name="LINK_NAME">divine_comedy_books</field>
               <field name="TEXT">What to read?</field>
-              <value name="CONTENT_TYPE">
-                <block type="content_type_link">
-                  <field name="CONTENT_TYPE">Books</field>
+              <value name="PAGE_LINK">
+                <block type="page_link">
+                  <field name="PAGE_NAME">Books</field>
                 </block>
               </value>
             </block>
