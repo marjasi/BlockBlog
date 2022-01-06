@@ -57,93 +57,55 @@ customJSONGenerator['image'] = function(block) {
 customJSONGenerator['link'] = function(block) {
   var text_link_name = block.getFieldValue('LINK_NAME');
   var text_text = block.getFieldValue('TEXT');
-  var value_content_type = customJSONGenerator.valueToCode(block, 'CONTENT_TYPE', customJSONGenerator.PRECEDENCE);
-  var htmlData = '<a id=\\"' + text_link_name + '\\" href=\\"' + value_content_type + '\\">' + text_text + '</a>';
+  var value_page_link = customJSONGenerator.valueToCode(block, 'PAGE_LINK', customJSONGenerator.PRECEDENCE);
+  var htmlData = '<a id=\\"' + text_link_name + '\\" href=\\"' + value_page_link + '\\">' + text_text + '</a>';
   return htmlData;
 };
 
-customJSONGenerator['content_type_link'] = function(block) {
-  var text_content_type = block.getFieldValue('CONTENT_TYPE');
-  var htmlData = text_content_type + '.html';
+customJSONGenerator['page'] = function(block) {
+  var text_page_name = block.getFieldValue('PAGE_NAME');
+  var statements_properties = customJSONGenerator.statementToCode(block, 'PROPERTIES');
+  var htmlData = '<!DOCTYPE html><html><head><title>' + text_page_name + '</title></head><body>'
+      + statements_properties + '</body></html>';
+  htmlData = formatHtmlData(htmlData);
+  var json = '{\n"page_name" : "' + text_page_name + '",\n "html_data" : "' + htmlData + '"\n}END';
+  return json;
+};
+
+customJSONGenerator['page_link'] = function(block) {
+  var text_page_name = block.getFieldValue('PAGE_NAME');
+  var htmlData = text_page_name + '.html';
   return [htmlData, customJSONGenerator.PRECEDENCE];
 };
 
-customJSONGenerator['content_type_reference'] = function(block) {
-  var text_content_type = block.getFieldValue('CONTENT_TYPE');
-  var json = '{\n "content_type_reference" : "' + text_content_type + '"\n}';
+customJSONGenerator['page_reference'] = function(block) {
+  var text_page_name = block.getFieldValue('PAGE_NAME');
+  var json = '{\n "page_reference" : "' + text_page_name + '"\n}';
   return json;
 };
 
-customJSONGenerator['content_type'] = function(block) {
-  var text_content_type = block.getFieldValue('CONTENT_TYPE');
-  var statements_properties = customJSONGenerator.statementToCode(block, 'PROPERTIES');
-  var htmlData = '<!DOCTYPE html><html><head><title>' + text_content_type + '</title></head><body>'
-      + statements_properties + '</body></html>';
-  htmlData = formatHtmlData(htmlData);
-  var json = '{\n"content_type" : "' + text_content_type + '",\n "html_data" : "' + htmlData + '"\n}END';
-  return json;
-};
-
-customJSONGenerator['resource_linker'] = function(block) {
-  // Get the name of the linker variable.
-  var linkerID = block.getField("LINKER_VARIABLE");
-  var json = linkerID.getText();
-  return [json, customJSONGenerator.PRECEDENCE];
-};
-
-customJSONGenerator['resource_definition'] = function(block) {
-  var resourceName = block.getFieldValue('RESOURCE_NAME');
-  var resourceLinker = customJSONGenerator.valueToCode(block, 'RESOURCE_ID', customJSONGenerator.PRECEDENCE);
-  var json = '{\n"resource_name" : "' + resourceName + '",\n' + '"resource_linker" : "' + resourceLinker + '"\n}';
-  return json;
-};
-
-customJSONGenerator['resource_definitions'] = function(block) {
-  var resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
-  var json = '{\n"resources" : [\n' + resources + '\n]\n}';
-  return json;
-};
-
-customJSONGenerator['uri_root'] = function(block) {
-  var uriRootPath = block.getFieldValue('URI_ROOT');
-  var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
-  var json = '{\n "uri_root" : {\n "root_path" : "' + uriRootPath + '",\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
-  return json;
-};
-
-customJSONGenerator['uri_static'] = function(block) {
-  var staticUriPath = block.getFieldValue('URI_STATIC');
-  var linkerID = customJSONGenerator.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
-  var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
+customJSONGenerator['url'] = function(block) {
+  var urlPath = block.getFieldValue('URL_PATH');
+  var urlPaths = customJSONGenerator.statementToCode(block, 'URL');
   var json;
-  if (uriPaths) {
-    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n'
-      + '"dynamic" : false,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
+  if (urlPaths) {
+    json = '{\n"path" : {\n"url_path": "' + urlPath + '",\n' + '"url_paths" : [' + urlPaths + ']\n}\n}';
   }
   else {
-    json = '{\n"path" : {\n"uri_path": "' + staticUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n"dynamic" : false' + '\n}\n}';
+    json = '{\n"path" : {\n"url_path": "' + urlPath + '\n}\n}';
   }
   return json;
 };
 
-customJSONGenerator['uri_dynamic'] = function(block) {
-  var dynamicUriPath = block.getFieldValue('URI_DYNAMIC');
-  var linkerID = customJSONGenerator.valueToCode(block, 'RESOURCE_LINKER', customJSONGenerator.PRECEDENCE);
-  var uriPaths = customJSONGenerator.statementToCode(block, 'URI');
-  var json;
-  if (uriPaths) {
-    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n'
-      + '"dynamic" : true,\n' + '"uri_paths" : [' + uriPaths + ']\n}\n}';
-  }
-    else {
-    json = '{\n"path" : {\n"uri_path": "' + dynamicUriPath + '",\n' + '"resource_linker" : "' + linkerID + '",\n"dynamic" : true' + '\n}\n}';
-  }
+customJSONGenerator['url_root'] = function(block) {
+  var urlRootPath = block.getFieldValue('URL_ROOT');
+  var urlPaths = customJSONGenerator.statementToCode(block, 'URL');
+  var json = '{\n "url_root" : {\n "root_path" : "' + urlRootPath + '",\n' + '"url_paths" : [' + urlPaths + ']\n}\n}';
   return json;
 };
 
 customJSONGenerator['rest_api'] = function(block) {
-  var resources = customJSONGenerator.statementToCode(block, 'RESOURCES');
-  var uri = customJSONGenerator.statementToCode(block, 'URI_ROOT');
-  var code = '{\n' + '"resource_definitions" : ' + resources + ',\n' + '"uri" : ' + uri + '\n}END';
+  var url = customJSONGenerator.statementToCode(block, 'URL_ROOT');
+  var code = '{\n' + '"url_schema" : ' + url + '\n}END';
   return code;
 };
