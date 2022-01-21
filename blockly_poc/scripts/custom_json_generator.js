@@ -40,7 +40,7 @@ customJSONGenerator['header'] = function(block) {
   var text_text = block.getFieldValue('TEXT');
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   text_text = removeNewLinesFromString(text_text);
-  var htmlData = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h1>' + statements_children;
+  var htmlData = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h' + dropdown_level + '>' + statements_children;
   return htmlData;
 };
 

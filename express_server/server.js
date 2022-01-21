@@ -2,7 +2,7 @@ const { Console } = require('console');
 const express = require('express');
 const fs = require('fs');
 const app = express();
-htmlFileDictionary = {}
+htmlFileDictionary = {};
 
 function updateHtmlFileDictionary(jsonData) {
   for (var jsonElement of jsonData) {

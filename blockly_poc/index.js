@@ -3,6 +3,24 @@ var blockWorkspace = Blockly.inject('blocklyDiv',
     {media: 'https://unpkg.com/blockly/media/',
      toolbox: document.getElementById('toolbox')});
 Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), blockWorkspace);
+htmlFileDictionary = {};
+
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+function updateHtmlFileDictionary(jsonData) {
+  for (var jsonElement of jsonData) {
+    if (jsonElement.page_name) {
+      htmlFileDictionary[jsonElement.page_name] = jsonElement.html_data;
+      alert(jsonElement.html_data);
+    }
+  }
+}
+
+function getHtmlFilePageName(htmlFileData) {
+  return getKeyByValue(htmlFileDictionary, htmlFileData);
+}
 
 function formatWorkspaceJsonData(workspaceJsonData){
   workspaceJsonData = '[\n' + workspaceJsonData + '\n]';
@@ -22,11 +40,15 @@ function createDownloadFile(fileName, fileContent, fileType) {
   document.body.removeChild(element);
 }
 
+function createJSONData() {
+  var json = customJSONGenerator.workspaceToCode(blockWorkspace);
+  return formatWorkspaceJsonData(json);
+}
+
 function showJSON() {
   // Generate JSON code and display it.
   customJSONGenerator.INFINITE_LOOP_TRAP = null;
-  var json = customJSONGenerator.workspaceToCode(blockWorkspace);
-  json = formatWorkspaceJsonData(json);
+  var json = createJSONData();
   alert(json);
 }
 
@@ -36,8 +58,7 @@ function downloadJSON() {
   jsonFileType = "application/json"
   window.LoopTrap = 1000;
   customJSONGenerator.INFINITE_LOOP_TRAP = null;
-  var json = customJSONGenerator.workspaceToCode(blockWorkspace);
-  json = formatWorkspaceJsonData(json);
+  var json = createJSONData();
   try {
     createDownloadFile(jsonFileName, json, jsonFileType);
   } catch(error) {
@@ -47,5 +68,7 @@ function downloadJSON() {
 }
 
 function createBlogPreview() {
-  alert("Hello!");
+  var json = createJSONData();
+  const blocklyJsondata = JSON.parse(json);
+  updateHtmlFileDictionary(blocklyJsondata);
 }
