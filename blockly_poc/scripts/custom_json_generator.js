@@ -4,10 +4,6 @@ function removeNewLinesFromString(string) {
 }
 
 function addBackslashBeforeQuotes(string) {
-  // string = string.replace(/( "|" |^")/gm, "\"");
-  // string = string.replace(/"\./gm, "\".");
-  // string = string.replace(/( "|" |^")/gm, '\\"');
-  // string = string.replace(/"\./gm, '\\".');
   string = string.replace(/"/gm, '\\"');
   return string;
 }
