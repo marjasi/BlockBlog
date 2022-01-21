@@ -346,6 +346,11 @@
   $(function(){
     $('#previewBtn').click(function() {
       createBlogPreview();
+      $.get('http://127.0.0.1:8080/previewTemplate.html')
+        .done(function(htmlData) {
+          previewWindow = window.open();
+          previewWindow.document.write(htmlData);
+        });
     });
   });
 </script>

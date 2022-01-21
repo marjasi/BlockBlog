@@ -13,7 +13,6 @@ function updateHtmlFileDictionary(jsonData) {
   for (var jsonElement of jsonData) {
     if (jsonElement.page_name) {
       htmlFileDictionary[jsonElement.page_name] = jsonElement.html_data;
-      alert(jsonElement.html_data);
     }
   }
 }
