@@ -1,11 +1,26 @@
-function removeNewLinesFromString(string){
+function removeNewLinesFromString(string) {
   string = string.replace(/(\r\n|\n|\r)/gm, "");
+  return string;
+}
+
+function addBackslashBeforeQuotes(string) {
+  // string = string.replace(/( "|" |^")/gm, "\"");
+  // string = string.replace(/"\./gm, "\".");
+  // string = string.replace(/( "|" |^")/gm, '\\"');
+  // string = string.replace(/"\./gm, '\\".');
+  string = string.replace(/"/gm, '\\"');
+  return string;
+}
+
+function removeCommaAfterMarkup(string) {
+  string = string.replace(/>,/gm, '>');
   return string;
 }
 
 function formatHtmlData(htmlData) {
   htmlData = removeNewLinesFromString(htmlData);
-  htmlData = htmlData.replace(/>,/gm, '>');
+  htmlData = addBackslashBeforeQuotes(htmlData);
+  htmlData = removeCommaAfterMarkup(htmlData);
   return htmlData;
 }
 
@@ -29,7 +44,7 @@ customJSONGenerator['header'] = function(block) {
   var text_text = block.getFieldValue('TEXT');
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   text_text = removeNewLinesFromString(text_text);
-  var htmlData = '<h' + dropdown_level + ' id=\\"' + text_header_name + '\\">' + text_text + '</h1>' + statements_children;
+  var htmlData = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h1>' + statements_children;
   return htmlData;
 };
 
@@ -37,7 +52,7 @@ customJSONGenerator['paragraph'] = function(block) {
   var text_paragraph_name = block.getFieldValue('PARAGRAPH_NAME');
   var text_text = block.getFieldValue('TEXT');
   text_text = removeNewLinesFromString(text_text);
-  var code = '<p id=\\"' + text_paragraph_name + '\\">' + text_text + '</p>';
+  var code = '<p id="' + text_paragraph_name + '">' + text_text + '</p>';
   return code;
 };
 
@@ -58,7 +73,7 @@ customJSONGenerator['link'] = function(block) {
   var text_link_name = block.getFieldValue('LINK_NAME');
   var text_text = block.getFieldValue('TEXT');
   var value_page_link = customJSONGenerator.valueToCode(block, 'PAGE_LINK', customJSONGenerator.PRECEDENCE);
-  var htmlData = '<a id=\\"' + text_link_name + '\\" href=\\"' + value_page_link + '\\">' + text_text + '</a>';
+  var htmlData = '<a id="' + text_link_name + '" href="' + value_page_link + '">' + text_text + '</a>';
   return htmlData;
 };
 
