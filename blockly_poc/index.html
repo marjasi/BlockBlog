@@ -23,7 +23,7 @@
   <p>
     <!-- <button onclick="showJSON()">Show JSON</button> -->
     <button onclick="downloadJSON()">Download JSON</button>
-    <button id="previewBtn">Preview</button>
+    <button onclick="createBlogPreview()">Preview</button>
   </p>
 
   <div id="blocklyDiv" style="height: 800px; width: 1600px;"></div>
@@ -340,20 +340,6 @@
   <script src='scripts/block_definitions.js'></script>
   <script src='scripts/custom_json_generator.js'></script>
   <script src="index.js"></script>
-  <script src="node_modules/jquery/dist/jquery.js"></script>
-
-<script>
-  $(function(){
-    $('#previewBtn').click(function() {
-      createBlogPreview();
-      $.get('http://127.0.0.1:8080/previewTemplate.html')
-        .done(function(htmlData) {
-          previewWindow = window.open();
-          previewWindow.document.write(htmlData);
-        });
-    });
-  });
-</script>
 
 </body>
 </html>
