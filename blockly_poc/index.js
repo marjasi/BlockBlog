@@ -45,3 +45,7 @@ function downloadJSON() {
     console.log(error);
   }
 }
+
+function createBlogPreview() {
+  alert("Hello!");
+}
