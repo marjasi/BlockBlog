@@ -53,15 +53,15 @@
       <statement name="URL_ROOT">
         <block type="url_root">
           <field name="URL_ROOT">home</field>
-          <statement name="URL">
+          <!-- <statement name="URL">
             <block type="url">
               <field name="URL_PATH">books</field>
               <statement name="URL">
                 <block type="page_reference">
                   <field name="PAGE_NAME">Books</field>
                 </block>
-              </statement>
-              <statement name="URL">
+              </statement> -->
+              <!-- <statement name="URL">
                 <block type="url">
                   <field name="URL_PATH">divine_comedy</field>
                   <statement name="URL">
@@ -69,6 +69,15 @@
                       <field name="PAGE_NAME">DivineComedy</field>
                     </block>
                   </statement>
+              </statement>
+          </statement> -->
+          <statement name="URL">
+            <block type="url">
+              <field name="URL_PATH">about</field>
+              <statement name="URL">
+                <block type="page_reference">
+                  <field name="PAGE_NAME">About</field>
+                </block>
               </statement>
           </statement>
           <statement name="URL">
@@ -78,15 +87,6 @@
                 <block type="page_reference">
                   <field name="PAGE_NAME">Homepage</field>
                 </block>
-              </statement>
-              <statement name="URL">
-                <block type="url">
-                  <field name="URL_PATH">about</field>
-                  <statement name="URL">
-                    <block type="page_reference">
-                      <field name="PAGE_NAME">About</field>
-                    </block>
-                  </statement>
               </statement>
           </statement>
         </block>
@@ -99,7 +99,7 @@
           <field name="HEADER_NAME">main_header</field>
           <field name="LEVEL">1</field>
           <field name="TEXT">How to read quickly</field>
-          <statement name="CHILDREN">
+          <!-- <statement name="CHILDREN">
             <block type="link">
               <field name="LINK_NAME">home_books</field>
               <field name="TEXT">What to read?</field>
@@ -109,7 +109,7 @@
                 </block>
               </value>
             </block>
-          </statement>
+          </statement> -->
           <statement name="CHILDREN">
             <block type="link">
               <field name="LINK_NAME">home_about</field>
@@ -173,7 +173,7 @@
         </block>
       </statement>
     </block>
-    <block type="page" x="500" y="400">
+    <!-- <block type="page" x="500" y="400">
       <field name="PAGE_NAME">Books</field>
       <statement name="PROPERTIES">
         <block type="header">
@@ -216,8 +216,8 @@
           </statement>
         </block>
       </statement>
-    </block>
-    <block type="page" x="1050" y="400">
+    </block> -->
+    <!-- <block type="page" x="1050" y="400">
       <field name="PAGE_NAME">DivineComedy</field>
       <statement name="PROPERTIES">
         <block type="header">
@@ -243,7 +243,7 @@
           </statement>
         </block>
       </statement>
-    </block>
+    </block> -->
     <!-- <block type="rest_api" x="60" y="20">
       <statement name="RESOURCES">
         <block type="resource_definitions">
