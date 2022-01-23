@@ -1,3 +1,4 @@
+
 // Initialize the Blockly workspace.
 var blockWorkspace = Blockly.inject('blocklyDiv',
     {media: 'https://unpkg.com/blockly/media/',
@@ -43,13 +44,13 @@ function createDownloadFile(fileName, fileContent, fileType) {
 }
 
 function createJSONData() {
+  customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = customJSONGenerator.workspaceToCode(blockWorkspace);
   return formatWorkspaceJsonData(json);
 }
 
 function showJSON() {
   // Generate JSON code and display it.
-  customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = createJSONData();
   alert(json);
 }
@@ -59,7 +60,6 @@ function downloadJSON() {
   jsonFileName = "blocklyREST";
   jsonFileType = "application/json"
   window.LoopTrap = 1000;
-  customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = createJSONData();
   try {
     createDownloadFile(jsonFileName, json, jsonFileType);
