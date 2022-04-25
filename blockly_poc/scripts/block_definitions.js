@@ -351,3 +351,39 @@ Blockly.Blocks['rest_api'] = {
     this.jsonInit(restApiJson);
   }
 }
+
+var buttonJson = {
+  "type": "button",
+  "message0": "Button %1 %2 Text %3 Action %4",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "BUTTON_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "BUTTON_TEXT",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "BUTTON_ACTION",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['button'] = {
+  init: function() {
+    this.jsonInit(buttonJson);
+  }
+}

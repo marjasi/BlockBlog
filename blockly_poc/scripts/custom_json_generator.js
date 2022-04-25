@@ -120,3 +120,11 @@ customJSONGenerator['rest_api'] = function(block) {
   var code = '{\n' + '"url_schema" : ' + url + '\n}END';
   return code;
 };
+
+customJSONGenerator['button'] = function(block) {
+  var buttonId = block.getFieldValue('BUTTON_NAME');
+  var buttonText = block.getFieldValue('BUTTON_TEXT');
+  var buttonAction = block.getFieldValue('BUTTON_ACTION');
+  var code = '<button id="' + buttonId + '" onclick="' + buttonAction + '">' + buttonText + '</button>';
+  return code;
+};
