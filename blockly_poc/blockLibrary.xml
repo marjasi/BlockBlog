@@ -1180,4 +1180,74 @@
         <field name="HUE">310</field>
       </block>
     </value>
+  </block><block type="factory_base" id="~%)9v61fO,_+*X8j7P(s" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">button</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="l/Seh*X^ppnMNkmeqa8m">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="JC7uKYmjlM6gs]IiZ/,4">
+            <field name="TEXT">Button</field>
+            <next>
+              <block type="field_input" id="5NOf];j+#-yCz?$`?}EI">
+                <field name="TEXT"></field>
+                <field name="FIELDNAME">BUTTON_NAME</field>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_dummy" id="d,vkqi*)%6PVdYti%IyA">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="o[2OeBqI*O=RNePAhT5I">
+                <field name="TEXT">Text</field>
+                <next>
+                  <block type="field_input" id="jW^xeqXcn[T{KEEUrJAI">
+                    <field name="TEXT"></field>
+                    <field name="FIELDNAME">BUTTON_TEXT</field>
+                    <next>
+                      <block type="field_static" id="mChO=_rT%8z8%Ccf(_1+">
+                        <field name="TEXT">Action</field>
+                        <next>
+                          <block type="field_input" id=",Ke9K.=hn)UKKB0d.;B@">
+                            <field name="TEXT"></field>
+                            <field name="FIELDNAME">BUTTON_ACTION</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="%J2CS210rS5#NYj_p,ZT" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="_h,Tn!)A@`;j0cl/H8iP" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="n$knu?a68^hiFg08t$Ja"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="NTLp|#s0EM-)Skckv^yK"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id=".SQs?}ZChO#x#S7j4nX~">
+        <mutation colour="#5b93a5"></mutation>
+        <field name="HUE">195</field>
+      </block>
+    </value>
   </block></xml>
