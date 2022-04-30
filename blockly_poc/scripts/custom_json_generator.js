@@ -142,3 +142,8 @@ customJSONGenerator['input_label'] = function(block) {
   var text_label_text = block.getFieldValue('LABEL_TEXT');
   return [text_label_text, customJSONGenerator.PRECEDENCE];
 };
+
+customJSONGenerator['empty_line'] = function(block) {
+  var htmlData = '<br><br>'
+  return htmlData;
+};

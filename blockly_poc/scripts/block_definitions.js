@@ -448,3 +448,19 @@ Blockly.Blocks['input_label'] = {
     this.jsonInit(inputLabelJson);
   }
 }
+
+var emptyLineJson = {
+  "type": "empty_line",
+  "message0": "Empty line",
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['empty_line'] = {
+  init: function() {
+    this.jsonInit(emptyLineJson);
+  }
+}
