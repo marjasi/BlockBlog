@@ -45,10 +45,25 @@ customJSONGenerator['header'] = function(block) {
 };
 
 customJSONGenerator['paragraph'] = function(block) {
-  var text_paragraph_name = block.getFieldValue('PARAGRAPH_NAME');
-  var text_text = block.getFieldValue('TEXT');
-  text_text = removeNewLinesFromString(text_text);
-  var json = '<p id="' + text_paragraph_name + '">' + text_text + '</p>';
+  var paragraphId = block.getFieldValue('PARAGRAPH_NAME');
+  var textFormat = block.getFieldValue('FORMAT');
+  var paragraphText = block.getFieldValue('TEXT');
+
+  switch(textFormat) {
+    case 'HTML':
+      paragraphText = paragraphText;
+      break;
+    case 'Markdown':
+      paragraphText = showdownConverter.makeHtml(paragraphText);
+      break;
+    case 'Text file':
+      break;
+    default:
+      paragraphText = paragraphText;
+  }
+
+  paragraphText = removeNewLinesFromString(paragraphText);
+  var json = '<p id="' + paragraphId + '">' + paragraphText + '</p>';
   return json;
 };
 

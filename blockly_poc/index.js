@@ -1,4 +1,3 @@
-
 // Initialize the Blockly workspace.
 var blockWorkspace = Blockly.inject('blocklyDiv',
     {media: 'https://unpkg.com/blockly/media/',
@@ -14,6 +13,8 @@ var blogEntryBodyStart = '<div class="w3-container">';
 var blogEntryEnd = ' <div class="w3-row"> <div class="w3-col m8 s12"> <p><button class="w3-button w3-padding-large w3-white w3-border" style="display: none;"><b></b></button></p> </div> <div class="w3-col m4 w3-hide-small"> <p><span class="w3-padding-large w3-right"><b>Comments </b> <span class="w3-tag">2</span></span></p> </div> </div> </div> </div> <hr>';
 
 var htmlFileArray = [];
+
+var showdownConverter = new showdown.Converter();
 
 var imageInput = document.createElement('input');
 imageInput.type = 'file';

@@ -768,19 +768,41 @@
           </block>
         </statement>
         <next>
-          <block type="input_dummy" id="n5Cro,t8DuOGBzxl9rS?">
+          <block type="input_dummy" id="Ga!A0RgIMH]Op(*v=p36">
             <field name="ALIGN">LEFT</field>
             <statement name="FIELDS">
-              <block type="field_static" id="n8[mp{1MGryiiE%]M[,%">
-                <field name="TEXT">Text</field>
+              <block type="field_static" id="80_!3LBG5,:m$S%nAY1j">
+                <field name="TEXT">Format</field>
                 <next>
-                  <block type="field_input" id="GJO+K1[G:5mnd|iH,DEB">
-                    <field name="TEXT"></field>
-                    <field name="FIELDNAME">TEXT</field>
+                  <block type="field_dropdown" id="!2rXLifTNb4P#HUyZr!F">
+                    <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                    <field name="FIELDNAME">FORMAT</field>
+                    <field name="USER0">HTML</field>
+                    <field name="CPU0">HTML</field>
+                    <field name="USER1">Markdown</field>
+                    <field name="CPU1">Markdown</field>
+                    <field name="USER2">Text file</field>
+                    <field name="CPU2">Text file</field>
                   </block>
                 </next>
               </block>
             </statement>
+            <next>
+              <block type="input_dummy" id="n5Cro,t8DuOGBzxl9rS?">
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="n8[mp{1MGryiiE%]M[,%">
+                    <field name="TEXT">Text</field>
+                    <next>
+                      <block type="field_input" id="GJO+K1[G:5mnd|iH,DEB">
+                        <field name="TEXT"></field>
+                        <field name="FIELDNAME">TEXT</field>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
           </block>
         </next>
       </block>

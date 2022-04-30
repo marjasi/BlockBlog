@@ -68,12 +68,33 @@ Blockly.Blocks['header'] = {
 
 var paragraphJson = {
   "type": "paragraph",
-  "message0": "Paragraph %1 %2 Text %3",
+  "message0": "Paragraph %1 %2 Format %3 %4 Text %5",
   "args0": [
     {
       "type": "field_input",
       "name": "PARAGRAPH_NAME",
       "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "FORMAT",
+      "options": [
+        [
+          "HTML",
+          "HTML"
+        ],
+        [
+          "Markdown",
+          "Markdown"
+        ],
+        [
+          "Text file",
+          "Text file"
+        ]
+      ]
     },
     {
       "type": "input_dummy"
