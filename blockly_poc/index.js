@@ -15,6 +15,9 @@ var blogEntryEnd = ' <div class="w3-row"> <div class="w3-col m8 s12"> <p><button
 
 var htmlFileArray = [];
 
+var imageInput = document.createElement('input');
+imageInput.type = 'file';
+
 function updateHtmlFileArray(jsonData) {
   var i = 0;
   for (var jsonElement of jsonData) {
@@ -95,4 +98,22 @@ function createBlogPreview() {
   htmlPreviewData += blogTemplateEnd;
   previewWindow = window.open();
   previewWindow.document.write(htmlPreviewData);
+}
+
+function setFieldValueToSelectedImage(blockField) {
+  imageInput.onchange = setEncodedImageValueInField(imageInput.files[0], blockField);
+  imageInput.click();
+}
+
+function setEncodedImageValueInField(selectedFileReference, blockField) {
+  var imageFile = selectedFileReference;
+  var reader = new FileReader();
+
+  if (selectedFileReference) {
+    reader.readAsDataURL(imageFile);
+    reader.onload = readerEvent => {
+      var encodedImage = readerEvent.target.result;
+      blockField.setValue(encodedImage);
+    }
+  }
 }
