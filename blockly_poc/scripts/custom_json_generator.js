@@ -61,8 +61,19 @@ customJSONGenerator['image_property'] = function(block) {
 };
 
 customJSONGenerator['image'] = function(block) {
-  var htmlData = '';
-  return [htmlData, customJSONGenerator.PRECEDENCE];
+  var imageId = block.getFieldValue('IMAGE_NAME');
+  var imageAlternativeText = block.getFieldValue('IMAGE_ALTERNATIVE_TEXT');
+  var imageWidth = block.getFieldValue('IMAGE_WIDTH');
+  var imageHeight = block.getFieldValue('IMAGE_HEIGHT');
+  var imageSource = customJSONGenerator.valueToCode(block, 'SOURCE', customJSONGenerator.PRECEDENCE);
+  var htmlData = '<img id="' + imageId + '" alt="' + imageAlternativeText + '" src="' + imageSource + '"';
+  htmlData += 'width="' + imageWidth + '" height="' + imageHeight + '"';
+  return htmlData;
+};
+
+customJSONGenerator['image_source'] = function(block) {
+  var imageSource = block.getFieldValue('SOURCE');
+  return [imageSource, customJSONGenerator.PRECEDENCE];
 };
 
 customJSONGenerator['link'] = function(block) {

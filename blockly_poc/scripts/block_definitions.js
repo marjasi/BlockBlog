@@ -131,19 +131,51 @@ Blockly.Blocks['image_property'] = {
 
 var imageJson = {
   "type": "image",
-  "message0": "%1",
+  "message0": "Image %1 %2 Alternative Text %3 %4 Width %5 %6 Height %7 %8 Source %9",
   "args0": [
     {
-      "type": "field_image",
-      "src": "https://www.gstatic.com/codesite/ph/images/star_on.gif",
-      "width": 15,
-      "height": 15,
-      "alt": "*",
-      "flipRtl": false
+      "type": "field_input",
+      "name": "IMAGE_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "IMAGE_ALTERNATIVE_TEXT",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_number",
+      "name": "IMAGE_WIDTH",
+      "value": 0,
+      "min": 1
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_number",
+      "name": "IMAGE_HEIGHT",
+      "value": 0,
+      "min": 1
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "SOURCE",
+      "check": "image_source"
     }
   ],
-  "output": null,
-  "colour": 215,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 0,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -151,6 +183,28 @@ var imageJson = {
 Blockly.Blocks['image'] = {
   init: function() {
     this.jsonInit(imageJson);
+  }
+}
+
+var imageSourceJson = {
+  "type": "image_source",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "SOURCE",
+      "text": "Source"
+    }
+  ],
+  "output": null,
+  "colour": 240,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['image_source'] = {
+  init: function() {
+    this.jsonInit(imageSourceJson);
   }
 }
 
