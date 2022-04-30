@@ -387,3 +387,64 @@ Blockly.Blocks['button'] = {
     this.jsonInit(buttonJson);
   }
 }
+
+var inputFieldJson = {
+  "type": "input_field",
+  "message0": "Input %1 %2 Input text %3 %4 Label %5",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "INPUT_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "INPUT_TEXT",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "LABEL",
+      "check": "input_label"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 90,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['input_field'] = {
+  init: function() {
+    this.jsonInit(inputFieldJson);
+  }
+}
+
+var inputLabelJson = {
+  "type": "input_label",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "LABEL_TEXT",
+      "text": "Label"
+    }
+  ],
+  "output": null,
+  "colour": 165,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['input_label'] = {
+  init: function() {
+    this.jsonInit(inputLabelJson);
+  }
+}

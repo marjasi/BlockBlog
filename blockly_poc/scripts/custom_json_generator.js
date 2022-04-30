@@ -40,29 +40,29 @@ customJSONGenerator['header'] = function(block) {
   var text_text = block.getFieldValue('TEXT');
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   text_text = removeNewLinesFromString(text_text);
-  var htmlData = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h' + dropdown_level + '>' + statements_children;
-  return htmlData;
+  var json = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h' + dropdown_level + '>' + statements_children;
+  return json;
 };
 
 customJSONGenerator['paragraph'] = function(block) {
   var text_paragraph_name = block.getFieldValue('PARAGRAPH_NAME');
   var text_text = block.getFieldValue('TEXT');
   text_text = removeNewLinesFromString(text_text);
-  var code = '<p id="' + text_paragraph_name + '">' + text_text + '</p>';
-  return code;
+  var json = '<p id="' + text_paragraph_name + '">' + text_text + '</p>';
+  return json;
 };
 
 customJSONGenerator['image_property'] = function(block) {
   var text_image_name = block.getFieldValue('IMAGE_NAME');
   var value_image = customJSONGenerator.valueToCode(block, 'IMAGE', customJSONGenerator.PRECEDENCE);
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
-  var code = '';
-  return code;
+  var json = '';
+  return json;
 };
 
 customJSONGenerator['image'] = function(block) {
-  var code = '';
-  return [code, customJSONGenerator.PRECEDENCE];
+  var htmlData = '';
+  return [htmlData, customJSONGenerator.PRECEDENCE];
 };
 
 customJSONGenerator['link'] = function(block) {
@@ -117,14 +117,28 @@ customJSONGenerator['url_root'] = function(block) {
 
 customJSONGenerator['rest_api'] = function(block) {
   var url = customJSONGenerator.statementToCode(block, 'URL_ROOT');
-  var code = '{\n' + '"url_schema" : ' + url + '\n}END';
-  return code;
+  var json = '{\n' + '"url_schema" : ' + url + '\n}END';
+  return json;
 };
 
 customJSONGenerator['button'] = function(block) {
   var buttonId = block.getFieldValue('BUTTON_NAME');
   var buttonText = block.getFieldValue('BUTTON_TEXT');
   var buttonAction = block.getFieldValue('BUTTON_ACTION');
-  var code = '<button id="' + buttonId + '" onclick="' + buttonAction + '">' + buttonText + '</button>';
-  return code;
+  var htmlData = '<button id="' + buttonId + '" onclick="' + buttonAction + '">' + buttonText + '</button>';
+  return htmlData;
+};
+
+customJSONGenerator['input_field'] = function(block) {
+  var inputId = block.getFieldValue('INPUT_NAME');
+  var input_text = block.getFieldValue('INPUT_TEXT');
+  var labelText = customJSONGenerator.valueToCode(block, 'LABEL', customJSONGenerator.PRECEDENCE);
+  var htmlData = '<label for="' + inputId + '">' + labelText + '</label>';
+  htmlData += '<input type="text" id="' + inputId + '" value="' + input_text + '">';
+  return htmlData;
+};
+
+customJSONGenerator['input_label'] = function(block) {
+  var text_label_text = block.getFieldValue('LABEL_TEXT');
+  return [text_label_text, customJSONGenerator.PRECEDENCE];
 };

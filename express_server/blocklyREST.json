@@ -24,7 +24,7 @@
 },
 {
 "page_name" : "Homepage",
- "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <h1 id=\"main_header\">How to read quickly</h1>  <p id=\"main_first_paragraph\">Be selective and tune into your intention. Before you pull a book from a shelf or open a journal article, ask yourself: why am I reading this? Why do I need this information? This pause for thought will hopefully help you cull all of the unnecessary material you would have otherwise flicked through absentmindedly.</p>    <a id=\"home_about\" href=\"About.html\">About</a>  <button id=\"Button\" onclick=\"console.log('Button pressed!')\">Press</button></body></html>"
+ "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <h1 id=\"main_header\">How to read quickly</h1>  <p id=\"main_first_paragraph\">Be selective and tune into your intention. Before you pull a book from a shelf or open a journal article, ask yourself: why am I reading this? Why do I need this information? This pause for thought will hopefully help you cull all of the unnecessary material you would have otherwise flicked through absentmindedly.</p>    <a id=\"home_about\" href=\"About.html\">About</a>  <label for=\"AddressInput\">Address:</label><input type=\"text\" id=\"AddressInput\" value=\"empty field\"></body></html>"
 },
 {
 "page_name" : "About",
