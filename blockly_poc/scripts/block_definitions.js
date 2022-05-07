@@ -228,7 +228,7 @@ Blockly.Blocks['image_source'] = {
     this.jsonInit(imageSourceJson);
     //Add input listener.
     var textField =  this.getField('SOURCE');
-    textField.showEditor_=(()=>setFieldValueToSelectedImage(textField));
+    textField.showEditor_ = (()=>setFieldValueToSelectedImage(textField));
   }
 }
 

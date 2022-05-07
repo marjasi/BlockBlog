@@ -18,6 +18,7 @@ var showdownConverter = new showdown.Converter();
 
 var imageInput = document.createElement('input');
 imageInput.type = 'file';
+imageInput.accept = 'image/*';
 
 function updateHtmlFileArray(jsonData) {
   var i = 0;
@@ -102,15 +103,18 @@ function createBlogPreview() {
 }
 
 function setFieldValueToSelectedImage(blockField) {
-  imageInput.onchange = setEncodedImageValueInField(imageInput.files[0], blockField);
+  imageInput.onchange = () => {
+    setEncodedImageValueInField(imageInput, blockField);
+    imageInput.value = null;
+  }
   imageInput.click();
 }
 
-function setEncodedImageValueInField(selectedFileReference, blockField) {
-  var imageFile = selectedFileReference;
+function setEncodedImageValueInField(imageInput, blockField) {
+  var imageFile = imageInput.files[0];
   var reader = new FileReader();
 
-  if (selectedFileReference) {
+  if (imageFile) {
     reader.readAsDataURL(imageFile);
     reader.onload = readerEvent => {
       var encodedImage = readerEvent.target.result;
