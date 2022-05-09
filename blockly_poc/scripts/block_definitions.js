@@ -115,6 +115,28 @@ var paragraphJson = {
 Blockly.Blocks['paragraph'] = {
   init: function() {
     this.jsonInit(paragraphJson);
+    
+    //Convert formats when selecting different dropdown options.
+    var conversionFormatValidator = (selectedFormat) => {
+      var paragraphTextField = this.getField('TEXT');
+      
+      switch(selectedFormat) {
+        case 'HTML':
+          paragraphTextField.setValue(showdownConverter.makeHtml(paragraphTextField.getValue()));
+          break;
+        case 'Markdown':
+          paragraphTextField.setValue(showdownConverter.makeMarkdown(paragraphTextField.getValue()));
+          break;
+        case 'Text file':
+          paragraphTextField.setValue('Select Text File...');
+          break;
+        default:
+          paragraphTextField.setValue('');
+      }
+    }
+
+    //Add conversion validator to dropdown field.
+    this.getField('FORMAT').setValidator(conversionFormatValidator);
   }
 }
 
@@ -214,7 +236,7 @@ var imageSourceJson = {
     {
       "type": "field_input",
       "name": "SOURCE",
-      "text": "Source"
+      "text": "Select Image File..."
     }
   ],
   "output": null,
