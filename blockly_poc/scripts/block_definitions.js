@@ -118,21 +118,7 @@ Blockly.Blocks['paragraph'] = {
     
     //Convert formats when selecting different dropdown options.
     var conversionFormatValidator = (selectedFormat) => {
-      var paragraphTextField = this.getField('TEXT');
-      
-      switch(selectedFormat) {
-        case 'HTML':
-          paragraphTextField.setValue(showdownConverter.makeHtml(paragraphTextField.getValue()));
-          break;
-        case 'Markdown':
-          paragraphTextField.setValue(showdownConverter.makeMarkdown(paragraphTextField.getValue()));
-          break;
-        case 'Text file':
-          paragraphTextField.setValue('Select Text File...');
-          break;
-        default:
-          paragraphTextField.setValue('');
-      }
+      convertParagraphFormats(selectedFormat, this.getField('TEXT'));
     }
 
     //Add conversion validator to dropdown field.

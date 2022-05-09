@@ -122,3 +122,20 @@ function setEncodedImageValueInField(imageInput, blockField) {
     }
   }
 }
+
+//Converts formats when selecting different dropdown options in the paragraph block.
+function convertParagraphFormats(selectedFormat, paragraphTextField) {
+  switch(selectedFormat) {
+    case 'HTML':
+      paragraphTextField.setValue(showdownConverter.makeHtml(paragraphTextField.getValue()));
+      break;
+    case 'Markdown':
+      paragraphTextField.setValue(showdownConverter.makeMarkdown(paragraphTextField.getValue()));
+      break;
+    case 'Text file':
+      paragraphTextField.setValue('Select Text File...');
+      break;
+    default:
+      paragraphTextField.setValue('');
+  }
+}
