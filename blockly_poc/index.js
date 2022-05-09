@@ -20,6 +20,7 @@ var imageInput = document.createElement('input');
 imageInput.type = 'file';
 imageInput.accept = 'image/*';
 
+//Updates html file array.
 function updateHtmlFileArray(jsonData) {
   var i = 0;
   for (var jsonElement of jsonData) {
@@ -30,6 +31,7 @@ function updateHtmlFileArray(jsonData) {
   }
 }
 
+//Formats json schema by replacing custom '}END' notations with appropriate formatting symbols.
 function formatWorkspaceJsonData(workspaceJsonData){
   workspaceJsonData = '[\n' + workspaceJsonData + '\n]';
   workspaceJsonData = workspaceJsonData.replace(/}END\r?\n{/gm, '},\n{');
@@ -37,6 +39,7 @@ function formatWorkspaceJsonData(workspaceJsonData){
   return workspaceJsonData;
 }
 
+//Creates a json schema file and makes it downloadable by the browser.
 function createDownloadFile(fileName, fileContent, fileType) {
   const blobFile = new Blob([fileContent], {type: fileType});
   const element = document.createElement('a');
@@ -48,18 +51,21 @@ function createDownloadFile(fileName, fileContent, fileType) {
   document.body.removeChild(element);
 }
 
+//Initiates json schema generation and formats the generated json.
 function createJSONData() {
   customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = customJSONGenerator.workspaceToCode(blockWorkspace);
   return formatWorkspaceJsonData(json);
 }
 
+//Shows the generated json schema in an alert window.
 function showJSON() {
   // Generate JSON code and display it.
   var json = createJSONData();
   alert(json);
 }
 
+//Initiates downloading of a generated json schema file.
 function downloadJSON() {
   // Generate JSON code and save it to a file for the user to download.
   jsonFileName = "blocklyREST";
@@ -74,12 +80,14 @@ function downloadJSON() {
   }
 }
 
+//Updates the html file array based on new added pages.
 function updateBlogHtmlFiles() {
   var json = createJSONData();
   const blocklyJsondata = JSON.parse(json);
   updateHtmlFileArray(blocklyJsondata);
 }
 
+//Adds blog entries to template html string.
 function addBlogEntries(blogTemplate) {
   for (var blogpost of htmlFileArray) {
     blogTemplate += blogEntryStart;
@@ -92,6 +100,7 @@ function addBlogEntries(blogTemplate) {
   return blogTemplate;
 }
 
+//Creates the html file of the preview window.
 function createBlogPreview() {
   var htmlPreviewData = '';
   htmlPreviewData += blogTemplateStart;
@@ -102,6 +111,7 @@ function createBlogPreview() {
   previewWindow.document.write(htmlPreviewData);
 }
 
+//Opens the file selector and sets the value of a block field to the selected image file.
 function setFieldValueToSelectedImage(blockField) {
   imageInput.onchange = () => {
     setEncodedImageValueInField(imageInput, blockField);
@@ -110,6 +120,7 @@ function setFieldValueToSelectedImage(blockField) {
   imageInput.click();
 }
 
+//Sets the base 64 encoded value in the passed field.
 function setEncodedImageValueInField(imageInput, blockField) {
   var imageFile = imageInput.files[0];
   var reader = new FileReader();

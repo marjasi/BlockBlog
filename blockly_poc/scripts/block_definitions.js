@@ -116,7 +116,6 @@ Blockly.Blocks['paragraph'] = {
   init: function() {
     this.jsonInit(paragraphJson);
     
-    //Convert formats when selecting different dropdown options.
     var conversionFormatValidator = (selectedFormat) => {
       convertParagraphFormats(selectedFormat, this.getField('TEXT'));
     }
