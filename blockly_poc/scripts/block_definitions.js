@@ -117,6 +117,8 @@ Blockly.Blocks['paragraph'] = {
     this.jsonInit(paragraphJson);
     
     var conversionFormatValidator = (selectedFormat) => {
+      //If the validator is a local validator, 'this' refers to the block not the field.
+      //Blockly documentation doesn't provide insight about the value of 'this' in local validators.
       convertParagraphFormats(selectedFormat, this.getField('TEXT'));
     }
 
