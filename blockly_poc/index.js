@@ -14,11 +14,17 @@ var blogEntryEnd = ' <div class="w3-row"> <div class="w3-col m8 s12"> <p><button
 
 var htmlFileArray = [];
 
+var MAX_TEXT_LENGTH = 200;
+
 var showdownConverter = new showdown.Converter();
 
 var imageInput = document.createElement('input');
 imageInput.type = 'file';
 imageInput.accept = 'image/*';
+
+var textInput = document.createElement('input');
+textInput.type = 'file';
+textInput.accept = 'text/*';
 
 //Updates html file array.
 function updateHtmlFileArray(jsonData) {
@@ -121,13 +127,13 @@ function setFieldValueToSelectedImage(blockField) {
 }
 
 //Sets the base 64 encoded value in the passed field.
-function setEncodedImageValueInField(imageInput, blockField) {
-  var imageFile = imageInput.files[0];
+function setEncodedImageValueInField(fileInput, blockField) {
+  var imageFile = fileInput.files[0];
   var reader = new FileReader();
 
   if (imageFile) {
     reader.readAsDataURL(imageFile);
-    reader.onload = readerEvent => {
+    reader.onload = (readerEvent) => {
       var encodedImage = readerEvent.target.result;
       blockField.setValue(encodedImage);
     }
@@ -145,8 +151,34 @@ function convertParagraphFormats(selectedFormat, paragraphTextField) {
       break;
     case 'Text file':
       paragraphTextField.setValue('Select Text File...');
+      paragraphTextField.showEditor_ = () => {
+        saveTextFromFileInField(paragraphTextField);
+      }
       break;
     default:
       paragraphTextField.setValue('');
+  }
+}
+
+//Opens the file selector and sets the value of a block field to the selected text file in a way to not cause lag.
+function saveTextFromFileInField(blockField) {
+  textInput.onchange = () => {
+    readTextFromSelectedFile(textInput, blockField);
+    textInput.value = null;
+  }
+  textInput.click();
+}
+
+//Reads and returns text from a selected file.
+function readTextFromSelectedFile(fileInput, blockField) {
+  var textFile = fileInput.files[0];
+  var reader = new FileReader();
+
+  if (textFile) {
+    reader.readAsText(textFile);
+    reader.onload = (readerEvent) => {
+      blockField.setValue(readerEvent.target.result.slice(0, MAX_TEXT_LENGTH) + '...');
+      blockField.value_ = readerEvent.target.result;
+    }
   }
 }

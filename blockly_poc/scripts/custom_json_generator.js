@@ -57,6 +57,7 @@ customJSONGenerator['paragraph'] = function(block) {
       paragraphText = showdownConverter.makeHtml(paragraphText);
       break;
     case 'Text file':
+      paragraphText = showdownConverter.makeHtml(paragraphText);
       break;
     default:
       paragraphText = paragraphText;

@@ -115,15 +115,18 @@ var paragraphJson = {
 Blockly.Blocks['paragraph'] = {
   init: function() {
     this.jsonInit(paragraphJson);
+
+    var formatField = this.getField('FORMAT');
+    var paragraphTextField = this.getField('TEXT');
     
     var conversionFormatValidator = (selectedFormat) => {
       //If the validator is a local validator, 'this' refers to the block not the field.
       //Blockly documentation doesn't provide insight about the value of 'this' in local validators.
-      convertParagraphFormats(selectedFormat, this.getField('TEXT'));
+      convertParagraphFormats(selectedFormat, paragraphTextField);
     }
 
     //Add conversion validator to dropdown field.
-    this.getField('FORMAT').setValidator(conversionFormatValidator);
+    formatField.setValidator(conversionFormatValidator);
   }
 }
 
@@ -237,7 +240,9 @@ Blockly.Blocks['image_source'] = {
     this.jsonInit(imageSourceJson);
     //Add input listener.
     var textField =  this.getField('SOURCE');
-    textField.showEditor_ = (()=>setFieldValueToSelectedImage(textField));
+    textField.showEditor_ = () => {
+      setFieldValueToSelectedImage(textField);
+    }
   }
 }
 
