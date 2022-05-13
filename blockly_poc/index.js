@@ -15,6 +15,7 @@ var blogEntryEnd = ' <div class="w3-row"> <div class="w3-col m8 s12"> <p><button
 var htmlFileArray = [];
 
 var MAX_TEXT_LENGTH = 200;
+var TEXT_FILE_SELECTION_MESSAGE = 'Select Text File...';
 
 var showdownConverter = new showdown.Converter();
 
@@ -150,7 +151,7 @@ function convertParagraphFormats(selectedFormat, paragraphTextField) {
       paragraphTextField.setValue(showdownConverter.makeMarkdown(paragraphTextField.getValue()));
       break;
     case 'Text file':
-      paragraphTextField.setValue('Select Text File...');
+      paragraphTextField.setValue(TEXT_FILE_SELECTION_MESSAGE);
       paragraphTextField.showEditor_ = () => {
         saveTextFromFileInField(paragraphTextField);
       }
