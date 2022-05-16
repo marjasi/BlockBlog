@@ -1,7 +1,23 @@
 // Initialize the Blockly workspace.
+// var blockWorkspace = Blockly.inject('blocklyDiv',
+//     {media: 'https://unpkg.com/blockly/media/',
+//      toolbox: document.getElementById('toolbox')});
+
 var blockWorkspace = Blockly.inject('blocklyDiv',
-    {media: 'https://unpkg.com/blockly/media/',
-     toolbox: document.getElementById('toolbox')});
+  {
+    toolbox: document.getElementById('toolbox'),
+    zoom:
+    {
+      controls: true,
+      wheel: true,
+      startScale: 1.0,
+      maxScale: 3,
+      minScale: 0.3,
+      scaleSpeed: 1.2
+    },
+    trashcan: true
+  });
+
 Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), blockWorkspace);
 
 // TemplateStart + EntryStart + EntryDate + EntryBodyStart + EntryText + EntryEnd + TemplateEnd.
@@ -38,7 +54,7 @@ function updateHtmlFileArray(jsonData) {
 }
 
 //Formats json schema by replacing custom '}END' notations with appropriate formatting symbols.
-function formatWorkspaceJsonData(workspaceJsonData){
+function formatWorkspaceJsonData(workspaceJsonData) {
   workspaceJsonData = '[\n' + workspaceJsonData + '\n]';
   workspaceJsonData = workspaceJsonData.replace(/}END\r?\n{/gm, '},\n{');
   workspaceJsonData = workspaceJsonData.replace(/}END\r?\n]/gm, '}\n]');
@@ -47,9 +63,9 @@ function formatWorkspaceJsonData(workspaceJsonData){
 
 //Creates a json schema file and makes it downloadable by the browser.
 function createDownloadFile(fileName, fileContent, fileType) {
-  const blobFile = new Blob([fileContent], {type: fileType});
+  const blobFile = new Blob([fileContent], { type: fileType });
   const element = document.createElement('a');
-  element.href = URL.createObjectURL(blobFile, {oneTimeOnly: true});
+  element.href = URL.createObjectURL(blobFile, { oneTimeOnly: true });
   element.download = fileName;
   element.style.display = 'none';
   document.body.appendChild(element);
@@ -80,7 +96,7 @@ function downloadJSON() {
   var json = createJSONData();
   try {
     createDownloadFile(jsonFileName, json, jsonFileType);
-  } catch(error) {
+  } catch (error) {
     alert("Failed to create JSON file for download.\n" + error)
     console.log(error);
   }
@@ -113,8 +129,9 @@ function createBlogPreview() {
   updateBlogHtmlFiles();
   htmlPreviewData = addBlogEntries(htmlPreviewData);
   htmlPreviewData += blogTemplateEnd;
-  previewWindow = window.open();
-  previewWindow.document.write(htmlPreviewData);
+  document.getElementById('previewArea').innerHTML = htmlPreviewData;
+  // previewWindow = window.open();
+  // previewWindow.document.write(htmlPreviewData);
 }
 
 //Opens the file selector and sets the value of a block field to the selected image file.
@@ -142,7 +159,7 @@ function setEncodedImageValueInField(fileInput, blockField) {
 
 //Converts formats when selecting different dropdown options in the paragraph block.
 function convertParagraphFormats(selectedFormat, paragraphTextField, textFileSelectionField) {
-  switch(selectedFormat) {
+  switch (selectedFormat) {
     case 'HTML':
       textFileSelectionField.setVisible(false);
       paragraphTextField.setValue(showdownConverter.makeHtml(paragraphTextField.getValue()));
