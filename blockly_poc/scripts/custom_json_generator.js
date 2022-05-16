@@ -40,29 +40,57 @@ customJSONGenerator['header'] = function(block) {
   var text_text = block.getFieldValue('TEXT');
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   text_text = removeNewLinesFromString(text_text);
-  var htmlData = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h' + dropdown_level + '>' + statements_children;
-  return htmlData;
+  var json = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h' + dropdown_level + '>' + statements_children;
+  return json;
 };
 
 customJSONGenerator['paragraph'] = function(block) {
-  var text_paragraph_name = block.getFieldValue('PARAGRAPH_NAME');
-  var text_text = block.getFieldValue('TEXT');
-  text_text = removeNewLinesFromString(text_text);
-  var code = '<p id="' + text_paragraph_name + '">' + text_text + '</p>';
-  return code;
+  var paragraphId = block.getFieldValue('PARAGRAPH_NAME');
+  var textFormat = block.getFieldValue('FORMAT');
+  var paragraphText = block.getFieldValue('TEXT');
+  var selectedFileText = block.getFieldValue('TEXT_FILE_SELECTION');
+
+  switch(textFormat) {
+    case 'HTML':
+      paragraphText = paragraphText;
+      break;
+    case 'Markdown':
+      paragraphText = showdownConverter.makeHtml(paragraphText);
+      break;
+    case 'Text file':
+      paragraphText = showdownConverter.makeHtml(selectedFileText);
+      break;
+    default:
+      paragraphText = paragraphText;
+  }
+
+  paragraphText = removeNewLinesFromString(paragraphText);
+  var json = '<p id="' + paragraphId + '">' + paragraphText + '</p>';
+  return json;
 };
 
 customJSONGenerator['image_property'] = function(block) {
   var text_image_name = block.getFieldValue('IMAGE_NAME');
   var value_image = customJSONGenerator.valueToCode(block, 'IMAGE', customJSONGenerator.PRECEDENCE);
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
-  var code = '';
-  return code;
+  var json = '';
+  return json;
 };
 
 customJSONGenerator['image'] = function(block) {
-  var code = '';
-  return [code, customJSONGenerator.PRECEDENCE];
+  var imageId = block.getFieldValue('IMAGE_NAME');
+  var imageAlternativeText = block.getFieldValue('IMAGE_ALTERNATIVE_TEXT');
+  var imageWidth = block.getFieldValue('IMAGE_WIDTH');
+  var imageHeight = block.getFieldValue('IMAGE_HEIGHT');
+  var imageSource = customJSONGenerator.valueToCode(block, 'SOURCE', customJSONGenerator.PRECEDENCE);
+  var htmlData = '<img id="' + imageId + '" alt="' + imageAlternativeText + '" src="' + imageSource + '"';
+  htmlData += 'width="' + imageWidth + '" height="' + imageHeight + '"';
+  return htmlData;
+};
+
+customJSONGenerator['image_source'] = function(block) {
+  var imageSource = block.getFieldValue('SOURCE');
+  return [imageSource, customJSONGenerator.PRECEDENCE];
 };
 
 customJSONGenerator['link'] = function(block) {
@@ -117,6 +145,55 @@ customJSONGenerator['url_root'] = function(block) {
 
 customJSONGenerator['rest_api'] = function(block) {
   var url = customJSONGenerator.statementToCode(block, 'URL_ROOT');
-  var code = '{\n' + '"url_schema" : ' + url + '\n}END';
-  return code;
+  var json = '{\n' + '"url_schema" : ' + url + '\n}END';
+  return json;
+};
+
+customJSONGenerator['form'] = function(block) {
+  var formId = block.getFieldValue('FORM_NAME');
+  var actionUrl = block.getFieldValue('ACTION');
+  var selectedMethod = block.getFieldValue('METHOD');
+  var inputFields = customJSONGenerator.statementToCode(block, 'INPUTS');
+  var formButtons = customJSONGenerator.statementToCode(block, 'BUTTONS');
+
+  var htmlData = '<form id="' + formId + '" action="' + actionUrl + '" method="' + selectedMethod + '">';
+  htmlData += inputFields;
+  htmlData += '</form>' + formButtons;
+  return htmlData;
+};
+
+customJSONGenerator['button'] = function(block) {
+  var buttonId = block.getFieldValue('BUTTON_NAME');
+  var buttonText = block.getFieldValue('BUTTON_TEXT');
+  var buttonAction = block.getFieldValue('BUTTON_ACTION');
+  //Get form id from form block.
+  var formId = block.getSurroundParent().getFieldValue('FORM_NAME');
+
+  var htmlData = '<button id="' + buttonId + '" onclick="' + buttonAction + '"';
+  if (formId) {
+    htmlData += 'form="' + formId + '">' + buttonText + '</button>';
+  }
+  else {
+    htmlData += '>' + buttonText + '</button>';
+  }
+  return htmlData;
+};
+
+customJSONGenerator['input_field'] = function(block) {
+  var inputId = block.getFieldValue('INPUT_NAME');
+  var input_text = block.getFieldValue('INPUT_TEXT');
+  var labelText = customJSONGenerator.valueToCode(block, 'LABEL', customJSONGenerator.PRECEDENCE);
+  var htmlData = '<label for="' + inputId + '">' + labelText + '</label>';
+  htmlData += '<input type="text" id="' + inputId + '" value="' + input_text + '">';
+  return htmlData;
+};
+
+customJSONGenerator['input_label'] = function(block) {
+  var text_label_text = block.getFieldValue('LABEL_TEXT');
+  return [text_label_text, customJSONGenerator.PRECEDENCE];
+};
+
+customJSONGenerator['empty_line'] = function(block) {
+  var htmlData = '<br><br>'
+  return htmlData;
 };

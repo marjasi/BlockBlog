@@ -68,7 +68,7 @@ Blockly.Blocks['header'] = {
 
 var paragraphJson = {
   "type": "paragraph",
-  "message0": "Paragraph %1 %2 Text %3",
+  "message0": "Paragraph %1 %2 Format %3 %4 Text %5 %6",
   "args0": [
     {
       "type": "field_input",
@@ -79,9 +79,35 @@ var paragraphJson = {
       "type": "input_dummy"
     },
     {
+      "type": "field_dropdown",
+      "name": "FORMAT",
+      "options": [
+        [
+          "HTML",
+          "HTML"
+        ],
+        [
+          "Markdown",
+          "Markdown"
+        ],
+        [
+          "Text file",
+          "Text file"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
       "type": "field_multilinetext",
       "name": "TEXT",
       "text": ""
+    },
+    {
+      "type": "field_multilinetext",
+      "name": "TEXT_FILE_SELECTION",
+      "text": "Select Text File..."
     }
   ],
   "previousStatement": null,
@@ -94,6 +120,27 @@ var paragraphJson = {
 Blockly.Blocks['paragraph'] = {
   init: function() {
     this.jsonInit(paragraphJson);
+
+    var formatField = this.getField('FORMAT');
+    var paragraphTextField = this.getField('TEXT');
+    var textFileSelectionField = this.getField('TEXT_FILE_SELECTION');
+
+    // Hide text file selection field.
+    textFileSelectionField.setVisible(false);
+
+    //Overwrite editor method with file selection method.
+    textFileSelectionField.showEditor_ = () => {
+      saveTextFromFileInField(textFileSelectionField);
+    }
+    
+    var conversionFormatValidator = (selectedFormat) => {
+      //If the validator is a local validator, 'this' refers to the block not the field.
+      //Blockly documentation doesn't provide insight about the value of 'this' in local validators.
+      convertParagraphFormats(selectedFormat, paragraphTextField, textFileSelectionField);
+    }
+
+    //Add conversion validator to dropdown field.
+    formatField.setValidator(conversionFormatValidator);
   }
 }
 
@@ -131,19 +178,51 @@ Blockly.Blocks['image_property'] = {
 
 var imageJson = {
   "type": "image",
-  "message0": "%1",
+  "message0": "Image %1 %2 Alternative Text %3 %4 Width %5 %6 Height %7 %8 Source %9",
   "args0": [
     {
-      "type": "field_image",
-      "src": "https://www.gstatic.com/codesite/ph/images/star_on.gif",
-      "width": 15,
-      "height": 15,
-      "alt": "*",
-      "flipRtl": false
+      "type": "field_input",
+      "name": "IMAGE_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "IMAGE_ALTERNATIVE_TEXT",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_number",
+      "name": "IMAGE_WIDTH",
+      "value": 0,
+      "min": 1
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_number",
+      "name": "IMAGE_HEIGHT",
+      "value": 0,
+      "min": 1
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "SOURCE",
+      "check": "image_source"
     }
   ],
-  "output": null,
-  "colour": 215,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 0,
   "tooltip": "",
   "helpUrl": ""
 }
@@ -151,6 +230,33 @@ var imageJson = {
 Blockly.Blocks['image'] = {
   init: function() {
     this.jsonInit(imageJson);
+  }
+}
+
+var imageSourceJson = {
+  "type": "image_source",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "SOURCE",
+      "text": "Select Image File..."
+    }
+  ],
+  "output": null,
+  "colour": 240,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['image_source'] = {
+  init: function() {
+    this.jsonInit(imageSourceJson);
+    //Add input listener.
+    var textField =  this.getField('SOURCE');
+    textField.showEditor_ = () => {
+      setFieldValueToSelectedImage(textField);
+    }
   }
 }
 
@@ -349,5 +455,176 @@ var restApiJson = {
 Blockly.Blocks['rest_api'] = {
   init: function() {
     this.jsonInit(restApiJson);
+  }
+}
+
+var formJson = {
+  "type": "form",
+  "message0": "Form %1 Method %2 %3 Action %4 %5 Inputs %6 Buttons %7",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "FORM_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_dropdown",
+      "name": "METHOD",
+      "options": [
+        [
+          "GET",
+          "GET"
+        ],
+        [
+          "POST",
+          "POST"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "ACTION",
+      "text": "URL..."
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "INPUTS",
+      "check": "input_field"
+    },
+    {
+      "type": "input_statement",
+      "name": "BUTTONS",
+      "check": "button"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 180,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['form'] = {
+  init: function() {
+    this.jsonInit(formJson);
+  }
+}
+
+var buttonJson = {
+  "type": "button",
+  "message0": "Button %1 %2 Text %3 Action %4",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "BUTTON_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "BUTTON_TEXT",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "BUTTON_ACTION",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 195,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['button'] = {
+  init: function() {
+    this.jsonInit(buttonJson);
+  }
+}
+
+var inputFieldJson = {
+  "type": "input_field",
+  "message0": "Input %1 %2 Input text %3 %4 Label %5",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "INPUT_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "INPUT_TEXT",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "LABEL",
+      "check": "input_label"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 90,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['input_field'] = {
+  init: function() {
+    this.jsonInit(inputFieldJson);
+  }
+}
+
+var inputLabelJson = {
+  "type": "input_label",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "LABEL_TEXT",
+      "text": "Label"
+    }
+  ],
+  "output": null,
+  "colour": 165,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['input_label'] = {
+  init: function() {
+    this.jsonInit(inputLabelJson);
+  }
+}
+
+var emptyLineJson = {
+  "type": "empty_line",
+  "message0": "Empty line",
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['empty_line'] = {
+  init: function() {
+    this.jsonInit(emptyLineJson);
   }
 }
