@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="css/fontRaleway.css"> 
+
   <title>Blockly Headless CMS</title>
   <script src="./node_modules/blockly/blockly_compressed.js"></script>
   <script src="./node_modules/blockly/blocks_compressed.js"></script>
@@ -14,10 +17,13 @@
       background-color: #fff;
       font-family: sans-serif;
     }
-
     h1 {
       font-weight: normal;
       font-size: 140%;
+    }
+    body,h1,h2,h3,h4,h5 {
+      font-family: "Raleway",
+      sans-serif
     }
   </style>
 </head>
@@ -25,7 +31,7 @@
 <body>
   <p>
     <!-- <button onclick="showJSON()">Show JSON</button> -->
-    <button onclick="downloadJSON()">Download JSON</button>
+    <button onclick="downloadJSON()" style="margin-left: 5px;">Download JSON</button>
     <button onclick="createBlogPreview()">Preview</button>
   </p>
 
