@@ -48,6 +48,7 @@ customJSONGenerator['paragraph'] = function(block) {
   var paragraphId = block.getFieldValue('PARAGRAPH_NAME');
   var textFormat = block.getFieldValue('FORMAT');
   var paragraphText = block.getFieldValue('TEXT');
+  var selectedFileText = block.getFieldValue('TEXT_FILE_SELECTION');
 
   switch(textFormat) {
     case 'HTML':
@@ -57,7 +58,7 @@ customJSONGenerator['paragraph'] = function(block) {
       paragraphText = showdownConverter.makeHtml(paragraphText);
       break;
     case 'Text file':
-      paragraphText = showdownConverter.makeHtml(paragraphText);
+      paragraphText = showdownConverter.makeHtml(selectedFileText);
       break;
     default:
       paragraphText = paragraphText;

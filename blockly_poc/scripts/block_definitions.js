@@ -68,7 +68,7 @@ Blockly.Blocks['header'] = {
 
 var paragraphJson = {
   "type": "paragraph",
-  "message0": "Paragraph %1 %2 Format %3 %4 Text %5",
+  "message0": "Paragraph %1 %2 Format %3 %4 Text %5 %6",
   "args0": [
     {
       "type": "field_input",
@@ -103,6 +103,11 @@ var paragraphJson = {
       "type": "field_multilinetext",
       "name": "TEXT",
       "text": ""
+    },
+    {
+      "type": "field_multilinetext",
+      "name": "TEXT_FILE_SELECTION",
+      "text": "Select Text File..."
     }
   ],
   "previousStatement": null,
@@ -118,11 +123,20 @@ Blockly.Blocks['paragraph'] = {
 
     var formatField = this.getField('FORMAT');
     var paragraphTextField = this.getField('TEXT');
+    var textFileSelectionField = this.getField('TEXT_FILE_SELECTION');
+
+    // Hide text file selection field.
+    textFileSelectionField.setVisible(false);
+
+    //Overwrite editor method with file selection method.
+    textFileSelectionField.showEditor_ = () => {
+      saveTextFromFileInField(textFileSelectionField);
+    }
     
     var conversionFormatValidator = (selectedFormat) => {
       //If the validator is a local validator, 'this' refers to the block not the field.
       //Blockly documentation doesn't provide insight about the value of 'this' in local validators.
-      convertParagraphFormats(selectedFormat, paragraphTextField);
+      convertParagraphFormats(selectedFormat, paragraphTextField, textFileSelectionField);
     }
 
     //Add conversion validator to dropdown field.
