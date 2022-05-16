@@ -458,6 +458,64 @@ Blockly.Blocks['rest_api'] = {
   }
 }
 
+var formJson = {
+  "type": "form",
+  "message0": "Form %1 Method %2 %3 Action %4 %5 Inputs %6 Buttons %7",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "FORM_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_dropdown",
+      "name": "METHOD",
+      "options": [
+        [
+          "GET",
+          "GET"
+        ],
+        [
+          "POST",
+          "POST"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "ACTION",
+      "text": "URL..."
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "INPUTS",
+      "check": "input_field"
+    },
+    {
+      "type": "input_statement",
+      "name": "BUTTONS",
+      "check": "button"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 180,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['form'] = {
+  init: function() {
+    this.jsonInit(formJson);
+  }
+}
+
 var buttonJson = {
   "type": "button",
   "message0": "Button %1 %2 Text %3 Action %4",

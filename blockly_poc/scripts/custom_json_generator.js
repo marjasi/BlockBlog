@@ -149,11 +149,33 @@ customJSONGenerator['rest_api'] = function(block) {
   return json;
 };
 
+customJSONGenerator['form'] = function(block) {
+  var formId = block.getFieldValue('FORM_NAME');
+  var actionUrl = block.getFieldValue('ACTION');
+  var selectedMethod = block.getFieldValue('METHOD');
+  var inputFields = customJSONGenerator.statementToCode(block, 'INPUTS');
+  var formButtons = customJSONGenerator.statementToCode(block, 'BUTTONS');
+
+  var htmlData = '<form id="' + formId + '" action="' + actionUrl + '" method="' + selectedMethod + '">';
+  htmlData += inputFields;
+  htmlData += '</form>' + formButtons;
+  return htmlData;
+};
+
 customJSONGenerator['button'] = function(block) {
   var buttonId = block.getFieldValue('BUTTON_NAME');
   var buttonText = block.getFieldValue('BUTTON_TEXT');
   var buttonAction = block.getFieldValue('BUTTON_ACTION');
-  var htmlData = '<button id="' + buttonId + '" onclick="' + buttonAction + '">' + buttonText + '</button>';
+  //Get form id from form block.
+  var formId = block.getSurroundParent().getFieldValue('FORM_NAME');
+
+  var htmlData = '<button id="' + buttonId + '" onclick="' + buttonAction + '"';
+  if (formId) {
+    htmlData += 'form="' + formId + '">' + buttonText + '</button>';
+  }
+  else {
+    htmlData += '>' + buttonText + '</button>';
+  }
   return htmlData;
 };
 
