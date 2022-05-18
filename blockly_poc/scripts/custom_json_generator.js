@@ -20,6 +20,12 @@ function formatHtmlData(htmlData) {
   return htmlData;
 }
 
+function formatCssData(cssData) {
+  cssData = removeNewLinesFromString(cssData);
+  cssData = addBackslashBeforeQuotes(cssData);
+  return cssData;
+}
+
 const customJSONGenerator = new Blockly.Generator("JSON");
 customJSONGenerator.PRECEDENCE = 0;
 
@@ -66,14 +72,6 @@ customJSONGenerator['paragraph'] = function(block) {
 
   paragraphText = removeNewLinesFromString(paragraphText);
   var json = '<p id="' + paragraphId + '">' + paragraphText + '</p>';
-  return json;
-};
-
-customJSONGenerator['image_property'] = function(block) {
-  var text_image_name = block.getFieldValue('IMAGE_NAME');
-  var value_image = customJSONGenerator.valueToCode(block, 'IMAGE', customJSONGenerator.PRECEDENCE);
-  var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
-  var json = '';
   return json;
 };
 
@@ -196,4 +194,17 @@ customJSONGenerator['input_label'] = function(block) {
 customJSONGenerator['empty_line'] = function(block) {
   var htmlData = '<br><br>'
   return htmlData;
+};
+
+customJSONGenerator['css_file'] = function(block) {
+  var cssFileName = block.getFieldValue('CSS_FILE_NAME');
+  var cssFileContent = customJSONGenerator.statementToCode(block, 'CSS_STYLES');
+  var json = '{\n"css_file_name" : "' + cssFileName + '",\n "css_data" : "' + cssFileContent + '"\n}END';
+  return json;
+};
+
+customJSONGenerator['css_style_w3css'] = function(block) {
+  var cssData = W3CSS;
+  cssData = formatCssData(cssData);
+  return cssData;
 };

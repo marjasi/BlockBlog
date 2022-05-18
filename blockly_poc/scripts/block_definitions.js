@@ -144,38 +144,6 @@ Blockly.Blocks['paragraph'] = {
   }
 }
 
-var imagePropertyJson = {
-  "type": "image_property",
-  "message0": "Image %1 %2 %3",
-  "args0": [
-    {
-      "type": "field_input",
-      "name": "IMAGE_NAME",
-      "text": ""
-    },
-    {
-      "type": "input_value",
-      "name": "IMAGE",
-      "check": "image"
-    },
-    {
-      "type": "input_statement",
-      "name": "CHILDREN"
-    }
-  ],
-  "previousStatement": null,
-  "nextStatement": null,
-  "colour": 215,
-  "tooltip": "",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['image_property'] = {
-  init: function() {
-    this.jsonInit(imagePropertyJson);
-  }
-}
-
 var imageJson = {
   "type": "image",
   "message0": "Image %1 %2 Alternative Text %3 %4 Width %5 %6 Height %7 %8 Source %9",
@@ -626,5 +594,154 @@ var emptyLineJson = {
 Blockly.Blocks['empty_line'] = {
   init: function() {
     this.jsonInit(emptyLineJson);
+  }
+}
+
+var cssFileJson = {
+  "type": "css_file",
+  "message0": "CSS File %1 %2 Style Blocks: %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_FILE_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "CSS_STYLES",
+      "check": [
+        "css_style",
+        "css_preset"
+      ]
+    }
+  ],
+  "colour": 300,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_file'] = {
+  init: function() {
+    this.jsonInit(cssFileJson);
+  }
+}
+
+var cssFileLinkerJson = {
+  "type": "css_file_linker",
+  "message0": "CSS File To Use %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_FILE_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 255,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_file_linker'] = {
+  init: function() {
+    this.jsonInit(cssFileLinkerJson);
+  }
+}
+
+var cssPresetJson = {
+  "type": "css_preset",
+  "message0": "Style Preset %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_PRESET_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "PRESET_STYLES"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_preset'] = {
+  init: function() {
+    this.jsonInit(cssPresetJson);
+  }
+}
+
+var cssPresetLinkerJson = {
+  "type": "css_preset_linker",
+  "message0": "CSS Preset To Use %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_PRESET_LINK_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_preset_linker'] = {
+  init: function() {
+    this.jsonInit(cssPresetLinkerJson);
+  }
+}
+
+var w3CssStylePresetJson = {
+  "type": "css_style_w3css",
+  "message0": "W3CSS Preset",
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 315,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_style_w3css'] = {
+  init: function() {
+    this.jsonInit(w3CssStylePresetJson);
+  }
+}
+
+var cssStyleJson = {
+  "type": "css_style",
+  "message0": "Style %1 %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "NAME"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_style'] = {
+  init: function() {
+    this.jsonInit(cssStyleJson);
   }
 }
