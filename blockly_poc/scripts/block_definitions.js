@@ -652,6 +652,28 @@ Blockly.Blocks['css_file_linker'] = {
   }
 }
 
+var cssReferenceJson = {
+  "type": "css_reference",
+  "message0": "CSS %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_FILE_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "colour": 345,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_reference'] = {
+  init: function() {
+    this.jsonInit(cssReferenceJson);
+  }
+}
+
 var cssPresetJson = {
   "type": "css_preset",
   "message0": "Style Preset %1 %2 %3",

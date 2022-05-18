@@ -203,8 +203,20 @@ customJSONGenerator['css_file'] = function(block) {
   return json;
 };
 
+customJSONGenerator['css_reference'] = function(block) {
+  var cssFileName = block.getFieldValue('CSS_FILE_NAME');
+  var json = '{\n "css_reference" : "' + cssFileName + '"\n}';
+  return json;
+};
+
 customJSONGenerator['css_style_w3css'] = function(block) {
   var cssData = W3CSS;
   cssData = formatCssData(cssData);
   return cssData;
+};
+
+customJSONGenerator['css_file_linker'] = function(block) {
+  var cssFileName = block.getFieldValue('CSS_FILE_NAME');
+  var htmlData = '<link rel="stylesheet" href="' + cssFileName + '">';
+  return htmlData;
 };
