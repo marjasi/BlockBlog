@@ -3,6 +3,7 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 htmlFileDictionary = {};
+cssFileDictionary = {};
 
 function updateHtmlFileDictionary(jsonData) {
   for (var jsonElement of jsonData) {
@@ -12,11 +13,31 @@ function updateHtmlFileDictionary(jsonData) {
   }
 }
 
+function updateCssFileDictionary(jsonData) {
+  for (var jsonElement of jsonData) {
+    if (jsonElement.css_file_name) {
+      cssFileDictionary[jsonElement.css_file_name] = jsonElement.css_data;
+    }
+  }
+}
+
 function getPageName(urlPaths) {
   if (urlPaths) {
     for (var urlPath of urlPaths) {
       if (urlPath.page_reference) {
         return urlPath.page_reference;
+      }
+    }
+  }
+
+  return null;
+}
+
+function getCssName(urlPaths) {
+  if (urlPaths) {
+    for (var urlPath of urlPaths) {
+      if (urlPath.css_reference) {
+        return urlPath.css_reference;
       }
     }
   }
@@ -37,10 +58,16 @@ function checkUrlPaths(urlPaths) {
 }
 
 function registerUrlPath(parentUrlPath, urlPathData, jsonData) {
-  var urlPathValue = parentUrlPath + '/' + urlPathData.url_path;
+  var urlPathValue = parentUrlPath;
+  if (urlPathData.url_path) {
+    urlPathValue += '/' + urlPathData.url_path;
+  }
   var urlPaths = urlPathData.url_paths;
   if (getPageName(urlPaths)) {
     createMockupEndpointWithHtml(urlPathValue, getPageName(urlPaths));
+  }
+  else if (getCssName(urlPaths)) {
+    createMockupEndpointWithCss(urlPathValue, getCssName(urlPaths));
   }
   else {
     createMockupEndpoint(urlPathValue);
@@ -50,7 +77,7 @@ function registerUrlPath(parentUrlPath, urlPathData, jsonData) {
     for (var urlPath of urlPaths) {
       // Check if the child element is a url.
       if (urlPath.path) {
-      urlPath = urlPath.path;
+        urlPath = urlPath.path;
         registerUrlPath(urlPathValue, urlPath, jsonData);
       }
     }
@@ -71,7 +98,7 @@ function createMockupEndpoints(jsonData) {
   var urlPaths = jsonData.url_schema.url_root.url_paths;
   if (checkUrlPaths(urlPaths)) {
     for (var urlPath of urlPaths) {
-      urlPath = urlPath.path;
+      urlPath = urlPath.path ? urlPath.path : urlPath;
       registerUrlPath(urlRoot, urlPath, jsonData);
     }
   }
@@ -85,6 +112,17 @@ function createMockupEndpointWithHtml(endpoint, pageName) {
         "Content-Type": "	text/html",
       });
       res.send(htmlFileDictionary[pageName]);
+  });
+}
+
+function createMockupEndpointWithCss(endpoint, cssName) {
+  app.get(endpoint, (req, res) => {
+      filename = cssName + '.css';
+      res.set({
+        "Content-Disposition": 'attachment; filename="'+ filename +'"',
+        "Content-Type": "	text/css",
+      });
+      res.send(cssFileDictionary[cssName]);
   });
 }
   
@@ -103,6 +141,7 @@ fs.readFile('blocklyREST.json', 'utf8', (err, fileContents) => {
   try {
     const blocklyJsondata = JSON.parse(fileContents);
     updateHtmlFileDictionary(blocklyJsondata);
+    updateCssFileDictionary(blocklyJsondata);
     createMockupEndpoints(blocklyJsondata);
   } catch(err) {
     console.error(err);
