@@ -32,7 +32,7 @@
 },
 {
 "page_name" : "Homepage",
- "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <link rel=\"stylesheet\" href=\"W3CSS\">  <h1 id=\"main_header\">How to read quickly</h1>  <p id=\"main_first_paragraph\">Be selective and tune into your intention. Before you pull a book from a                shelf or open a journal article, ask yourself: why am I reading this? Why do I need                this information? This pause for thought will hopefully help you cull all of the                unnecessary material you would have otherwise flicked through absentmindedly.</p>    <a id=\"home_about\" href=\"About.html\">About</a></body></html>"
+ "html_data" : "<!DOCTYPE html><html><head><title>Homepage</title></head><body>  <link rel=\"stylesheet\" href=\"W3CSS\">  <div class=\"w3-card-4 w3-margin w3-white\">  <div class=\"w3-container\">  <div class=\"w3-col l8 s12\">  <h1 id=\"main_header\">How to read quickly</h1>  <p id=\"main_first_paragraph\">Be selective and tune into your intention. Before you pull a book from a                shelf or open a journal article, ask yourself: why am I reading this? Why do I need                this information? This pause for thought will hopefully help you cull all of the                unnecessary material you would have otherwise flicked through absentmindedly.</p>          <a id=\"home_about\" href=\"About.html\">About</a></div></div></div></body></html>"
 },
 {
 "page_name" : "About",

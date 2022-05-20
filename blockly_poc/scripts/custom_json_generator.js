@@ -121,6 +121,14 @@ customJSONGenerator['page_reference'] = function(block) {
   return json;
 };
 
+customJSONGenerator['div_span'] = function(block) {
+  var keyword = block.getFieldValue('KEYWORD');
+  var classSpecifier = block.getFieldValue('CLASS');
+  var subelements = customJSONGenerator.statementToCode(block, 'SUBELEMENTS');
+  var htmlData = '<' + keyword + ' class="' + classSpecifier + '">' + subelements + '</' + keyword + '>';
+  return htmlData;
+};
+
 customJSONGenerator['url'] = function(block) {
   var urlPath = block.getFieldValue('URL_PATH');
   var urlPaths = customJSONGenerator.statementToCode(block, 'URL');

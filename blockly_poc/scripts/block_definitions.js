@@ -335,6 +335,50 @@ Blockly.Blocks['page_reference'] = {
   }
 }
 
+varDivSpanJson = {
+  "type": "div_span",
+  "message0": "%1 Class %2 %3 %4",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "KEYWORD",
+      "options": [
+        [
+          "div",
+          "div"
+        ],
+        [
+          "span",
+          "span"
+        ]
+      ]
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "SUBELEMENTS"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 105,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['div_span'] = {
+  init: function() {
+    this.jsonInit(varDivSpanJson);
+  }
+}
+
 var urlJson = {
   "type": "url",
   "message0": "URL %1 %2 %3",
