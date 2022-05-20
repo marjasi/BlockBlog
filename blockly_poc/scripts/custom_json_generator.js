@@ -42,16 +42,18 @@ customJSONGenerator.scrub_ = function(block, code, opt_thisOnly) {
 
 customJSONGenerator['header'] = function(block) {
   var text_header_name = block.getFieldValue('HEADER_NAME');
+  var classSpecifier = block.getFieldValue('CLASS');
   var dropdown_level = block.getFieldValue('LEVEL');
   var text_text = block.getFieldValue('TEXT');
   var statements_children = customJSONGenerator.statementToCode(block, 'CHILDREN');
   text_text = removeNewLinesFromString(text_text);
-  var json = '<h' + dropdown_level + ' id="' + text_header_name + '">' + text_text + '</h' + dropdown_level + '>' + statements_children;
+  var json = '<h' + dropdown_level + ' id="' + text_header_name + '" class="' + classSpecifier +'">' + text_text + '</h' + dropdown_level + '>' + statements_children;
   return json;
 };
 
 customJSONGenerator['paragraph'] = function(block) {
   var paragraphId = block.getFieldValue('PARAGRAPH_NAME');
+  var classSpecifier = block.getFieldValue('CLASS');
   var textFormat = block.getFieldValue('FORMAT');
   var paragraphText = block.getFieldValue('TEXT');
   var selectedFileText = block.getFieldValue('TEXT_FILE_SELECTION');
@@ -71,18 +73,19 @@ customJSONGenerator['paragraph'] = function(block) {
   }
 
   paragraphText = removeNewLinesFromString(paragraphText);
-  var json = '<p id="' + paragraphId + '">' + paragraphText + '</p>';
+  var json = '<p id="' + paragraphId + '" class="' + classSpecifier +'">' + paragraphText + '</p>';
   return json;
 };
 
 customJSONGenerator['image'] = function(block) {
   var imageId = block.getFieldValue('IMAGE_NAME');
+  var classSpecifier = block.getFieldValue('CLASS');
   var imageAlternativeText = block.getFieldValue('IMAGE_ALTERNATIVE_TEXT');
   var imageWidth = block.getFieldValue('IMAGE_WIDTH');
   var imageHeight = block.getFieldValue('IMAGE_HEIGHT');
   var imageSource = customJSONGenerator.valueToCode(block, 'SOURCE', customJSONGenerator.PRECEDENCE);
-  var htmlData = '<img id="' + imageId + '" alt="' + imageAlternativeText + '" src="' + imageSource + '"';
-  htmlData += 'width="' + imageWidth + '" height="' + imageHeight + '"';
+  var htmlData = '<img id="' + imageId + '" class="' + classSpecifier + '" alt="' + imageAlternativeText + '" src="' + imageSource + '"';
+  htmlData += 'width="' + imageWidth + '" height="' + imageHeight + '">';
   return htmlData;
 };
 
@@ -93,9 +96,10 @@ customJSONGenerator['image_source'] = function(block) {
 
 customJSONGenerator['link'] = function(block) {
   var text_link_name = block.getFieldValue('LINK_NAME');
+  var classSpecifier = block.getFieldValue('CLASS');
   var text_text = block.getFieldValue('TEXT');
   var value_page_link = customJSONGenerator.valueToCode(block, 'PAGE_LINK', customJSONGenerator.PRECEDENCE);
-  var htmlData = '<a id="' + text_link_name + '" href="' + value_page_link + '">' + text_text + '</a>';
+  var htmlData = '<a id="' + text_link_name + '" class="' + classSpecifier + '" href="' + value_page_link + '">' + text_text + '</a>';
   return htmlData;
 };
 
@@ -157,12 +161,13 @@ customJSONGenerator['rest_api'] = function(block) {
 
 customJSONGenerator['form'] = function(block) {
   var formId = block.getFieldValue('FORM_NAME');
+  var classSpecifier = block.getFieldValue('CLASS');
   var actionUrl = block.getFieldValue('ACTION');
   var selectedMethod = block.getFieldValue('METHOD');
   var inputFields = customJSONGenerator.statementToCode(block, 'INPUTS');
   var formButtons = customJSONGenerator.statementToCode(block, 'BUTTONS');
 
-  var htmlData = '<form id="' + formId + '" action="' + actionUrl + '" method="' + selectedMethod + '">';
+  var htmlData = '<form id="' + formId + '" class="' + classSpecifier + '" action="' + actionUrl + '" method="' + selectedMethod + '">';
   htmlData += inputFields;
   htmlData += '</form>' + formButtons;
   return htmlData;
@@ -170,12 +175,13 @@ customJSONGenerator['form'] = function(block) {
 
 customJSONGenerator['button'] = function(block) {
   var buttonId = block.getFieldValue('BUTTON_NAME');
+  var classSpecifier = block.getFieldValue('CLASS');
   var buttonText = block.getFieldValue('BUTTON_TEXT');
   var buttonAction = block.getFieldValue('BUTTON_ACTION');
   //Get form id from form block.
   var formId = block.getSurroundParent().getFieldValue('FORM_NAME');
 
-  var htmlData = '<button id="' + buttonId + '" onclick="' + buttonAction + '"';
+  var htmlData = '<button id="' + buttonId + '" class="' + classSpecifier + '" onclick="' + buttonAction + '"';
   if (formId) {
     htmlData += 'form="' + formId + '">' + buttonText + '</button>';
   }
@@ -187,10 +193,11 @@ customJSONGenerator['button'] = function(block) {
 
 customJSONGenerator['input_field'] = function(block) {
   var inputId = block.getFieldValue('INPUT_NAME');
+  var classSpecifier = block.getFieldValue('CLASS');
   var input_text = block.getFieldValue('INPUT_TEXT');
   var labelText = customJSONGenerator.valueToCode(block, 'LABEL', customJSONGenerator.PRECEDENCE);
   var htmlData = '<label for="' + inputId + '">' + labelText + '</label>';
-  htmlData += '<input type="text" id="' + inputId + '" value="' + input_text + '">';
+  htmlData += '<input type="text" id="' + inputId + '" class="' + classSpecifier + '" value="' + input_text + '">';
   return htmlData;
 };
 
@@ -227,4 +234,25 @@ customJSONGenerator['css_file_linker'] = function(block) {
   var cssFileName = block.getFieldValue('CSS_FILE_NAME');
   var htmlData = '<link rel="stylesheet" href="' + cssFileName + '">';
   return htmlData;
+};
+
+customJSONGenerator['block_fragment'] = function(block) {
+  var htmlData = '<!--BLOCK_FRAGMENT_START-->';
+  htmlData += customJSONGenerator.statementToCode(block, 'ELEMENTS');
+  htmlData += '<!--BLOCK_FRAGMENT_END-->';
+  return htmlData;
+};
+
+customJSONGenerator['block_fragment_reference'] = function(block) {
+  var fragmentName = block.getFieldValue('FRAGMENT_NAME');
+  var allBlocks = blockWorkspace.getAllBlocks(false);
+
+  //Look for the fragment declaration and return its value.
+  for (var specificBlock of allBlocks) {
+    if (specificBlock.type == 'block_fragment' && specificBlock.getFieldValue('FRAGMENT_NAME') == fragmentName) {
+      return customJSONGenerator.blockToCode(specificBlock, false);
+    }
+  }
+
+  return '';
 };

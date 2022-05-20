@@ -59,7 +59,7 @@ function formatWorkspaceJsonData(workspaceJsonData) {
   return workspaceJsonData;
 }
 
-//Creates a json schema file and makes it downloadable by the browser.
+//Creates a file and makes it downloadable by the browser.
 function createDownloadFile(fileName, fileContent, fileType) {
   const blobFile = new Blob([fileContent], { type: fileType });
   const element = document.createElement('a');
@@ -98,6 +98,27 @@ function downloadJSON() {
     createDownloadFile(jsonFileName, json, jsonFileType);
   } catch (error) {
     alert("Failed to create JSON file for download.\n" + error)
+    console.log(error);
+  }
+}
+
+//Download current block workspace before closing browser window.
+window.onbeforeunload = () => {
+  downloadBlockWorkspace();
+}
+
+//Initiates downloading of the current block workspace.
+function downloadBlockWorkspace() {
+  //Get workspace name from input field.
+  blockWorkspaceFileName = document.getElementById("workspaceName").value;
+  blockWorkspaceFileType = "text/xml";
+  window.LoopTrap = 1000;
+  var blockWorkspaceXmlDom = Blockly.Xml.workspaceToDom(blockWorkspace, false);
+  var blockWorkspaceXmlText = Blockly.Xml.domToPrettyText(blockWorkspaceXmlDom); 
+  try {
+    createDownloadFile(blockWorkspaceFileName, blockWorkspaceXmlText, blockWorkspaceFileType);
+  } catch (error) {
+    alert("Failed to create workspace XML file for download.\n" + error)
     console.log(error);
   }
 }
@@ -189,17 +210,42 @@ function convertParagraphFormats(selectedFormat, paragraphTextField, textFileSel
   }
 }
 
-//Opens the file selector and sets the value of a block field to the selected text file in a way to not cause lag.
-function saveTextFromFileInField(blockField) {
+//Loads the block workspace from selected workspace xml file.
+function loadBlockWorkspaceFromXmlFile() {
   textInput.onchange = () => {
-    readTextFromSelectedFile(textInput, blockField);
+    loadBlocksFromXmlFile(textInput);
     textInput.value = null;
   }
   textInput.click();
 }
 
-//Reads and returns text from a selected file.
-function readTextFromSelectedFile(fileInput, blockField) {
+//Opens the file selector and sets the value of a block field to the selected text file in a way to not cause lag.
+function saveTextFromFileInField(blockField) {
+  textInput.onchange = () => {
+    saveTextFromSelectedFileInField(textInput, blockField);
+    textInput.value = null;
+  }
+  textInput.click();
+}
+
+//Reads an xml file and loads it as a block workspace.
+function loadBlocksFromXmlFile(fileInput) {
+  var xmlFile = fileInput.files[0];
+  var reader = new FileReader();
+
+  if (xmlFile) {
+    reader.readAsText(xmlFile);
+    reader.onload = (readerEvent) => {
+      blockWorkspace.clear();
+      document.getElementById("workspaceName").value = xmlFile.name.split('.xml')[0];
+      var blockWorkspaceDom = Blockly.Xml.textToDom(readerEvent.target.result);
+      Blockly.Xml.domToWorkspace(blockWorkspaceDom, blockWorkspace);
+    }
+  }
+}
+
+//Reads and saves text in a specified block field.
+function saveTextFromSelectedFileInField(fileInput, blockField) {
   var textFile = fileInput.files[0];
   var reader = new FileReader();
 

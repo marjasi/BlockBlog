@@ -1,10 +1,15 @@
 var headerJson = {
   "type": "header",
-  "message0": "Header %1 Level %2 %3 Text %4 %5 %6",
+  "message0": "Header %1 Class %2 Level %3 %4 Text %5 %6 %7",
   "args0": [
     {
       "type": "field_input",
       "name": "HEADER_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -68,11 +73,16 @@ Blockly.Blocks['header'] = {
 
 var paragraphJson = {
   "type": "paragraph",
-  "message0": "Paragraph %1 %2 Format %3 %4 Text %5 %6",
+  "message0": "Paragraph %1 Class %2 %3 Format %4 %5 Text %6 %7",
   "args0": [
     {
       "type": "field_input",
       "name": "PARAGRAPH_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -146,11 +156,16 @@ Blockly.Blocks['paragraph'] = {
 
 var imageJson = {
   "type": "image",
-  "message0": "Image %1 %2 Alternative Text %3 %4 Width %5 %6 Height %7 %8 Source %9",
+  "message0": "Image %1 Class %2 %3 Alternative Text %4 %5 Width %6 %7 Height %8 %9 Source %10",
   "args0": [
     {
       "type": "field_input",
       "name": "IMAGE_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -230,11 +245,16 @@ Blockly.Blocks['image_source'] = {
 
 var linkJson = {
   "type": "link",
-  "message0": "Link %1 Ref Text %2 %3",
+  "message0": "Link %1 Class %2 Ref Text %3 %4",
   "args0": [
     {
       "type": "field_input",
       "name": "LINK_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -472,11 +492,16 @@ Blockly.Blocks['rest_api'] = {
 
 var formJson = {
   "type": "form",
-  "message0": "Form %1 Method %2 %3 Action %4 %5 Inputs %6 Buttons %7",
+  "message0": "Form %1 Class %2 Method %3 %4 Action %5 %6 Inputs %7 Buttons %8",
   "args0": [
     {
       "type": "field_input",
       "name": "FORM_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -530,11 +555,16 @@ Blockly.Blocks['form'] = {
 
 var buttonJson = {
   "type": "button",
-  "message0": "Button %1 %2 Text %3 Action %4",
+  "message0": "Button %1 Class %2 %3 Text %4 Action %5",
   "args0": [
     {
       "type": "field_input",
       "name": "BUTTON_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -566,11 +596,16 @@ Blockly.Blocks['button'] = {
 
 var inputFieldJson = {
   "type": "input_field",
-  "message0": "Input %1 %2 Input text %3 %4 Label %5",
+  "message0": "Input %1 Class %2 %3 Input text %4 %5 Label %6",
   "args0": [
     {
       "type": "field_input",
       "name": "INPUT_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -809,5 +844,56 @@ var cssStyleJson = {
 Blockly.Blocks['css_style'] = {
   init: function() {
     this.jsonInit(cssStyleJson);
+  }
+}
+
+var blockFragmentJson = {
+  "type": "block_fragment",
+  "message0": "Fragment %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "FRAGMENT_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "ELEMENTS"
+    }
+  ],
+  "colour": 165,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['block_fragment'] = {
+  init: function() {
+    this.jsonInit(blockFragmentJson);
+  }
+}
+
+var blockFragmentReferenceJson = {
+  "type": "block_fragment_reference",
+  "message0": "Block Fragment To Insert %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "FRAGMENT_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 165,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['block_fragment_reference'] = {
+  init: function() {
+    this.jsonInit(blockFragmentReferenceJson);
   }
 }

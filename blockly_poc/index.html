@@ -28,8 +28,14 @@
 
 <body>
   <p>
-    <!-- <button onclick="showJSON()">Show JSON</button> -->
-    <button onclick="downloadJSON()" style="margin-left: 5px;">Download JSON</button>
+    <p>
+      <span  style="margin-left: 5px;">
+        Workspace:
+        <input id="workspaceName" type="text" value="unnamed">
+      </span>
+    <button onclick="downloadBlockWorkspace()">Save Block Workspace</button>
+    <button onclick="loadBlockWorkspaceFromXmlFile()">Load Block Workspace</button>
+    <button onclick="downloadJSON()">Download JSON</button>
     <button onclick="createBlogMiniPreview()">Mini Preview</button>
     <button onclick="createBlogNewPagePreview()">Preview In New Page</button>
   </p>
