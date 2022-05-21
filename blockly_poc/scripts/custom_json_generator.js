@@ -13,6 +13,11 @@ function removeCommaAfterMarkup(string) {
   return string;
 }
 
+function removeCommaAfterBracket(string) {
+  string = string.replace(/},/gm, '}');
+  return string;
+}
+
 function formatHtmlData(htmlData) {
   htmlData = removeNewLinesFromString(htmlData);
   htmlData = addBackslashBeforeQuotes(htmlData);
@@ -23,6 +28,7 @@ function formatHtmlData(htmlData) {
 function formatCssData(cssData) {
   cssData = removeNewLinesFromString(cssData);
   cssData = addBackslashBeforeQuotes(cssData);
+  cssData = removeCommaAfterBracket(cssData);
   return cssData;
 }
 
@@ -231,6 +237,7 @@ customJSONGenerator['css_style_preset'] = function (block) {
 
 customJSONGenerator['css_style_preset_reference'] = function (block) {
   var cssPresetName = block.getFieldValue('CSS_PRESET_REFERENCE');
+  var allBlocks = blockWorkspace.getAllBlocks(false);
 
   //Look for the style preset declaration and return its styles' value.
   for (var specificBlock of allBlocks) {
