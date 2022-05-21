@@ -40,6 +40,10 @@ var textInput = document.createElement('input');
 textInput.type = 'file';
 textInput.accept = 'text/*';
 
+var xmlInput = document.createElement('input');
+xmlInput.type = 'file';
+xmlInput.accept = 'text/xml';
+
 //Updates html file array.
 function updateHtmlFileArray(jsonData) {
   var i = 0;
@@ -212,11 +216,11 @@ function convertParagraphFormats(selectedFormat, paragraphTextField, textFileSel
 
 //Loads the block workspace from selected workspace xml file.
 function loadBlockWorkspaceFromXmlFile() {
-  textInput.onchange = () => {
-    loadBlocksFromXmlFile(textInput);
-    textInput.value = null;
+  xmlInput.onchange = () => {
+    loadBlocksFromXmlFile(xmlInput);
+    xmlInput.value = null;
   }
-  textInput.click();
+  xmlInput.click();
 }
 
 //Opens the file selector and sets the value of a block field to the selected text file in a way to not cause lag.
@@ -236,6 +240,7 @@ function loadBlocksFromXmlFile(fileInput) {
   if (xmlFile) {
     reader.readAsText(xmlFile);
     reader.onload = (readerEvent) => {
+      //Clear current workspace before loading blocks from xml file.
       blockWorkspace.clear();
       document.getElementById("workspaceName").value = xmlFile.name.split('.xml')[0];
       var blockWorkspaceDom = Blockly.Xml.textToDom(readerEvent.target.result);
