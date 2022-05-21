@@ -256,7 +256,7 @@ customJSONGenerator['css_style_preset_w3css'] = function (block) {
 
 customJSONGenerator['css_file_linker'] = function (block) {
   var cssFileName = block.getFieldValue('CSS_FILE_NAME');
-  var htmlData = '<link rel="stylesheet" href="' + cssFileName + '">';
+  var htmlData = '<link rel="stylesheet" href="' + cssFileName + '.css">';
   return htmlData;
 };
 
