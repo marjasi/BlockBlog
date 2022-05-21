@@ -355,14 +355,18 @@ Blockly.Blocks['page_reference'] = {
   }
 }
 
-varDivSpanJson = {
-  "type": "div_span",
+varSectionDivSpanJson = {
+  "type": "section_div_span",
   "message0": "%1 Class %2 %3 %4",
   "args0": [
     {
       "type": "field_dropdown",
       "name": "KEYWORD",
       "options": [
+        [
+          "section",
+          "section"
+        ],
         [
           "div",
           "div"
@@ -393,9 +397,68 @@ varDivSpanJson = {
   "helpUrl": ""
 }
 
-Blockly.Blocks['div_span'] = {
+Blockly.Blocks['section_div_span'] = {
   init: function() {
-    this.jsonInit(varDivSpanJson);
+    this.jsonInit(varSectionDivSpanJson);
+  }
+}
+
+var sectionWrapperJson = {
+  "type": "section_wrapper",
+  "message0": "Section Wrapper %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "SECTION_WRAPPER_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "SECTIONS",
+      "check": "section_div_span"
+    }
+  ],
+  "colour": 165,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['section_wrapper'] = {
+  init: function() {
+    this.jsonInit(sectionWrapperJson);
+  }
+}
+
+var sectionWrapperReferenceJson = {
+  "type": "section_wrapper_reference",
+  "message0": "Section Wrapper To Use %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "SECTION_WRAPPER_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "ELEMENTS"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['section_wrapper_reference'] = {
+  init: function() {
+    this.jsonInit(sectionWrapperReferenceJson);
   }
 }
 

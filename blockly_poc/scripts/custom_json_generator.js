@@ -13,6 +13,11 @@ function removeCommaAfterMarkup(string) {
   return string;
 }
 
+function removeCommaAfterBracket(string) {
+  string = string.replace(/},/gm, '}');
+  return string;
+}
+
 function formatHtmlData(htmlData) {
   htmlData = removeNewLinesFromString(htmlData);
   htmlData = addBackslashBeforeQuotes(htmlData);
@@ -23,6 +28,7 @@ function formatHtmlData(htmlData) {
 function formatCssData(cssData) {
   cssData = removeNewLinesFromString(cssData);
   cssData = addBackslashBeforeQuotes(cssData);
+  cssData = removeCommaAfterBracket(cssData);
   return cssData;
 }
 
@@ -125,12 +131,37 @@ customJSONGenerator['page_reference'] = function (block) {
   return json;
 };
 
-customJSONGenerator['div_span'] = function (block) {
+customJSONGenerator['section_div_span'] = function (block) {
   var keyword = block.getFieldValue('KEYWORD');
   var classSpecifier = block.getFieldValue('CLASS');
   var subelements = customJSONGenerator.statementToCode(block, 'SUBELEMENTS');
   var htmlData = '<' + keyword + ' class="' + classSpecifier + '">' + subelements + '</' + keyword + '>';
   return htmlData;
+};
+
+customJSONGenerator['section_wrapper'] = function (block) {
+  return '';
+};
+
+customJSONGenerator['section_wrapper_reference'] = function (block) {
+  var sectionWrapperName = block.getFieldValue('SECTION_WRAPPER_NAME');
+  var elements = customJSONGenerator.statementToCode(block, 'ELEMENTS');
+  var matchRegex = /<\/(section|div|span)>/;
+  var allBlocks = blockWorkspace.getAllBlocks(false);
+
+  //Look for the section wrapper declaration and insert elements' value into the first deepest wrapper statement.
+  for (var specificBlock of allBlocks) {
+    if (specificBlock.type == 'section_wrapper' && specificBlock.getFieldValue('SECTION_WRAPPER_NAME') == sectionWrapperName) {
+      var sectionsString = customJSONGenerator.statementToCode(specificBlock, 'SECTIONS');
+      var deepestElementIndex = sectionsString.search(matchRegex);
+      var sectionsStart = sectionsString.substring(0, deepestElementIndex);
+      var sectionsEnd = sectionsString.substring(deepestElementIndex);
+
+      return sectionsStart + elements + sectionsEnd;
+    }
+  }
+  
+  return '';
 };
 
 customJSONGenerator['url'] = function (block) {
@@ -231,6 +262,7 @@ customJSONGenerator['css_style_preset'] = function (block) {
 
 customJSONGenerator['css_style_preset_reference'] = function (block) {
   var cssPresetName = block.getFieldValue('CSS_PRESET_REFERENCE');
+  var allBlocks = blockWorkspace.getAllBlocks(false);
 
   //Look for the style preset declaration and return its styles' value.
   for (var specificBlock of allBlocks) {
@@ -249,7 +281,7 @@ customJSONGenerator['css_style_preset_w3css'] = function (block) {
 
 customJSONGenerator['css_file_linker'] = function (block) {
   var cssFileName = block.getFieldValue('CSS_FILE_NAME');
-  var htmlData = '<link rel="stylesheet" href="' + cssFileName + '">';
+  var htmlData = '<link rel="stylesheet" href="' + cssFileName + '.css">';
   return htmlData;
 };
 
