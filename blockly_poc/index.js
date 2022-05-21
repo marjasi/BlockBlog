@@ -76,7 +76,6 @@ function createDownloadFile(fileName, fileContent, fileType) {
 function createJSONData() {
   customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = customJSONGenerator.workspaceToCode(blockWorkspace);
-  //Format JSON to be easy-to-read by indenting new lines with 4 spaces.
   json = formatWorkspaceJsonData(json);
   return json;
 }
