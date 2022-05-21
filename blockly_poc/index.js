@@ -147,14 +147,20 @@ function addBlogEntries(blogTemplate) {
   return blogTemplate;
 }
 
-//Creates the html file of the preview panel to the side of the Blockly window.
-function createBlogMiniPreview() {
+//Creates the html file of the preview panel to the side of the Blockly window and show it on top of the main window.
+function createBlogQuickPreview() {
   var htmlPreviewData = '';
   htmlPreviewData += blogTemplateStart;
   updateBlogHtmlFiles();
   htmlPreviewData = addBlogEntries(htmlPreviewData);
   htmlPreviewData += blogTemplateEnd;
-  document.getElementById('previewArea').innerHTML = htmlPreviewData;
+  document.getElementById('quickPreviewAreaContent').innerHTML = htmlPreviewData;
+  document.getElementById("quickPreviewArea").style.width = "100%";
+}
+
+//Close the open quick preview window.
+function closeQuickPreview() {
+  document.getElementById("quickPreviewArea").style.width = 0;
 }
 
 //Creates the html file of the preview window.
