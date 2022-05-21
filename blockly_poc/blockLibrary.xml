@@ -797,6 +797,12 @@
                       <block type="field_input" id="GJO+K1[G:5mnd|iH,DEB">
                         <field name="TEXT"></field>
                         <field name="FIELDNAME">TEXT</field>
+                        <next>
+                          <block type="field_input" id="bXiM4Q*%!S^-~EEN*$$/">
+                            <field name="TEXT"></field>
+                            <field name="FIELDNAME">TEXT_FILE_SELECTION</field>
+                          </block>
+                        </next>
                       </block>
                     </next>
                   </block>
@@ -1506,7 +1512,7 @@
         <field name="ALIGN">LEFT</field>
         <statement name="FIELDS">
           <block type="field_input" id="$t/[(fzMRBh[20eWHG:`">
-            <field name="TEXT">Source</field>
+            <field name="TEXT">Select Image File...</field>
             <field name="FIELDNAME">SOURCE</field>
           </block>
         </statement>
@@ -1529,6 +1535,114 @@
       <block type="colour_hue" id="1LdSw1t%d$_}!`1_g6.x">
         <mutation colour="#5b5ba5"></mutation>
         <field name="HUE">240</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="Ll5Ct^r(SvbzQ)+l?W*y" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">form</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="xLB72hE;K63I@QB=YDW?">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="sq%lRA#kfOVdTQJ=/a4z">
+            <field name="TEXT">Form</field>
+            <next>
+              <block type="field_input" id=".fOJ_Kb{o`3T3kF4;l,e">
+                <field name="TEXT"></field>
+                <field name="FIELDNAME">FORM_NAME</field>
+                <next>
+                  <block type="field_static" id="_hgK6)+k*3:z5:xe+=oO">
+                    <field name="TEXT">Method</field>
+                    <next>
+                      <block type="field_dropdown" id="+^_84OYLr53_@60pnzMJ">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">METHOD</field>
+                        <field name="USER0">GET</field>
+                        <field name="CPU0">GET</field>
+                        <field name="USER1">POST</field>
+                        <field name="CPU1">POST</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_dummy" id="LH4VYf6hMj?zx?:/SVov">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="ow!2ya$Y=~WDt;`*PV-,">
+                <field name="TEXT">Action</field>
+                <next>
+                  <block type="field_input" id="?ZlH-I27S0}wg58?dMXP">
+                    <field name="TEXT">URL...</field>
+                    <field name="FIELDNAME">ACTION</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="input_statement" id="/_$Y8%)f_+ml?X!$p2nQ">
+                <field name="INPUTNAME">INPUTS</field>
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="v+;UJPDQ)kI*;0|PJzz#">
+                    <field name="TEXT">Inputs</field>
+                  </block>
+                </statement>
+                <value name="TYPE">
+                  <shadow type="type_null" id="si?I+ESWs-.{E[yTAKGs"></shadow>
+                  <block type="type_other" id="segDq0[2)B)bUG}atkQp">
+                    <field name="TYPE">input_field</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="input_statement" id="|iYfQ#ROSPzvP?(L1(cP">
+                    <field name="INPUTNAME">BUTTONS</field>
+                    <field name="ALIGN">LEFT</field>
+                    <statement name="FIELDS">
+                      <block type="field_static" id="Sy9qx1Q`=JR^~AY3Um#y">
+                        <field name="TEXT">Buttons</field>
+                      </block>
+                    </statement>
+                    <value name="TYPE">
+                      <shadow type="type_null" id="XR4YQbXH0]`dzaujo?X`"></shadow>
+                      <block type="type_other" id="1.*2k+VmirhOtu,!nSu5">
+                        <field name="TYPE">button</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="g@_h}TQnW(Yxs}bf015a" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="xkw;_jE3Z|o1R0NbN6K{" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="L$$xP,-Abg05{R*^+clP"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="qVD.B6EzEB8k2=3q:=},"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id=".XNtaAZZuEerYfSMFwd3">
+        <mutation colour="#5ba5a5"></mutation>
+        <field name="HUE">180</field>
       </block>
     </value>
   </block></xml>

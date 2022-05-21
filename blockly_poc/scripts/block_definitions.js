@@ -1,10 +1,15 @@
 var headerJson = {
   "type": "header",
-  "message0": "Header %1 Level %2 %3 Text %4 %5 %6",
+  "message0": "Header %1 Class %2 Level %3 %4 Text %5 %6 %7",
   "args0": [
     {
       "type": "field_input",
       "name": "HEADER_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -68,11 +73,16 @@ Blockly.Blocks['header'] = {
 
 var paragraphJson = {
   "type": "paragraph",
-  "message0": "Paragraph %1 %2 Format %3 %4 Text %5 %6",
+  "message0": "Paragraph %1 Class %2 %3 Format %4 %5 Text %6 %7",
   "args0": [
     {
       "type": "field_input",
       "name": "PARAGRAPH_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -144,9 +154,9 @@ Blockly.Blocks['paragraph'] = {
   }
 }
 
-var imagePropertyJson = {
-  "type": "image_property",
-  "message0": "Image %1 %2 %3",
+var imageJson = {
+  "type": "image",
+  "message0": "Image %1 Class %2 %3 Alternative Text %4 %5 Width %6 %7 Height %8 %9 Source %10",
   "args0": [
     {
       "type": "field_input",
@@ -154,35 +164,8 @@ var imagePropertyJson = {
       "text": ""
     },
     {
-      "type": "input_value",
-      "name": "IMAGE",
-      "check": "image"
-    },
-    {
-      "type": "input_statement",
-      "name": "CHILDREN"
-    }
-  ],
-  "previousStatement": null,
-  "nextStatement": null,
-  "colour": 215,
-  "tooltip": "",
-  "helpUrl": ""
-}
-
-Blockly.Blocks['image_property'] = {
-  init: function() {
-    this.jsonInit(imagePropertyJson);
-  }
-}
-
-var imageJson = {
-  "type": "image",
-  "message0": "Image %1 %2 Alternative Text %3 %4 Width %5 %6 Height %7 %8 Source %9",
-  "args0": [
-    {
       "type": "field_input",
-      "name": "IMAGE_NAME",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -262,11 +245,16 @@ Blockly.Blocks['image_source'] = {
 
 var linkJson = {
   "type": "link",
-  "message0": "Link %1 Ref Text %2 %3",
+  "message0": "Link %1 Class %2 Ref Text %3 %4",
   "args0": [
     {
       "type": "field_input",
       "name": "LINK_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -367,6 +355,50 @@ Blockly.Blocks['page_reference'] = {
   }
 }
 
+varDivSpanJson = {
+  "type": "div_span",
+  "message0": "%1 Class %2 %3 %4",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "KEYWORD",
+      "options": [
+        [
+          "div",
+          "div"
+        ],
+        [
+          "span",
+          "span"
+        ]
+      ]
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "SUBELEMENTS"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 105,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['div_span'] = {
+  init: function() {
+    this.jsonInit(varDivSpanJson);
+  }
+}
+
 var urlJson = {
   "type": "url",
   "message0": "URL %1 %2 %3",
@@ -460,11 +492,16 @@ Blockly.Blocks['rest_api'] = {
 
 var formJson = {
   "type": "form",
-  "message0": "Form %1 Method %2 %3 Action %4 %5 Inputs %6 Buttons %7",
+  "message0": "Form %1 Class %2 Method %3 %4 Action %5 %6 Inputs %7 Buttons %8",
   "args0": [
     {
       "type": "field_input",
       "name": "FORM_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -518,11 +555,16 @@ Blockly.Blocks['form'] = {
 
 var buttonJson = {
   "type": "button",
-  "message0": "Button %1 %2 Text %3 Action %4",
+  "message0": "Button %1 Class %2 %3 Text %4 Action %5",
   "args0": [
     {
       "type": "field_input",
       "name": "BUTTON_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -554,11 +596,16 @@ Blockly.Blocks['button'] = {
 
 var inputFieldJson = {
   "type": "input_field",
-  "message0": "Input %1 %2 Input text %3 %4 Label %5",
+  "message0": "Input %1 Class %2 %3 Input text %4 %5 Label %6",
   "args0": [
     {
       "type": "field_input",
       "name": "INPUT_NAME",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "CLASS",
       "text": ""
     },
     {
@@ -626,5 +673,260 @@ var emptyLineJson = {
 Blockly.Blocks['empty_line'] = {
   init: function() {
     this.jsonInit(emptyLineJson);
+  }
+}
+
+var cssFileJson = {
+  "type": "css_file",
+  "message0": "CSS File %1 %2 Style Blocks: %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_FILE_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "CSS_STYLES",
+      "check": [
+        "css_style",
+        "css_preset"
+      ]
+    }
+  ],
+  "colour": 300,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_file'] = {
+  init: function() {
+    this.jsonInit(cssFileJson);
+  }
+}
+
+var cssFileLinkerJson = {
+  "type": "css_file_linker",
+  "message0": "CSS File To Use %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_FILE_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 255,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_file_linker'] = {
+  init: function() {
+    this.jsonInit(cssFileLinkerJson);
+  }
+}
+
+var cssReferenceJson = {
+  "type": "css_reference",
+  "message0": "CSS %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_FILE_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "colour": 345,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_reference'] = {
+  init: function() {
+    this.jsonInit(cssReferenceJson);
+  }
+}
+
+var cssStylePresetJson = {
+  "type": "css_style_preset",
+  "message0": "Style Preset %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_PRESET_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "PRESET_STYLES"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 345,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_style_preset'] = {
+  init: function() {
+    this.jsonInit(cssStylePresetJson);
+  }
+}
+
+var cssStylePresetReference = {
+  "type": "css_style_preset_reference",
+  "message0": "CSS Preset To Use %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CSS_PRESET_REFERENCE",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 330,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_style_preset_reference'] = {
+  init: function() {
+    this.jsonInit(cssStylePresetReference);
+  }
+}
+
+var w3CssStylePresetJson = {
+  "type": "css_style_preset_w3css",
+  "message0": "W3CSS Preset",
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 315,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_style_preset_w3css'] = {
+  init: function() {
+    this.jsonInit(w3CssStylePresetJson);
+  }
+}
+
+var cssDeclarationJson = {
+  "type": "css_declaration",
+  "message0": "Declaration %1 : %2",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "PROPERTIES",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "VALUES",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 195,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_declaration'] = {
+  init: function() {
+    this.jsonInit(cssDeclarationJson);
+  }
+}
+
+var cssSelectorJson = {
+  "type": "css_selector",
+  "message0": "Selector %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "SELECTOR",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "ELEMENTS"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['css_selector'] = {
+  init: function() {
+    this.jsonInit(cssSelectorJson);
+  }
+}
+
+var blockFragmentJson = {
+  "type": "block_fragment",
+  "message0": "Fragment %1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "FRAGMENT_NAME",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "ELEMENTS"
+    }
+  ],
+  "colour": 165,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['block_fragment'] = {
+  init: function() {
+    this.jsonInit(blockFragmentJson);
+  }
+}
+
+var blockFragmentReferenceJson = {
+  "type": "block_fragment_reference",
+  "message0": "Block Fragment To Insert %1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "FRAGMENT_NAME",
+      "text": ""
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 165,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+Blockly.Blocks['block_fragment_reference'] = {
+  init: function() {
+    this.jsonInit(blockFragmentReferenceJson);
   }
 }
