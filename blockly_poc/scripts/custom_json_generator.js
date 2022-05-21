@@ -139,6 +139,31 @@ customJSONGenerator['section_div_span'] = function (block) {
   return htmlData;
 };
 
+customJSONGenerator['section_wrapper'] = function (block) {
+  return '';
+};
+
+customJSONGenerator['section_wrapper_reference'] = function (block) {
+  var sectionWrapperName = block.getFieldValue('SECTION_WRAPPER_NAME');
+  var elements = customJSONGenerator.statementToCode(block, 'ELEMENTS');
+  var matchRegex = /<\/(section|div|span)>/;
+  var allBlocks = blockWorkspace.getAllBlocks(false);
+
+  //Look for the section wrapper declaration and insert elements' value into the first deepest wrapper statement.
+  for (var specificBlock of allBlocks) {
+    if (specificBlock.type == 'section_wrapper' && specificBlock.getFieldValue('SECTION_WRAPPER_NAME') == sectionWrapperName) {
+      var sectionsString = customJSONGenerator.statementToCode(specificBlock, 'SECTIONS');
+      var deepestElementIndex = sectionsString.search(matchRegex);
+      var sectionsStart = sectionsString.substring(0, deepestElementIndex);
+      var sectionsEnd = sectionsString.substring(deepestElementIndex);
+
+      return sectionsStart + elements + sectionsEnd;
+    }
+  }
+  
+  return '';
+};
+
 customJSONGenerator['url'] = function (block) {
   var urlPath = block.getFieldValue('URL_PATH');
   var urlPaths = customJSONGenerator.statementToCode(block, 'URL');
