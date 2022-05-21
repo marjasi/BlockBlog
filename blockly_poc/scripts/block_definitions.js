@@ -355,14 +355,18 @@ Blockly.Blocks['page_reference'] = {
   }
 }
 
-varDivSpanJson = {
-  "type": "div_span",
+varSectionDivSpanJson = {
+  "type": "section_div_span",
   "message0": "%1 Class %2 %3 %4",
   "args0": [
     {
       "type": "field_dropdown",
       "name": "KEYWORD",
       "options": [
+        [
+          "section",
+          "section"
+        ],
         [
           "div",
           "div"
@@ -393,9 +397,9 @@ varDivSpanJson = {
   "helpUrl": ""
 }
 
-Blockly.Blocks['div_span'] = {
+Blockly.Blocks['section_div_span'] = {
   init: function() {
-    this.jsonInit(varDivSpanJson);
+    this.jsonInit(varSectionDivSpanJson);
   }
 }
 

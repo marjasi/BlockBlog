@@ -131,7 +131,7 @@ customJSONGenerator['page_reference'] = function (block) {
   return json;
 };
 
-customJSONGenerator['div_span'] = function (block) {
+customJSONGenerator['section_div_span'] = function (block) {
   var keyword = block.getFieldValue('KEYWORD');
   var classSpecifier = block.getFieldValue('CLASS');
   var subelements = customJSONGenerator.statementToCode(block, 'SUBELEMENTS');
