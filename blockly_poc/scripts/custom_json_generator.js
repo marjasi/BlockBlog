@@ -237,20 +237,17 @@ customJSONGenerator['css_file_linker'] = function(block) {
 };
 
 customJSONGenerator['block_fragment'] = function(block) {
-  var htmlData = '<!--BLOCK_FRAGMENT_START-->';
-  htmlData += customJSONGenerator.statementToCode(block, 'ELEMENTS');
-  htmlData += '<!--BLOCK_FRAGMENT_END-->';
-  return htmlData;
+  return '';
 };
 
 customJSONGenerator['block_fragment_reference'] = function(block) {
   var fragmentName = block.getFieldValue('FRAGMENT_NAME');
   var allBlocks = blockWorkspace.getAllBlocks(false);
 
-  //Look for the fragment declaration and return its value.
+  //Look for the fragment declaration and return its elements' value.
   for (var specificBlock of allBlocks) {
     if (specificBlock.type == 'block_fragment' && specificBlock.getFieldValue('FRAGMENT_NAME') == fragmentName) {
-      return customJSONGenerator.blockToCode(specificBlock, false);
+      return customJSONGenerator.statementToCode(specificBlock, 'ELEMENTS');
     }
   }
 

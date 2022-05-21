@@ -54,6 +54,7 @@ function updateHtmlFileArray(jsonData) {
 //Formats json schema by replacing custom '}END' notations with appropriate formatting symbols.
 function formatWorkspaceJsonData(workspaceJsonData) {
   workspaceJsonData = '[\n' + workspaceJsonData + '\n]';
+  workspaceJsonData = workspaceJsonData.replace(/<!--BLOCK_FRAGMENT_START-->.*<!--BLOCK_FRAGMENT_END-->/gm, '');
   workspaceJsonData = workspaceJsonData.replace(/}END\r?\n{/gm, '},\n{');
   workspaceJsonData = workspaceJsonData.replace(/}END\r?\n]/gm, '}\n]');
   return workspaceJsonData;
@@ -76,8 +77,8 @@ function createJSONData() {
   customJSONGenerator.INFINITE_LOOP_TRAP = null;
   var json = customJSONGenerator.workspaceToCode(blockWorkspace);
   //Format JSON to be easy-to-read by indenting new lines with 4 spaces.
-  JSON.stringify(json, null, 4);
-  return formatWorkspaceJsonData(json);
+  json = formatWorkspaceJsonData(json);
+  return json;
 }
 
 //Shows the generated json schema in an alert window.
