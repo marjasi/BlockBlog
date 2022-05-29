@@ -121,7 +121,7 @@ customJSONGenerator['page'] = function (block) {
 
 customJSONGenerator['page_link'] = function (block) {
   var text_page_name = block.getFieldValue('PAGE_NAME');
-  var htmlData = text_page_name + '.html';
+  var htmlData = text_page_name;
   return [htmlData, customJSONGenerator.PRECEDENCE];
 };
 

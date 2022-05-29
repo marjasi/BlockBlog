@@ -92,6 +92,8 @@
       <block type="input_field"></block>
       <block type="input_label"></block>
       <block type="empty_line"></block>
+      <block type="block_fragment"></block>
+      <block type="block_fragment_reference"></block>
     </category>
     <category name="CSS" colour="%{BKY_VARIABLES_HUE}">
       <block type="css_file"></block>
@@ -102,14 +104,10 @@
       <block type="css_style_preset_reference"></block>
       <block type="css_style_preset_w3css"></block>
     </category>
-    <category name="Block Fragments" colour="%{BKY_PROCEDURES_HUE}">
-      <block type="block_fragment"></block>
-      <block type="block_fragment_reference"></block>
-    </category>
   </xml>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
-    <block type="rest_api" x="60" y="20">
+    <!-- <block type="rest_api" x="60" y="20">
       <statement name="URL_ROOT">
         <block type="url_root">
           <field name="URL_ROOT">home</field>
@@ -190,7 +188,7 @@
           </statement>
         </block>
       </statement>
-    </block>
+    </block> -->
   </xml>
 
   <script src="scripts/customRenderer.js"></script>
