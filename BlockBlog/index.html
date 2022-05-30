@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="css/fontRaleway.css"> 
+
+  <title>Blockly Headless CMS</title>
+
+  <script src="./node_modules/blockly/blockly_compressed.js"></script>
+  <script src="./node_modules/blockly/blocks_compressed.js"></script>
+  <script src="./node_modules/blockly/javascript_compressed.js"></script>
+  <script src="./node_modules/blockly/msg/en.js"></script>
+
+  <style>
+    body {
+      background-color: #fff;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    body,h1,h2,h3,h4,h5 {
+      font-family: "Raleway", sans-serif
+    }
+    .quickPreview {
+      height: 100%;
+      width: 0;
+      position: fixed; /* Stay in place. */
+      z-index: 200000; /* Blockly uses a maximum z-index of 100000. */
+      background-color: #fff;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      top: 0; /* Stay at the top. */
+      left: 0;
+      padding-top: 30px; /* Place content 30px from the top. */
+      transition: 0.5s; /* 0.5 second transition effect. */
+    }
+    .quickPreview .closeButton {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    <p>
+      <span  style="margin-left: 5px;">
+        Workspace:
+        <input id="workspaceName" type="text" value="unnamed">
+      </span>
+    <button onclick="downloadBlockWorkspace()">Save Block Workspace</button>
+    <button onclick="loadBlockWorkspaceFromXmlFile()">Load Block Workspace</button>
+    <button onclick="downloadJSON()">Download JSON</button>
+    <button onclick="createBlogQuickPreview()">Quick Preview</button>
+    <button onclick="createBlogNewPagePreview()">Preview In New Page</button>
+  </p>
+
+  <div id="blocklyDiv" style="height: 1000px; width: 100%; z-index: 0;"></div>
+
+  <div id="quickPreviewArea" class="quickPreview">
+    <a href="javascript:void(0)" class="closeButton" onclick="closeQuickPreview()">&times;</a>
+    <div id="quickPreviewAreaContent"></div>
+  </div>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <category name="REST" colour="%{BKY_TEXTS_HUE}">
+      <block type="rest_api"></block>
+      <block type="url_root"></block>
+      <block type="url"></block>
+      <block type="page_reference"></block>
+      <block type="css_reference"></block>
+    </category>
+    <category name="Page Content" colour="%{BKY_MATH_HUE}">
+      <block type="page"></block>
+      <block type="section_div_span"></block>
+      <block type="section_wrapper"></block>
+      <block type="section_wrapper_reference"></block>
+      <block type="header"></block>
+      <block type="paragraph"></block>
+      <block type="image"></block>
+      <block type="image_source"></block>
+      <block type="link"></block>
+      <block type="page_link"></block>
+      <block type="form"></block>
+      <block type="button"></block>
+      <block type="input_field"></block>
+      <block type="input_label"></block>
+      <block type="empty_line"></block>
+      <block type="block_fragment"></block>
+      <block type="block_fragment_reference"></block>
+    </category>
+    <category name="CSS" colour="%{BKY_VARIABLES_HUE}">
+      <block type="css_file"></block>
+      <block type="css_file_linker"></block>
+      <block type="css_selector"></block>
+      <block type="css_declaration"></block>
+      <block type="css_style_preset"></block>
+      <block type="css_style_preset_reference"></block>
+      <block type="css_style_preset_w3css"></block>
+    </category>
+  </xml>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
+  </xml>
+
+  <script src="scripts/customRenderer.js"></script>
+  <script src='scripts/block_definitions.js'></script>
+  <script src='scripts/custom_json_generator.js'></script>
+  <script src="scripts/showdown.js"></script>
+  <script src="index.js"></script>
+
+</body>
+
+</html>
