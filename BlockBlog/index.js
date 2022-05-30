@@ -74,7 +74,6 @@ function updateCssFileArray(jsonData) {
 //Formats json schema by replacing custom '}END' notations with appropriate formatting symbols.
 function formatWorkspaceJsonData(workspaceJsonData) {
   workspaceJsonData = '[\n' + workspaceJsonData + '\n]';
-  // workspaceJsonData = workspaceJsonData.replace(/<!--BLOCK_FRAGMENT_START-->.*<!--BLOCK_FRAGMENT_END-->/gm, '');
   workspaceJsonData = workspaceJsonData.replace(/}END\r?\n{/gm, '},\n{');
   workspaceJsonData = workspaceJsonData.replace(/}END\r?\n]/gm, '}\n]');
   return workspaceJsonData;
@@ -175,6 +174,24 @@ function addBlogEntries(blogTemplate) {
   return blogTemplate;
 }
 
+//Adds CSS when Preview In New Page is selected.
+function addCssPreviewInNewPage(htmlFile) {
+    var headString = '<head>';
+    var htmlStart = htmlFile.substr(0, htmlFile.search(headString) + headString.length);
+    var htmlEnd = htmlFile.substr(htmlFile.search('<head>') + '<head>'.length);
+    var page = htmlStart;
+    var cssStyle = '';
+
+    if (cssFileArray[0]) {
+      cssStyle = '<style>' + cssFileArray[0] + '</style>'
+    }
+
+    page += cssStyle;
+    page += htmlEnd;
+
+    return page;
+}
+
 //Creates the html file of the preview panel to the side of the Blockly window and show it on top of the main window.
 function createBlogQuickPreview() {
   var htmlPreviewData = '';
@@ -193,13 +210,16 @@ function closeQuickPreview() {
 
 //Creates the html file of the preview window.
 function createBlogNewPagePreview() {
-  var htmlPreviewData = '';
-  // htmlPreviewData += blogTemplateStart;
+  var htmlPreviewData;
+
   updateBlogHtmlAndCssFiles();
-  htmlPreviewData = addBlogEntries(htmlPreviewData);
-  // htmlPreviewData += blogTemplateEnd;
-  previewWindow = window.open();
-  previewWindow.document.write(htmlPreviewData);
+
+  //Open a new tab for each page file.
+  for (var htmlFile of htmlFileArray) {
+    htmlPreviewData = addCssPreviewInNewPage(htmlFile);
+    previewWindow = window.open();
+    previewWindow.document.write(htmlPreviewData);
+  }
 }
 
 //Opens the file selector and sets the value of a block field to the selected image file.
