@@ -13,6 +13,7 @@ It parses the data from the JSON and creates a simple local REST API for static 
 # How to use
 ## Requirements
 Node.js is required to use Blockly.
+
 Express is required to launch the local server for REST API creation based on the generated JSON file.
 ## Launch BlockBlog
 1. Pull the repo, make sure you have Node.js and npm installed.
@@ -41,6 +42,12 @@ Listening on port 3000
 Workspace .xml files can be loaded from the *Examples* folder.
 Examples are mostly based on the usage of the W3CSS library for page style declaration.
 # BlockBlog in action
+**Note:** all pictures used in example sites are taken from [Unsplash](https://unsplash.com/) and [This Person Does Not Exist](https://this-person-does-not-exist.com/).
 ## W3CSSBlogTemplate.xml
 ![The loaded workspace from the W3CSSBlogTemplate.xml file.](img/blogTemplateWorkspace.jpg)
+
 ![The preview of the created page](img/blogTemplate.png)
+## W3CSSBandTemplate.xml
+![The loaded workspace from the W3CSSBandTemplate.xml file.](img/bandTemplateWorkspace.jpg)
+
+![The preview of the created page](img/bandTemplate.png)

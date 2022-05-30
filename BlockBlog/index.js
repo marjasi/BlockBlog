@@ -62,13 +62,22 @@ function updateHtmlFileArray(jsonData) {
 function updateCssFileArray(jsonData) {
   cssFileArray = [];
 
-  var i = 0;
   for (var jsonElement of jsonData) {
     if (jsonElement.css_file_name) {
-      cssFileArray[i] = jsonElement.css_data;
-      i++;
+      cssFileArray[jsonElement.css_file_name] = jsonElement.css_data;
     }
   }
+}
+
+//Finds the css file linked to a particular html file.
+function findCssFileForHtml(htmlFile) {
+  var cssFindStart = '<link rel="stylesheet" href="';
+  var cssFindEnd = '.css">';
+  var cssFileName = htmlFile.slice(htmlFile.search(cssFindStart) + cssFindStart.length, htmlFile.search(cssFindEnd));
+
+  console.log(cssFileName);
+
+  return cssFileArray[cssFileName];
 }
 
 //Formats json schema by replacing custom '}END' notations with appropriate formatting symbols.
@@ -150,40 +159,38 @@ function updateBlogHtmlAndCssFiles() {
   updateCssFileArray(blocklyJsondata);
 }
 
-//Adds blog entries to template html string.
-function addBlogEntries(blogTemplate) {
-  for (var blogpost of htmlFileArray) {
-    // blogTemplate += blogEntryStart;
-    // blogTemplate += blogEntryDate;
-    // blogTemplate += blogEntryBodyStart;
+//Adds CSS when Quick Preview is selected.
+function addCssQuickPreview(previewHtml) {
+  for (var htmlFile of htmlFileArray) {
     var headString = '<head>';
-    var htmlStart = blogpost.substr(0, blogpost.search(headString) + headString.length);
-    var htmlEnd = blogpost.substr(blogpost.search('<head>') + '<head>'.length);
+    var htmlStart = htmlFile.slice(0, htmlFile.search(headString) + headString.length);
+    var htmlEnd = htmlFile.slice(htmlFile.search('<head>') + '<head>'.length);
     var cssStyle = '';
+    var cssFile = findCssFileForHtml(htmlFile);
 
-    if (cssFileArray[0]) {
-      cssStyle = '<style>' + cssFileArray[0] + '</style>'
+    if (cssFile) {
+      cssStyle = '<style>' + cssFile + '</style>'
     }
 
-    blogTemplate += htmlStart;
-    blogTemplate += cssStyle;
-    blogTemplate += htmlEnd;
-    // blogTemplate += blogEntryEnd;
+    previewHtml += htmlStart;
+    previewHtml += cssStyle;
+    previewHtml += htmlEnd;
   }
 
-  return blogTemplate;
+  return previewHtml;
 }
 
 //Adds CSS when Preview In New Page is selected.
 function addCssPreviewInNewPage(htmlFile) {
     var headString = '<head>';
-    var htmlStart = htmlFile.substr(0, htmlFile.search(headString) + headString.length);
-    var htmlEnd = htmlFile.substr(htmlFile.search('<head>') + '<head>'.length);
+    var htmlStart = htmlFile.slice(0, htmlFile.search(headString) + headString.length);
+    var htmlEnd = htmlFile.slice(htmlFile.search('<head>') + '<head>'.length);
     var page = htmlStart;
     var cssStyle = '';
+    var cssFile = findCssFileForHtml(htmlFile);
 
-    if (cssFileArray[0]) {
-      cssStyle = '<style>' + cssFileArray[0] + '</style>'
+    if (cssFile) {
+      cssStyle = '<style>' + cssFile + '</style>'
     }
 
     page += cssStyle;
@@ -197,7 +204,7 @@ function createBlogQuickPreview() {
   var htmlPreviewData = '';
   // htmlPreviewData += blogTemplateStart;
   updateBlogHtmlAndCssFiles();
-  htmlPreviewData = addBlogEntries(htmlPreviewData);
+  htmlPreviewData = addCssQuickPreview(htmlPreviewData);
   // htmlPreviewData += blogTemplateEnd;
   document.getElementById('quickPreviewAreaContent').innerHTML = htmlPreviewData;
   document.getElementById("quickPreviewArea").style.width = "100%";
