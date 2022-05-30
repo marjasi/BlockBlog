@@ -47,6 +47,8 @@ xmlInput.accept = 'text/xml';
 
 //Updates html file array.
 function updateHtmlFileArray(jsonData) {
+  htmlFileArray = [];
+
   var i = 0;
   for (var jsonElement of jsonData) {
     if (jsonElement.page_name) {
@@ -58,6 +60,8 @@ function updateHtmlFileArray(jsonData) {
 
 //Updates css file array.
 function updateCssFileArray(jsonData) {
+  cssFileArray = [];
+
   var i = 0;
   for (var jsonElement of jsonData) {
     if (jsonElement.css_file_name) {
